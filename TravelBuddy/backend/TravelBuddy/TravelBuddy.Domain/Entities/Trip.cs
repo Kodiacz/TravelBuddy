@@ -4,21 +4,22 @@
 	{
         public Trip()
         {
-            this.Itineraries = new();
-            this.Guests = new();
+            this.Itineraries = new HashSet<Itinerary>();
+            this.Guests = new HashSet<User>();
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; } = null!;
 
-		public string? Description { get; set; } 
+		public string? Description { get; set; }
 
-		public User Creator { get; set; } = null!;
+        public int UserId { get; set; }
+        public User Creator { get; set; } = null!;
 
-        public List<User> Guests { get; set; }
+        public ICollection<User> Guests { get; set; }
 
-		public List<Itinerary> Itineraries { get; set; }
+		public ICollection<Itinerary> Itineraries { get; set; }
 
     }
 }

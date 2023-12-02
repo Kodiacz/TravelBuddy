@@ -4,7 +4,7 @@
 	{
         public Itinerary()
         {
-			this.Activities = new();
+			this.Activities = new HashSet<Activity>();
         }
 
         public int Id { get; set; }
@@ -13,6 +13,6 @@
 
 		public string? Description { get; set; } = null!;
 
-		public List<Activities> Activities { get; set; }
+		public ICollection<Activity> Activities { get; set; }
 	}
 }

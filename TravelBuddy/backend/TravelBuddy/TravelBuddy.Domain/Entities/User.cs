@@ -4,7 +4,7 @@
 	{
         public User()
         {
-			this.Travels = new();    
+			this.Travels = new HashSet<Trip>();    
         }
 
 		public int Id { get; set; }
@@ -17,8 +17,18 @@
 
 		public string Email { get; set; } = null!;
 
+		public byte[]? PasswordHash { get; set; }
+
+		public string? ProfileImage { get; set; }
+
+		public byte[]? PasswordSalt { get; set; }
+
 		public string Password { get; set; } = null!;
 
-		public List<Trip> Travels { get; set; }
+		public ICollection<Trip> Travels { get; set; }
+
+		public DateTime Created { get; set; }
+
+		public DateTime LastLoggedIn { get; set; }
 	}
 }
