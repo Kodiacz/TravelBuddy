@@ -24,8 +24,4 @@
     <ProjectReference Include="..\TravelBuddy.Application\TravelBuddy.Application.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Common\DatabaseConstants\NewFolder\" />
-  </ItemGroup>
-
 </Project>
