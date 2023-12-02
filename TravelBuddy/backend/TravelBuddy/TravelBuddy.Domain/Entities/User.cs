@@ -4,7 +4,7 @@
 	{
         public User()
         {
-			this.Travels = new List<Travel>();    
+			this.Travels = new();    
         }
 
 		public int Id { get; set; }
@@ -19,6 +19,6 @@
 
 		public string Password { get; set; } = null!;
 
-		public List<Travel> Travels { get; set; }
+		public List<Trip> Travels { get; set; }
 	}
 }

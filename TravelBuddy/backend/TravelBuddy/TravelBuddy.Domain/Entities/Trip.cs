@@ -1,11 +1,11 @@
 ﻿namespace TravelBuddy.Domain.Entities
 {
-	public class Travel
+	public class Trip
 	{
-        public Travel()
+        public Trip()
         {
-            this.Itineraries = new List<Itinerary>();
-            this.Guests = new List<User>();
+            this.Itineraries = new();
+            this.Guests = new();
         }
 
         public int Id { get; set; }
