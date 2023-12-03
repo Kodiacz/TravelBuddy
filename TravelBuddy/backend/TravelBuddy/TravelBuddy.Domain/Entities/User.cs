@@ -4,7 +4,8 @@
 	{
         public User()
         {
-			this.Travels = new HashSet<Trip>();    
+			this.CreatedTravels = new HashSet<Trip>();    
+			this.InvitedToTravels = new HashSet<Trip>();    
         }
 
 		public int Id { get; set; }
@@ -25,7 +26,9 @@
 
 		public string Password { get; set; } = null!;
 
-		public ICollection<Trip> Travels { get; set; }
+		public ICollection<Trip> CreatedTravels { get; set; }
+
+		public ICollection<Trip> InvitedToTravels { get; set; }
 
 		public DateTime Created { get; set; }
 
