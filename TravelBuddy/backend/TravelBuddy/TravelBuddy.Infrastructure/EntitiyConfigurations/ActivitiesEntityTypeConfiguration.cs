@@ -18,10 +18,6 @@
 				.HasMaxLength(ACTIVITY_NAME_MAX_LENGTH);
 
 			builder
-				.Property (x => x.Description)
-				.HasMaxLength(ACTIVITY_DESCRIPTION_MAX_LENGTH);
-
-			builder
 				.Property(x => x.ItineraryId)
 				.IsRequired();
 		}
