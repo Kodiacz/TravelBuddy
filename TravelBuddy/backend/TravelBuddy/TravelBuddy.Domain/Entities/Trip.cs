@@ -12,9 +12,11 @@
 
         public string Name { get; set; } = null!;
 
-        public DateOnly Date { get; set; }
+        public string? Image { get; set; }
 
-        public int UserId { get; set; }
+		public DateOnly Date { get; set; }
+
+        public int CreatorId { get; set; }
         public User Creator { get; set; } = null!;
 
         public ICollection<User> Guests { get; set; }
