@@ -28,8 +28,14 @@
 
 		public ICollection<Trip> CreatedTrips { get; set; }
 
+		/// <summary>
+		/// All trips in which current user is invited
+		/// </summary>
 		public ICollection<Trip> InvitedToTrips { get; set; }
 
+		/// <summary>
+		/// The date on which the user was registered
+		/// </summary>
 		public DateTime Created { get; set; }
 
 		public DateTime LastLoggedIn { get; set; }
