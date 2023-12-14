@@ -5,3 +5,4 @@ global using TravelBuddy.Domain.Entities;
 global using static TravelBuddy.Infrastructure.Common.DatabaseConstants.ActivityConstants;
 global using static TravelBuddy.Infrastructure.Common.DatabaseConstants.ItineraryConstants;
 global using static TravelBuddy.Infrastructure.Common.DatabaseConstants.TripConstants;
+global using static TravelBuddy.Infrastructure.Common.DatabaseConstants.UserConstants;	
