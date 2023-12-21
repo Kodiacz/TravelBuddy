@@ -6,3 +6,5 @@ global using static TravelBuddy.Infrastructure.Common.DatabaseConstants.Activity
 global using static TravelBuddy.Infrastructure.Common.DatabaseConstants.ItineraryConstants;
 global using static TravelBuddy.Infrastructure.Common.DatabaseConstants.TripConstants;
 global using static TravelBuddy.Infrastructure.Common.DatabaseConstants.UserConstants;	
+global using TravelBuddy.Application.Interfaces.Repository;
+global using System.Linq.Expressions;
