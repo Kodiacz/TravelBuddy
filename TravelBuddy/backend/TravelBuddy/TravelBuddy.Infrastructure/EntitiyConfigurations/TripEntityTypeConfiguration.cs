@@ -17,7 +17,7 @@
 				.IsRequired();
 
 			builder
-				.HasCheckConstraint("CK_Itinerary_Date", $"{nameof(Trip.Date)} >= {DateTime.UtcNow}");
+				.HasCheckConstraint("CK_Trip_Date", $"{nameof(Trip.Date)} >= GETDATE()");
 
 			// Relationships:
 

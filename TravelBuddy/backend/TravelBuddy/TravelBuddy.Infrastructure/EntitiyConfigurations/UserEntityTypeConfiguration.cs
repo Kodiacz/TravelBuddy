@@ -32,8 +32,7 @@
 				.IsRequired();
 
 			builder
-				.HasCheckConstraint("CK_User_Created", $"{nameof(User.Created)} >= {DateTime.UtcNow}");
-
+				.HasCheckConstraint("CK_User_Created", $"{nameof(User.Created)} >= GETDATE()");
 		}
 	}
 }
