@@ -29,8 +29,7 @@
 
 			builder
 				.HasMany(trip => trip.Guests)
-				.WithMany(user => user.InvitedToTrips)
-				.UsingEntity(j => j.ToTable("TripUser"));
+				.WithMany(user => user.InvitedToTrips);
 
 			builder
 				.HasMany(trip => trip.Itineraries)
