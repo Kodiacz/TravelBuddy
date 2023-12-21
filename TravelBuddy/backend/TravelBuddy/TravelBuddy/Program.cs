@@ -7,6 +7,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<TravelBuddyDbContext>(opt =>
+{
+	opt.UseSqlServer(connectionString);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
