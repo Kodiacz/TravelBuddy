@@ -1,4 +1,6 @@
-﻿namespace TravelBuddy.Infrastructure
+﻿using TravelBuddy.Infrastructure.EntitiyConfigurations;
+
+namespace TravelBuddy.Infrastructure
 {
 	public class TravelBuddyDbContext : DbContext
 	{
@@ -14,7 +16,10 @@
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
-			//TODO: Aplly Configurtations
+			modelBuilder.ApplyConfiguration(new ActivityEntityTypeConfiguration());
+			modelBuilder.ApplyConfiguration(new ItineraryEntityTypeConfiguration());
+			modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
+			modelBuilder.ApplyConfiguration(new TripEntityTypeConfiguration());
 
 			base.OnModelCreating(modelBuilder);
 		}
