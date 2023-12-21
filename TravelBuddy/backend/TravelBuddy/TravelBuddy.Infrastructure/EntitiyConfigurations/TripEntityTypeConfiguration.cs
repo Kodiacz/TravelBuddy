@@ -24,11 +24,13 @@
 			builder
 				.HasOne(trip => trip.Creator)
 				.WithMany(user => user.CreatedTrips)
-				.HasForeignKey(trip => trip.CreatorId);
+				.HasForeignKey(trip => trip.CreatorId)
+				.OnDelete(DeleteBehavior.NoAction);
 
 			builder
 				.HasMany(trip => trip.Guests)
-				.WithMany(user => user.InvitedToTrips);
+				.WithMany(user => user.InvitedToTrips)
+				.UsingEntity(j => j.ToTable("TripUser"));
 
 			builder
 				.HasMany(trip => trip.Itineraries)
