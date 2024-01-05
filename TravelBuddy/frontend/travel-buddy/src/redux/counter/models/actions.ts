@@ -1,12 +1,12 @@
-export const INCREMENT_COUNTER = "INCMREMENT_COUNTER";
-export const DECREMENT_COUNTER = "DECREMENT_COUNTER";
+export const INCREMENT_COUNTER = 'INCMREMENT_COUNTER';
+export const DECREMENT_COUNTER = 'DECREMENT_COUNTER';
 
 interface IncrementAction {
-  type: typeof INCREMENT_COUNTER;
+	type: typeof INCREMENT_COUNTER;
 }
 
 interface DecrementAction {
-  type: typeof DECREMENT_COUNTER;
+	type: typeof DECREMENT_COUNTER;
 }
 
 export type CounterActionTypes = IncrementAction | DecrementAction;
