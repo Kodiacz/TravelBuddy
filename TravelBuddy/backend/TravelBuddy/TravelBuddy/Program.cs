@@ -1,3 +1,5 @@
+using TravelBuddy.Domain.Entities;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -11,6 +13,20 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<TravelBuddyDbContext>(opt =>
 {
 	opt.UseSqlServer(connectionString);
+});
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(opt => opt.SignIn.RequireConfirmedAccount = true)
+	.AddEntityFrameworkStores<TravelBuddyDbContext>();
+
+builder.Services.AddCors(opt =>
+{
+	opt.AddPolicy(name: "TravelBuddy", opt =>
+	{
+		opt
+		.AllowAnyHeader()
+		.AllowAnyMethod()
+		.AllowAnyOrigin();
+	});
 });
 
 var app = builder.Build();
