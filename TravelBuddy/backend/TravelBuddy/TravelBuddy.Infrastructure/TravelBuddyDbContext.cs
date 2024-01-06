@@ -1,8 +1,9 @@
-﻿using TravelBuddy.Infrastructure.EntitiyConfigurations;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using TravelBuddy.Infrastructure.EntitiyConfigurations;
 
 namespace TravelBuddy.Infrastructure
 {
-	public class TravelBuddyDbContext : DbContext
+	public class TravelBuddyDbContext : IdentityDbContext<ApplicationUser>
 	{
         public TravelBuddyDbContext(DbContextOptions<TravelBuddyDbContext> options) : base(options) {}
 

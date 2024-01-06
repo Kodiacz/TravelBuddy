@@ -5,7 +5,7 @@
         public Trip()
         {
             this.Itineraries = new HashSet<Itinerary>();
-            this.Guests = new HashSet<User>();
+            this.Guests = new HashSet<IUser>();
         }
 
         public int Id { get; set; }
@@ -17,11 +17,10 @@
 		public DateTime Date { get; set; }
 
         public int CreatorId { get; set; }
-        public User Creator { get; set; } = null!;
+        public IUser Creator { get; set; } = null!;
 
-        public ICollection<User> Guests { get; set; }
+        public ICollection<IUser> Guests { get; set; }
 
 		public ICollection<Itinerary> Itineraries { get; set; }
-
     }
 }

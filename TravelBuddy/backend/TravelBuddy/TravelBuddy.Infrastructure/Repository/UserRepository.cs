@@ -1,51 +1,51 @@
 ﻿
 namespace TravelBuddy.Infrastructure.Repository
 {
-	internal class UserRepository : IUserRepository
+	internal class ApplicationUserRepository : IApplicationUserRepository
 	{
 		private readonly TravelBuddyDbContext dbContext;
 
-		public UserRepository(TravelBuddyDbContext dbContext)
+		public ApplicationUserRepository(TravelBuddyDbContext dbContext)
 		{
 			this.dbContext = dbContext;
 		}
 
-		public Task AddAsync(User appointment)
+		public Task AddAsync(ApplicationUser appointment)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<ICollection<User>> GetAllAsReadOnlyAsync()
+		public Task<ICollection<ApplicationUser>> GetAllAsReadOnlyAsync()
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<ICollection<User>> GetAllAsReadOnlyAsync(Expression<Func<User, bool>> search)
+		public Task<ICollection<ApplicationUser>> GetAllAsReadOnlyAsync(Expression<Func<ApplicationUser, bool>> search)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<ICollection<User>> GetAllAsync()
+		public Task<ICollection<ApplicationUser>> GetAllAsync()
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<ICollection<User>> GetAllAsync(Expression<Func<User, bool>> search)
+		public Task<ICollection<ApplicationUser>> GetAllAsync(Expression<Func<ApplicationUser, bool>> search)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<User> GetByIdAsReadonlyAsync(int id)
+		public Task<ApplicationUser> GetByIdAsReadonlyAsync(int id)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<User> GetByIdAsReadonlyAsync(int id, Expression<Func<User, bool>> search)
+		public Task<ApplicationUser> GetByIdAsReadonlyAsync(int id, Expression<Func<ApplicationUser, bool>> search)
 		{
 			throw new NotImplementedException();
 		}
 
-		public Task<User> GetByIdAsync(int id)
+		public Task<ApplicationUser> GetByIdAsync(int id)
 		{
 			throw new NotImplementedException();
 		}
@@ -55,7 +55,7 @@ namespace TravelBuddy.Infrastructure.Repository
 			throw new NotImplementedException();
 		}
 
-		public void Update(User appointment)
+		public void Update(ApplicationUser appointment)
 		{
 			throw new NotImplementedException();
 		}
