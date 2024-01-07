@@ -5,63 +5,26 @@
 	[Route("api/[controller]/action")]
 	public class AuthenticationController : BaseController<AuthenticationController>
 	{
-		[HttpPost]
-		[ModelValidationFilter]
-		[ActionName(nameof(Register))]
-		public async Task<ActionResult<ApplicationUser> Register(CreateApplicationUserDto registerRequest)
+	private readonly IAuthService authenticationService;
+
+		public AuthenticationController(IAuthService authenticationService)
 		{
-			ComparePasswords comparePasswordsCommand = new ComparePasswords()
-			{
-				Password = registerRequest.Password,
-				ConfirmPassword = registerRequest.ConfirmPassword,
-			};
-
-			bool comparePasswordsResult = await base.Mediator.Send(comparePasswordsCommand);
-
-			if (!comparePasswordsResult) BadRequest();
-
-			CreatePasswordHash createPasswordHashCommand = new() { Password = registerRequest.Password };
-			ComputedPassword computedPassowrd = await base.Mediator.Send(createPasswordHashCommand);
-			CreateApplicationUser createApplicationUserCommand = base.Mapper.Map<CreateApplicationUser>(registerRequest);
-			createApplicationUserCommand.PasswordHash = computedPassowrd.PasswordHash;
-			createApplicationUserCommand.PasswordSalt = computedPassowrd.PasswordSalt;
-			ApplicationUser owner = await base.Mediator.Send(createApplicationUserCommand);
-			GetApplicationUserDto getApplicationUserDto = base.Mapper.Map<GetApplicationUserDto>(owner);
-			return NoContent();
+			this.authenticationService = authenticationService;
 		}
 
 		[HttpPost]
-		[ActionName(nameof(Login))]
-		public async Task<ActionResult<string>> Login(UserLoginDto loginRequest)
+		[ActionName(nameof(Register))]
+		public async Task<ActionResult<GetApplicationUserDto>> Register(CreateApplicationUserDto dto)
 		{
-			GetApplicationUserByUsername getApplicationUserCommand = new() { Username = loginRequest.Username };
-			ApplicationUser owner = await base.Mediator.Send(getApplicationUserCommand);
-			VerifyPasswordHash verifyPasswordCommand = new()
-			{
-				Password = loginRequest.Password,
-				PasswordHash = owner.PasswordHash!,
-				PasswordSalt = owner.PasswordSalt!,
-			};
+			this.authenticationService.CreatePasswordHash(dto.Password, out byte[] passwordHash, out byte[] passwordSalt);
+			this.authenticationService.
 
-			bool verification = await base.Mediator.Send(verifyPasswordCommand);
+ 		}
 
-			if (!verification)
-			{
-				return BadRequest("Wrong password");
-			}
-
-			GenerateToken generateTokenCommand = new()
-			{
-				ApplicationUser = owner,
-				Role = "User",
-			};
-
-			JwtToken ownerToken = await this.Mediator.Send(generateTokenCommand);
-			ownerToken.Username = owner.Username!;
-			ownerToken.UserId = owner.Id;
-			ownerToken.ProfileImageFilePath = owner.ProfileImageFilePath;
-
-			return Ok(ownerToken);
+		[HttpPost]
+		[ActionName(nameof(Login))]
+		public async Task<ActionResult<string>> Login()
+		{
 		}
 
 		[HttpPost]
