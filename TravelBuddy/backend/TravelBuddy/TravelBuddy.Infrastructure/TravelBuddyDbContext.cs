@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using TravelBuddy.Infrastructure.EntitiyConfigurations;
 
 namespace TravelBuddy.Infrastructure
 {
-	public class TravelBuddyDbContext : IdentityDbContext<ApplicationUser>
+	public class TravelBuddyDbContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
 	{
         public TravelBuddyDbContext(DbContextOptions<TravelBuddyDbContext> options) : base(options) {}
 
-		public DbSet<User> Users { get; set; } = null!;
+		public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
 
 		public DbSet<Itinerary> Itineraries { get; set; } = null!;
 
@@ -19,7 +20,7 @@ namespace TravelBuddy.Infrastructure
 		{
 			modelBuilder.ApplyConfiguration(new ActivityEntityTypeConfiguration());
 			modelBuilder.ApplyConfiguration(new ItineraryEntityTypeConfiguration());
-			modelBuilder.ApplyConfiguration(new UserEntityTypeConfiguration());
+			modelBuilder.ApplyConfiguration(new ApplicationUserEntityTypeConfiguration());
 			modelBuilder.ApplyConfiguration(new TripEntityTypeConfiguration());
 
 			base.OnModelCreating(modelBuilder);
