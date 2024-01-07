@@ -1,5 +1,6 @@
 import LandingScreen from './src/screens/Landing';
 import RegisterScreen from './src/screens/authentication/Register';
+import LoginScreen from './src/screens/authentication/Login';
 import { AppState } from './src/redux/store';
 import {
 	incrementCount,
@@ -48,6 +49,10 @@ export default function App() {
 						<Stack.Screen
 							name="Register"
 							component={RegisterScreen}
+						/>
+						<Stack.Screen
+							name="Login"
+							component={LoginScreen}
 						/>
 					</Stack.Navigator>
 				</NavigationContainer>
