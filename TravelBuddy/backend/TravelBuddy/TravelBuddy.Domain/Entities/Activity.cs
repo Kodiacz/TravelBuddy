@@ -11,8 +11,6 @@ namespace TravelBuddy.Domain.Entities
 		public int ItineraryId { get; set; }
 		public Itinerary Itinerary { get; set; } = null!;
 
-		public bool MyProperty { get; set; }
-
 		public bool Deleted { get; set; } = false;
 
 		public DateTime DateDeleted { get; set; }
