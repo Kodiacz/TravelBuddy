@@ -5,7 +5,7 @@
 	[Route("api/[controller]/action")]
 	public class AuthenticationController : BaseController<AuthenticationController>
 	{
-	private readonly IAuthService authenticationService;
+		private readonly IAuthService authenticationService;
 
 		public AuthenticationController(IAuthService authenticationService)
 		{
@@ -17,14 +17,15 @@
 		public async Task<ActionResult<GetApplicationUserDto>> Register(CreateApplicationUserDto dto)
 		{
 			this.authenticationService.CreatePasswordHash(dto.Password, out byte[] passwordHash, out byte[] passwordSalt);
-			this.authenticationService.
-
- 		}
+			await this.authenticationService.RegisterUser(dto);
+			return Ok();
+		}
 
 		[HttpPost]
 		[ActionName(nameof(Login))]
 		public async Task<ActionResult<string>> Login()
 		{
+			return Ok();
 		}
 
 		[HttpPost]
