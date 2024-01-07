@@ -1,35 +1,24 @@
-using TravelBuddy.Domain.Entities;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using TravelBuddy.API.Extenstions.BuilderServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-builder.Services.AddDbContext<TravelBuddyDbContext>(opt =>
-{
-	opt.UseSqlServer(connectionString);
-});
+builder.Services.ConfigureDatabaseConnection(builder);
 
-builder.Services.AddDefaultIdentity<ApplicationUser>(opt => opt.SignIn.RequireConfirmedAccount = true)
-	.AddEntityFrameworkStores<TravelBuddyDbContext>();
+builder.Services.AddApplicationIdentity();
 
-builder.Services.AddCors(opt =>
-{
-	opt.AddPolicy(name: "TravelBuddy", opt =>
-	{
-		opt
-		.AllowAnyHeader()
-		.AllowAnyMethod()
-		.AllowAnyOrigin();
-	});
-});
+builder.Services.AddApplicationCors();
 
 builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddApplicationAuthentication(builder);
 
 var app = builder.Build();
 
@@ -41,6 +30,11 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseAuthentication();
+
+app.UseRouting();
+
+app.UseCors();
 
 app.UseAuthorization();
 
