@@ -5,16 +5,16 @@
 		/// <summary>
 		/// Adding an ApplicationUser type entity in the database
 		/// </summary>
-		/// <param name="appointment">ApplicationUser type variable</param>
+		/// <param name="user">ApplicationUser type variable</param>
 		/// <returns></returns>
-		Task AddAsync(ApplicationUser appointment);
+		Task AddAsync(ApplicationUser user);
 
 		/// <summary>
 		/// Updating the ApplicationUser entity in the database
 		/// </summary>
-		/// <param name="appointment">ApplicationUser type variable</param>
+		/// <param name="user">ApplicationUser type variable</param>
 		/// <returns></returns>
-		void Update(ApplicationUser appointment);
+		void Update(ApplicationUser user);
 
 		/// <summary>
 		/// Gets the entity from the database by its Id
@@ -30,7 +30,7 @@
 		Task<ICollection<ApplicationUser>> GetAllAsync();
 
 		/// <summary>
-		/// Gets all the appointments and accepts a predicate for sarch term
+		/// Gets all the users and accepts a predicate for sarch term
 		/// </summary>
 		/// <returns></returns>
 		Task<ICollection<ApplicationUser>> GetAllAsync(Expression<Func<ApplicationUser, bool>> search);
@@ -62,7 +62,7 @@
 		/// <param name="id">The id of the ApplicationUser entity</param>
 		/// <param name="search">Expression that is aplpied for the where clause</param>
 		/// <returns>Return the ApplicationUser entity</returns>
-		Task<ApplicationUser> GetByIdAsReadonlyAsync(int id, Expression<Func<ApplicationUser, bool>> search);
+		Task<ApplicationUser> GetByIdAsReadonlyAsync(Expression<Func<ApplicationUser, bool>> search);
 
 		/// <summary>
 		/// Saves all changes that are done
