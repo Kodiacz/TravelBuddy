@@ -16,10 +16,5 @@
 		[Required]
 		[PasswordPropertyText]
 		public string Password { get; set; } = null!;
-
-		[Required]
-		[PasswordPropertyText]
-		public string ConfirmPassword { get; set; } = null!;
-
 	}
 }
