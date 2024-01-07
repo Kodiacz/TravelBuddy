@@ -1,6 +1,8 @@
-﻿namespace TravelBuddy.Domain.Entities
+﻿using TravelBuddy.Domain.Abstraction;
+
+namespace TravelBuddy.Domain.Entities
 {
-	public class Itinerary
+	public class Itinerary : IDeletableEntity
 	{
         public Itinerary()
         {
@@ -17,5 +19,9 @@
 		public Trip Trip { get; set; } = null!;
 
 		public ICollection<Activity> Activities { get; set; }
+
+		public bool Deleted { get; set; } = false;
+
+		public DateTime DateDeleted { get; set; }
 	}
 }
