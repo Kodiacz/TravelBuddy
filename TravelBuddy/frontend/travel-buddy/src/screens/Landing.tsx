@@ -6,34 +6,30 @@ import { incrementCount, decrementCount } from '../redux/counter/CounterAction';
 import { RootStackParamList } from '../types/types';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ILandingProps } from '../types/screens/landing';
+import { colors } from '../utils/colors';
 
 export default function Landing({ navigation }: ILandingProps) {
-	const count = useSelector((state: AppState) => state.counterReducer.count);
-	const dispatch = useDispatch();
-
-	const handleIncrement = () => {
-		console.log('cliced increment');
-		dispatch(incrementCount());
-	};
-
-	const handleDecrement = () => {
-		console.log('cliced decrement');
-		dispatch(decrementCount());
-	};
-
 	return (
 		<View style={styles.container}>
 			<View style={styles.middleContent}>
 				<Image source={require('../assets/logos/backpack.png')} />
 				<View style={styles.buttonsView}>
 					<Pressable
-						style={{ ...styles.button, ...styles.logInButton }}
-						onPress={() => console.log('log in button clicked')}
+						style={({ pressed }) => [
+							styles.button,
+							styles.logInButton,
+							pressed && styles.logInButtonPressed,
+						]}
+						onPress={() => navigation.navigate('Login')}
 					>
 						<Text style={styles.text}>LOG IN</Text>
 					</Pressable>
 					<Pressable
-						style={{ ...styles.button, ...styles.registerButton }}
+						style={({ pressed }) => [
+							styles.button,
+							styles.registerButton,
+							pressed && styles.registerButtonPressed,
+						]}
 						onPress={() => navigation.navigate('Register')}
 					>
 						<Text style={styles.text}>REGISTER</Text>
@@ -73,11 +69,17 @@ const styles = StyleSheet.create({
 		elevation: 3,
 	},
 	logInButton: {
-		backgroundColor: '#0C2668',
+		backgroundColor: colors.primary.fibonacciBlue,
+	},
+	logInButtonPressed: {
+		backgroundColor: colors.primary.skyBlue,
 	},
 	registerButton: {
-		backgroundColor: '#FF7B1B',
+		backgroundColor: colors.accent.pumpking,
 		marginTop: 12,
+	},
+	registerButtonPressed: {
+		backgroundColor: colors.accent.karry,
 	},
 	text: {
 		fontSize: 16,
