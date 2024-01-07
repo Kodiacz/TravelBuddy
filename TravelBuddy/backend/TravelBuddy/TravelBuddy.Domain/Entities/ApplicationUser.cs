@@ -19,7 +19,6 @@ namespace TravelBuddy.Domain.Entities
 
 		public byte[]? PasswordSalt { get; set; }
 
-		//public string Password { get; set; } = null!;
 		public ICollection<Trip> CreatedTrips { get; set; }
 
 		/// <summary>
