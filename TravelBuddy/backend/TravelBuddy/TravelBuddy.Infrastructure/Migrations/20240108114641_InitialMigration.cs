@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace TravelBuddy.Infrastructure.Migrations
 {
-    public partial class InitalMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -37,7 +37,7 @@ namespace TravelBuddy.Infrastructure.Migrations
                     Created = table.Column<DateTime>(type: "datetime2", nullable: false),
                     LastLoggedIn = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
-                    DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
@@ -56,7 +56,7 @@ namespace TravelBuddy.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
-                    table.CheckConstraint("CK_User_Created", "Created >= GETDATE()");
+                    table.CheckConstraint("CK_User_Created", "Created >= GETUTCDATE()");
                 });
 
             migrationBuilder.CreateTable(
@@ -245,7 +245,6 @@ namespace TravelBuddy.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(40)", maxLength: 40, nullable: false),
                     ItineraryId = table.Column<int>(type: "int", nullable: false),
-                    MyProperty = table.Column<bool>(type: "bit", nullable: false),
                     Deleted = table.Column<bool>(type: "bit", nullable: false),
                     DateDeleted = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },

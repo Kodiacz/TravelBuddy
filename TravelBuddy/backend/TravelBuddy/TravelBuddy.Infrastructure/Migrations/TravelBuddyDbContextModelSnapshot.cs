@@ -191,9 +191,6 @@ namespace TravelBuddy.Infrastructure.Migrations
                     b.Property<int>("ItineraryId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("MyProperty")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(40)
@@ -224,7 +221,7 @@ namespace TravelBuddy.Infrastructure.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DateDeleted")
+                    b.Property<DateTime?>("DateDeleted")
                         .HasColumnType("datetime2");
 
                     b.Property<bool>("Deleted")
@@ -304,7 +301,7 @@ namespace TravelBuddy.Infrastructure.Migrations
 
                     b.ToTable("AspNetUsers", (string)null);
 
-                    b.HasCheckConstraint("CK_User_Created", "Created >= GETDATE()");
+                    b.HasCheckConstraint("CK_User_Created", "Created >= GETUTCDATE()");
                 });
 
             modelBuilder.Entity("TravelBuddy.Domain.Entities.Itinerary", b =>
