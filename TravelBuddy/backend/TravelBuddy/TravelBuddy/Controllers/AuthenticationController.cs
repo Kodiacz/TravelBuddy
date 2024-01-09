@@ -1,4 +1,6 @@
-﻿namespace TravelBuddy.API.Controllers
+﻿using PetCare.Api.Filters;
+
+namespace TravelBuddy.API.Controllers
 {
 	[ApiController]
 	[EnableCors("TravelBuddy-FE")]
@@ -14,6 +16,7 @@
 
 		[HttpPost]
 		[ActionName(nameof(Register))]
+		[ModelValidationFilter]
 		public async Task<ActionResult<GetApplicationUserDto>> Register(CreateApplicationUserDto dto)
 		{
 			this.authenticationService.CreatePasswordHash(dto.Password, out byte[] passwordHash, out byte[] passwordSalt);
