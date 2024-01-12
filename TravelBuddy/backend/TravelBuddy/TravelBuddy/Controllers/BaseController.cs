@@ -1,4 +1,4 @@
-﻿namespace TravelBuddy.Api.Controllers
+﻿namespace TravelBuddy.API.Controllers
 {
 	[Route("api/[controller]")]
 	[ApiController]
