@@ -3,7 +3,7 @@ using TravelBuddy.Domain.Abstraction;
 
 namespace TravelBuddy.Domain.Entities
 {
-	public class ApplicationUser : IdentityUser<int>, IDeletableEntity
+	public class ApplicationUser : IdentityUser<Guid>, IDeletableEntity
 	{
 		public ApplicationUser()
 		{
@@ -35,6 +35,6 @@ namespace TravelBuddy.Domain.Entities
 
 		public bool Deleted { get; set; } = false;
 
-		public DateTime DateDeleted { get; set; }
+		public DateTime? DateDeleted { get; set; }
 	}
 }

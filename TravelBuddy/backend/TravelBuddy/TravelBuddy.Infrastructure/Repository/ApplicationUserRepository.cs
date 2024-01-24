@@ -59,7 +59,30 @@ namespace TravelBuddy.Infrastructure.Repository
 				.ToListAsync();
 		}
 
-		public async Task<ApplicationUser> GetByIdAsReadonlyAsync(int id)
+		public async Task<ApplicationUser> GetByEmailAsReadOnlyAsync(string email)
+		{
+			var user = await this.dbContext
+				.ApplicationUsers
+				.AsNoTracking()
+				.Include(user => user.CreatedTrips)
+				.Include(user => user.InvitedToTrips)
+				.FirstOrDefaultAsync(user => user.Email == email && !user.Deleted);
+
+			return user!;
+		}
+
+		public async Task<ApplicationUser> GetByEmailAsync(string email)
+		{
+			var user = await this.dbContext
+				.ApplicationUsers
+				.Include(user => user.CreatedTrips)
+				.Include(user => user.InvitedToTrips)
+				.FirstOrDefaultAsync(user => user.Email == email && !user.Deleted);
+
+			return user!;
+		}
+
+		public async Task<ApplicationUser> GetByIdAsReadonlyAsync(Guid id)
 		{
 			var user = await this.dbContext
 				.ApplicationUsers
@@ -84,7 +107,7 @@ namespace TravelBuddy.Infrastructure.Repository
 			return user!;
 		}
 
-		public async Task<ApplicationUser> GetByIdAsync(int id)
+		public async Task<ApplicationUser> GetByIdAsync(Guid id)
 		{
 			var user = await this.dbContext
 				.ApplicationUsers

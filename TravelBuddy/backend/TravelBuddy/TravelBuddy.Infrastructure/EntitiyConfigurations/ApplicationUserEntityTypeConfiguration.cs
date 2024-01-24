@@ -28,11 +28,15 @@
 			.IsRequired();
 
 			builder
+				.HasIndex(user => user.Email)
+				.IsUnique();
+
+			builder
 				.Property(user => user.PasswordHash)
 				.IsRequired();
 
 			builder
-				.HasCheckConstraint("CK_User_Created", $"{nameof(ApplicationUser.Created)} >= GETDATE()");
+				.HasCheckConstraint("CK_User_Created", $"{nameof(ApplicationUser.Created)} >= GETUTCDATE()");
 		}
 	}
 }

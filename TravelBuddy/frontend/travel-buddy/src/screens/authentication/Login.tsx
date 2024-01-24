@@ -13,10 +13,24 @@ import { useForm } from 'react-hook-form';
 import InputField from '../../components/InputField';
 import { colors } from '../../utils/colors';
 import { Dimensions } from 'react-native';
+import useSignIn from 'react-auth-kit/hooks/useSignIn';
+import axios from 'axios';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface ILoginData {
 	email: string;
 	password: string;
+}
+
+export interface IUser {
+	email: string;
+	username: string;
+	firstName: string;
+	lastName: string;
+	role: string;
+	accessToken: string;
+	refreshToken: string;
+	authUserState: any;
 }
 
 const screenWidth = Dimensions.get('window').width;
@@ -24,16 +38,76 @@ const screenWidth = Dimensions.get('window').width;
 export default function Login({ navigation }: IRegisterProps) {
 	const { safeArea } = useSafeArea();
 	const [user, setUser] = useState<ILoginData>();
+	const signIn = useSignIn();
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
 		getValues,
+		reset,
 	} = useForm<ILoginData>();
 	const viewContainerStyle = { ...safeArea, ...styles.container };
+	const onSubmit = async (data: any) => {
+		// await axios
+		// .get<IUser>('https://api.api-ninjas.com/v1/jokes?limit=2', {
+		// 	headers: {
+		// 		'X-Api-Key': 's3Aw0i4YiGgTly14xv8iCQ==LpBInF3SoVLH0kb4',
+		// 	},
+		// })
+		// .then((res) => console.log(res.data))
+		// .catch((err) => console.log(err));
 
-	const onSubmit = (data: any) => {
-		// console.log(data);
+		// const result = await fetch(
+		// 	'https://localhost:7024/api/Authentication/Login',
+		// 	{
+		// 		method: 'POST',
+		// 		headers: {
+		// 			Accept: 'application/json',
+		// 		},
+		// 		body: JSON.stringify(data),
+		// 	},
+		// )
+		// 	.then((res) => res.status)
+		// 	.catch((err) => console.log(err));
+
+		// console.log(result);
+		console.log('fetching');
+
+		await axios
+			.get('https://10.0.2.2/api/Trip/GetString')
+			.then((res) => console.log(res.data))
+			.catch((err) => console.log(err));
+
+		// await axios
+		// 	.post<IUser>('https://localhost:7024/api/Authentication/Login', data)
+		// 	.then((res) => {
+		// 		console.log(res.data);
+		// 		if (res.status === 200) {
+		// 			if (
+		// 				signIn({
+		// 					auth: {
+		// 						token: res.data.accessToken,
+		// 						type: 'Bearer',
+		// 					},
+		// 					refresh: res.data.refreshToken,
+		// 					userState: res.data,
+		// 				})
+		// 			) {
+		// 				// Only if you are using refreshToken feature
+		// 				// Redirect or do-something
+		// 			} else {
+		// 				console.error(res.status);
+		// 			}
+
+		// 			navigation.navigate('Home');
+		// 			console.log('fetched');
+		// 		}
+		// 	})
+		// 	.catch((error) => {
+		// 		console.log('we have an error here maaan...');
+		// 		// reset();
+		// 		console.log('Axios Error => ', error);
+		// 	});
 	};
 
 	return (
@@ -81,7 +155,6 @@ export default function Login({ navigation }: IRegisterProps) {
 					/>
 					<View style={styles.buttonsContainer}>
 						<Pressable
-							// style={styles.button}
 							style={({ pressed }) => [
 								styles.button,
 								pressed && styles.buttonPressed,
@@ -101,15 +174,10 @@ const styles = StyleSheet.create({
 	// containers
 	container: {
 		flex: 1,
-		// width: 359,
-		// height: 451,
 		justifyContent: 'center',
 		alignSelf: 'center',
 		alignContent: 'center',
 		alignItems: 'center',
-		// paddingHorizontal: newScreenWidth,
-		// paddingLeft: newScreenWidth,
-		// paddingRight: newScreenWidth,
 	},
 	inputsContainer: {
 		width: screenWidth * 0.9,
@@ -118,7 +186,6 @@ const styles = StyleSheet.create({
 		paddingLeft: 16,
 		backgroundColor: '#D5D8EA',
 		borderRadius: 12,
-		// marginHorizontal: newScreenWidth,
 	},
 	buttonsContainer: {
 		flexDirection: 'row',

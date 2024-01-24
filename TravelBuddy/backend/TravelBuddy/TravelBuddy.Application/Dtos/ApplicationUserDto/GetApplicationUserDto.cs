@@ -6,9 +6,12 @@
         {
 			this.CreatedTrips = new HashSet<Trip>();  
 			this.InvitedToTrips = new HashSet<Trip>();  
+			this.Id = new Guid();  
         }
 
-        public string FirstName { get; set; } = null!;
+		public Guid Id { get; set; } 
+
+		public string FirstName { get; set; } = null!;
 
 		public string LastName { get; set; } = null!;
 

@@ -21,7 +21,21 @@
 		/// </summary>
 		/// <param name="id">The id of the ApplicationUser entity</param>
 		/// <returns>Return the ApplicationUser entity</returns>
-		Task<ApplicationUser> GetByIdAsync(int id);
+		Task<ApplicationUser> GetByIdAsync(Guid id);
+		
+		/// <summary>
+		/// Gets the entity from the database by its email 
+		/// </summary>
+		/// <param name="id">The id of the ApplicationUser entity</param>
+		/// <returns>Return the ApplicationUser entity</returns>
+		Task<ApplicationUser> GetByEmailAsReadOnlyAsync(string email);
+		
+		/// <summary>
+		/// Gets the entity from the database by its email 
+		/// </summary>
+		/// <param name="id">The id of the ApplicationUser entity</param>
+		/// <returns>Return the ApplicationUser entity</returns>
+		Task<ApplicationUser> GetByEmailAsync(string email);
 
 		/// <summary>
 		/// Gets a collection of ApplicationUser type entites
@@ -53,7 +67,7 @@
 		/// </summary>
 		/// <param name="id">The id of the ApplicationUser entity</param>
 		/// <returns>Return the ApplicationUser entity</returns>
-		Task<ApplicationUser> GetByIdAsReadonlyAsync(int id);
+		Task<ApplicationUser> GetByIdAsReadonlyAsync(Guid id);
 
 		/// <summary>
 		/// Gets the entity from the database by its Id and 

@@ -2,8 +2,7 @@
 {
 	public class CreateApplicationUserDto
 	{
-		[Required]
-
+        [Required]
 		public string FirstName { get; set; } = null!;
 
 		[Required]
@@ -16,5 +15,21 @@
 		[Required]
 		[PasswordPropertyText]
 		public string Password { get; set; } = null!;
+
+		[Required]
+		[PasswordPropertyText]
+		public string ConfirmPassword { get; set; } = null!;
+
+		//[JsonIgnore]
+		//[BindNever]
+		//[NotMapped]
+		//[BindProperty(SupportsGet = true)]
+		//public byte[] PasswordHash { get; set; } = null!;
+
+		//[JsonIgnore]
+		//[BindNever]
+		//[NotMapped]
+		//[BindProperty(SupportsGet = true)]
+		//public byte[] PasswordSalt { get; set; } = null!;
 	}
 }

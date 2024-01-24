@@ -20,7 +20,7 @@
 					ValidateIssuer = false,
 					ValidateAudience = false,
 					ValidateIssuerSigningKey = true,
-					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["JwtSettings:Key"]!)),
+					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["JwtSettings:Secret"]!)),
 				};
 			});
 		}

@@ -63,6 +63,7 @@ interface IInputField {
 	error?: string | undefined;
 	secureTextEntry?: boolean;
 	keyboardType?: KeyboardTypeOptions;
+	clearInputField?: () => void;
 }
 
 export default function InputField({
@@ -78,7 +79,6 @@ export default function InputField({
 	secureTextEntry,
 	keyboardType,
 }: IInputField) {
-	console.log(inputFieldType);
 	return (
 		<Controller
 			control={control}
@@ -96,6 +96,7 @@ export default function InputField({
 						placeholder={placeholder}
 						placeholderTextColor={placeholderTextColor}
 						onChangeText={(text) => field.onChange(text)}
+						value={field.value}
 					/>
 					{error && <Text style={errorTextStyle}>{error}</Text>}
 				</>

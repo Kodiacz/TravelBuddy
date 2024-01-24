@@ -1,10 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using TravelBuddy.Infrastructure.EntitiyConfigurations;
-
-namespace TravelBuddy.Infrastructure
+﻿namespace TravelBuddy.Infrastructure
 {
-	public class TravelBuddyDbContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
+	public class TravelBuddyDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 	{
         public TravelBuddyDbContext(DbContextOptions<TravelBuddyDbContext> options) : base(options) {}
 

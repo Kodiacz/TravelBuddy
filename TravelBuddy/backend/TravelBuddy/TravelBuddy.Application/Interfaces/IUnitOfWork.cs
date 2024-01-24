@@ -10,5 +10,6 @@
 
 		public ITripRepository TripRepository { get; }
 
+		Task SaveAsync();
 	}
 }

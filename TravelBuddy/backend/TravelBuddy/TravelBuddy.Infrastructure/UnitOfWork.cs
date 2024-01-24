@@ -32,5 +32,10 @@
 		{
 			dbContext.Dispose();
 		}
+
+		public async Task SaveAsync()
+		{
+			await this.dbContext.SaveChangesAsync();
+		}
 	}
 }

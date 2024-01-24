@@ -18,7 +18,7 @@ namespace TravelBuddy.Domain.Entities
 
 		public DateTime Date { get; set; }
 
-        public int CreatorId { get; set; }
+        public Guid CreatorId { get; set; }
         public ApplicationUser Creator { get; set; } = null!;
 
         public ICollection<ApplicationUser> Guests { get; set; }
