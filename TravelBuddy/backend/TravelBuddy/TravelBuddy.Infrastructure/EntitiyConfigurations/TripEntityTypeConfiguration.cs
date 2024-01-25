@@ -35,6 +35,10 @@
 				.HasMany(trip => trip.Itineraries)
 				.WithOne(itinerary => itinerary.Trip)
 				.HasForeignKey(itinerary => itinerary.TripId);
+
+			builder
+			.Property(trip => trip.DateDeleted)
+			.IsRequired(false);
 		}
 	}
 }
