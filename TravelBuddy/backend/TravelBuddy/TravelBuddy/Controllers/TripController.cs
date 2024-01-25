@@ -5,21 +5,20 @@
 	[Route("api/[controller]/[action]")]
 	public class TripController : BaseController<AuthenticationController>
 	{
-		private readonly IAuthService authenticationService;
-		private readonly IConfiguration configuration;
+		private readonly ITripService tripService;
 
-		public TripController(IAuthService authenticationService, IConfiguration configuration)
+		public TripController(ITripService tripService, IConfiguration configuration)
 		{
-			this.authenticationService = authenticationService;
-			this.configuration = configuration;
+			this.tripService = tripService;
 		}
 
 		[HttpGet]
-		[ActionName(nameof(GetString))]
+		[ActionName(nameof(GetUserTrip))]
 		//[Authorize(Roles = "User")]
-		public ActionResult<string> GetString()
+		public async Task<ActionResult> GetUserTrip(Guid userId)
 		{
-			return Ok("Hey");
+			var trips = await this.tripService.GetUserTrips(userId);
+			return Ok(trips);
 		}
 	}
 }
