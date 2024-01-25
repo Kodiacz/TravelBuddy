@@ -27,6 +27,6 @@ namespace TravelBuddy.Domain.Entities
 
         public bool Deleted { get; set; } = false;
 
-        public DateTime DateDeleted { get; set; }
+        public DateTime? DateDeleted { get; set; }
 	}
 }
