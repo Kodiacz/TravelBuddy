@@ -9,14 +9,22 @@
 			this.dbContext = dbContext;
 		}
 
-		public Task AddAsync(Trip appointment)
+		public async Task AddAsync(Trip trip)
 		{
-			throw new NotImplementedException();
+			await this.dbContext.AddAsync(trip);
 		}
 
-		public Task<ICollection<Trip>> GetAllAsReadOnlyAsync()
+		public async Task<ICollection<Trip>> GetAllAsReadOnlyAsync(Guid userId)
 		{
-			throw new NotImplementedException();
+			var trips = await this.dbContext
+				.Trips
+				.AsNoTracking()
+				.Include(x => x.Itineraries)
+				.Include(x => x.Guests)
+				.Include(x => x.Creator)
+				.Where(trip => trip.Creator.Id == userId)
+				.ToListAsync();
+			return trips;
 		}
 
 		public Task<ICollection<Trip>> GetAllAsReadOnlyAsync(Expression<Func<Trip, bool>> search)
@@ -54,7 +62,7 @@
 			throw new NotImplementedException();
 		}
 
-		public void Update(Trip appointment)
+		public void Update(Trip trip)
 		{
 			throw new NotImplementedException();
 		}

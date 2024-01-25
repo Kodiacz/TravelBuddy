@@ -5,16 +5,16 @@
 		/// <summary>
 		/// Adding an Trip type entity in the database
 		/// </summary>
-		/// <param name="appointment">Trip type variable</param>
+		/// <param name="trip">Trip type variable</param>
 		/// <returns></returns>
-		Task AddAsync(Trip appointment);
+		Task AddAsync(Trip trip);
 
 		/// <summary>
 		/// Updating the Trip entity in the database
 		/// </summary>
-		/// <param name="appointment">Trip type variable</param>
+		/// <param name="trip">Trip type variable</param>
 		/// <returns></returns>
-		void Update(Trip appointment);
+		void Update(Trip trip);
 
 		/// <summary>
 		/// Gets the entity from the database by its Id
@@ -30,7 +30,7 @@
 		Task<ICollection<Trip>> GetAllAsync();
 
 		/// <summary>
-		/// Gets all the appointments and accepts a predicate for sarch term
+		/// Gets all the trips and accepts a predicate for sarch term
 		/// </summary>
 		/// <returns></returns>
 		Task<ICollection<Trip>> GetAllAsync(Expression<Func<Trip, bool>> search);
@@ -39,7 +39,7 @@
 		/// Gets all the Trips and uses AsNoTracking method
 		/// </summary>
 		/// <returns></returns>
-		Task<ICollection<Trip>> GetAllAsReadOnlyAsync();
+		Task<ICollection<Trip>> GetAllAsReadOnlyAsync(Guid userId);
 
 		/// <summary>
 		/// Gets all the Trips and accepts a predicate for sarch term also uses
