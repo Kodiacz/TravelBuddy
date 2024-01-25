@@ -1,11 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using TravelBuddy.Domain.Models;
-
-namespace TravelBuddy.Infrastructure.Services
+﻿namespace TravelBuddy.Infrastructure.Services
 {
 	public class AuthService : BaseService, IAuthService
 	{
