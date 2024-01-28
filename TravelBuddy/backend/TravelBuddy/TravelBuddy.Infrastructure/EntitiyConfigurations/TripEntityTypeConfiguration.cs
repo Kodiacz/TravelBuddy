@@ -13,11 +13,27 @@
 				.HasMaxLength(TRIP_NAME_MAX_LENGTH);
 
 			builder
-				.Property(trip => trip.Date)
+				.Property(trip => trip.StartDate)
+				.HasColumnType("Date")
 				.IsRequired();
 
 			builder
-				.HasCheckConstraint("CK_Trip_Date", $"{nameof(Trip.Date)} >= GETDATE()");
+				.HasCheckConstraint("CK_Trip_NewStartDate", $"{nameof(Trip.StartDate)} >= GETDATE()");
+
+			builder
+				.Property(trip => trip.EndDate)
+				.HasColumnType("Date")
+				.IsRequired();
+
+			builder
+				.HasCheckConstraint("CK_Trip_EndDate", $"{nameof(Trip.EndDate)} > StartDate");
+
+			builder
+				.Property(trip => trip.TravellingBy)
+				.HasMaxLength(TRIP_TRAVELLING_BY_MAX_LENGTH);
+
+			builder
+				.Property(trip => trip.Accommodation);
 
 			// Relationships:
 
@@ -37,8 +53,9 @@
 				.HasForeignKey(itinerary => itinerary.TripId);
 
 			builder
-			.Property(trip => trip.DateDeleted)
-			.IsRequired(false);
+				.Property(trip => trip.DateDeleted)
+				.HasColumnType("Date")
+				.IsRequired(false);
 		}
 	}
 }
