@@ -20,6 +20,7 @@ global using TravelBuddy.Application.Interfaces;
 global using TravelBuddy.Application.Interfaces.Services;
 global using TravelBuddy.Application.Interfaces.Repository;
 global using TravelBuddy.Application.Dtos.TripDtos;
+global using TravelBuddy.Application.Dtos.ItineraryDtos;
 global using TravelBuddy.Application.Dtos.ApplicationUserDto;
 global using TravelBuddy.Infrastructure.EntitiyConfigurations;
 global using static TravelBuddy.Infrastructure.Common.DatabaseConstants.ActivityConstants;

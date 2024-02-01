@@ -12,5 +12,7 @@ global using AutoMapper;
 global using TravelBuddy.Domain.Models;
 global using TravelBuddy.Domain.Entities;
 global using TravelBuddy.Application.CustomAttributes;
+global using TravelBuddy.Application.Dtos.ActivityDtos;
+global using TravelBuddy.Application.Dtos.ItineraryDtos;
 global using TravelBuddy.Application.Dtos.ApplicationUserDto;
 global using TravelBuddy.Application.Interfaces.Repository;
