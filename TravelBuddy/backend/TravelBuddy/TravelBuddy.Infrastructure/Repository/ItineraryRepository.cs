@@ -34,6 +34,16 @@
 			throw new NotImplementedException();
 		}
 
+		public async Task<ICollection<Itinerary>> GetAllTripItinerariesAsync(int tripId)
+		{
+			return await this.dbContext
+				.Itineraries
+				.Include(x => x.Trip)
+				.Include(x => x.Activities)
+				.Where(x => x.TripId == tripId)
+				.ToListAsync();
+		}
+
 		public Task<Itinerary> GetByIdAsReadonlyAsync(int id)
 		{
 			throw new NotImplementedException();
