@@ -96,4 +96,3 @@ const style = StyleSheet.create({
 });
 
 export { style };
-console.log(160 / 3);

@@ -3,7 +3,7 @@ import { Button, Image, Pressable, Text, View, StyleSheet } from 'react-native';
 import { AppState } from '../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementCount, decrementCount } from '../redux/counter/CounterAction';
-import { RootStackParamList } from '../types/types';
+import { RootStackParamList } from '../types/applicationDbTypes';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ILandingProps } from '../types/screens/landing';
 import { colors } from '../utils/colors';

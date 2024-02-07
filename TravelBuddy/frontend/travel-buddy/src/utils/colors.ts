@@ -34,6 +34,7 @@ export const colors: ColorsType = {
 	},
 	white: '#FFFFFF',
 	error: '#CC1919',
+	transparent: 'transparent',
 };
 
 type ColorsType = {
@@ -72,4 +73,5 @@ type ColorsType = {
 	};
 	white: '#FFFFFF';
 	error: '#CC1919';
+	transparent: 'transparent';
 };

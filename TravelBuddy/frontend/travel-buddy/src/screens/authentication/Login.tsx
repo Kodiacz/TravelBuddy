@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import {
 	Pressable,
 	StyleSheet,
@@ -14,100 +13,63 @@ import InputField from '../../components/InputField';
 import { colors } from '../../utils/colors';
 import { Dimensions } from 'react-native';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
-import axios from 'axios';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ILoginData, IUser } from '../../types/applicationDbTypes';
+import AuthApiService from '../../utils/services/AuthApiService';
+import { Button } from '@rneui/themed';
+import { useState } from 'react';
+import { styles } from '../../styles/Screens/LoginStyles';
 
-interface ILoginData {
-	email: string;
-	password: string;
-}
+const authApiService = new AuthApiService();
 
-export interface IUser {
-	email: string;
-	username: string;
-	firstName: string;
-	lastName: string;
-	role: string;
-	accessToken: string;
-	refreshToken: string;
-	authUserState: any;
-}
-
-const screenWidth = Dimensions.get('window').width;
+const pressable = () => <Pressable></Pressable>;
 
 export default function Login({ navigation }: IRegisterProps) {
 	const { safeArea } = useSafeArea();
-	const [user, setUser] = useState<ILoginData>();
 	const signIn = useSignIn();
 	const {
 		control,
 		handleSubmit,
 		formState: { errors },
+		setError,
 		getValues,
 		reset,
-	} = useForm<ILoginData>();
+	} = useForm<ILoginData>({ shouldUnregister: true });
 	const viewContainerStyle = { ...safeArea, ...styles.container };
+	const [loading, setLoading] = useState<boolean>(false);
+	const [disabled, setDisabled] = useState<boolean>(false);
+
 	const onSubmit = async (data: any) => {
-		// await axios
-		// .get<IUser>('https://api.api-ninjas.com/v1/jokes?limit=2', {
-		// 	headers: {
-		// 		'X-Api-Key': 's3Aw0i4YiGgTly14xv8iCQ==LpBInF3SoVLH0kb4',
-		// 	},
-		// })
-		// .then((res) => console.log(res.data))
-		// .catch((err) => console.log(err));
+		setLoading(true);
+		setDisabled(true);
 
-		// const result = await fetch(
-		// 	'https://localhost:7024/api/Authentication/Login',
-		// 	{
-		// 		method: 'POST',
-		// 		headers: {
-		// 			Accept: 'application/json',
-		// 		},
-		// 		body: JSON.stringify(data),
-		// 	},
-		// )
-		// 	.then((res) => res.status)
-		// 	.catch((err) => console.log(err));
+		const fetchedData = await authApiService.login(data);
 
-		// console.log(result);
-		console.log('fetching');
-
-		await axios
-			.get('https://10.0.2.2/api/Trip/GetString')
-			.then((res) => console.log(res.data))
-			.catch((err) => console.log(err));
-
-		// await axios
-		// 	.post<IUser>('https://localhost:7024/api/Authentication/Login', data)
-		// 	.then((res) => {
-		// 		console.log(res.data);
-		// 		if (res.status === 200) {
-		// 			if (
-		// 				signIn({
-		// 					auth: {
-		// 						token: res.data.accessToken,
-		// 						type: 'Bearer',
-		// 					},
-		// 					refresh: res.data.refreshToken,
-		// 					userState: res.data,
-		// 				})
-		// 			) {
-		// 				// Only if you are using refreshToken feature
-		// 				// Redirect or do-something
-		// 			} else {
-		// 				console.error(res.status);
-		// 			}
-
-		// 			navigation.navigate('Home');
-		// 			console.log('fetched');
-		// 		}
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log('we have an error here maaan...');
-		// 		// reset();
-		// 		console.log('Axios Error => ', error);
-		// 	});
+		if (fetchedData.status == 200) {
+			const user = fetchedData.data;
+			if (
+				signIn({
+					auth: {
+						token: user.accessToken,
+						type: 'Bearer',
+					},
+					userState: user,
+				})
+			) {
+				// Only if you are using refreshToken feature
+				// Redirect or do-something
+				setLoading(false);
+				setDisabled(false);
+				navigation.navigate('Main');
+			}
+		} else {
+			console.error(fetchedData.status, fetchedData.data);
+			setError('password', {
+				message: (fetchedData.data as any).title,
+				type: 'onBlur',
+			});
+		}
+		setLoading(false);
+		setDisabled(false);
 	};
 
 	return (
@@ -154,7 +116,7 @@ export default function Login({ navigation }: IRegisterProps) {
 						error={errors.password?.message?.toString()}
 					/>
 					<View style={styles.buttonsContainer}>
-						<Pressable
+						{/* <Pressable
 							style={({ pressed }) => [
 								styles.button,
 								pressed && styles.buttonPressed,
@@ -162,75 +124,25 @@ export default function Login({ navigation }: IRegisterProps) {
 							onPress={handleSubmit(onSubmit)}
 						>
 							<Text style={styles.buttonTetxt}>LOG IN</Text>
-						</Pressable>
+						</Pressable> */}
+						<Button
+							title="LOG IN"
+							loading={loading}
+							disabled={disabled}
+							disabledStyle={{ ...styles.button, ...styles.buttonDisabled }}
+							loadingProps={{
+								size: 'small',
+								color: 'rgba(111, 202, 186, 1)',
+								animating: true,
+							}}
+							onPress={handleSubmit(onSubmit)}
+							titleStyle={styles.buttonTetxt}
+							buttonStyle={styles.button}
+							containerStyle={styles.buttonsContainer}
+						/>
 					</View>
 				</View>
 			</View>
 		</KeyboardAvoidingView>
 	);
 }
-
-const styles = StyleSheet.create({
-	// containers
-	container: {
-		flex: 1,
-		justifyContent: 'center',
-		alignSelf: 'center',
-		alignContent: 'center',
-		alignItems: 'center',
-	},
-	inputsContainer: {
-		width: screenWidth * 0.9,
-		paddingTop: 24,
-		paddingRight: 16,
-		paddingLeft: 16,
-		backgroundColor: '#D5D8EA',
-		borderRadius: 12,
-	},
-	buttonsContainer: {
-		flexDirection: 'row',
-		justifyContent: 'flex-end',
-	},
-	inputField: {
-		width: 'auto',
-		height: 41.51,
-		borderRadius: 11.19,
-		backgroundColor: '#FFFFFF',
-		margin: 12,
-		color: '#0C2668',
-		fontWeight: '700',
-		fontSize: 17,
-		letterSpacing: -0.4,
-		lineHeight: 22,
-		padding: 0,
-		paddingLeft: 14.92,
-	},
-	errorText: {
-		color: colors.error,
-		paddingLeft: 14.92,
-	},
-	inputFieldRedBoreder: {
-		borderColor: colors.error,
-		borderWidth: 1,
-	},
-	button: {
-		width: 'auto',
-		height: 50,
-		borderRadius: 12,
-		paddingTop: 14,
-		paddingRight: 20,
-		paddingBottom: 14,
-		paddingLeft: 20,
-		marginBottom: 10,
-		marginTop: 12,
-		marginRight: 8,
-		backgroundColor: '#0C2668',
-	},
-	buttonPressed: {
-		backgroundColor: '#4071C1', // Change to a different color or add any other styles
-	},
-	buttonTetxt: {
-		color: '#FFFFFF',
-		textAlign: 'center',
-	},
-});
