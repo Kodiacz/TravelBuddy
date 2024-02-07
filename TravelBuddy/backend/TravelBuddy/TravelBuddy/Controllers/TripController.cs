@@ -20,5 +20,13 @@
 			var trips = await this.tripService.GetUserTrips(userId);
 			return Ok(trips);
 		}
+		
+		[HttpGet]
+		[ActionName(nameof(Hey))]
+		//[Authorize(Roles = "User")]
+		public ActionResult Hey()
+		{
+			return Ok("Hey");
+		}
 	}
 }

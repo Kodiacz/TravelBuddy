@@ -16,16 +16,15 @@
 
 		public async Task<ICollection<Trip>> GetAllAsReadOnlyAsync(Guid userId)
 		{
-			//var trips = await this.dbContext
-			//	.Trips
-			//	.AsNoTracking()
-			//	.Include(x => x.Itineraries)
-			//	.Include(x => x.Guests)
-			//	.Include(x => x.Creator)
-			//	.Where(trip => trip.Creator.Id == userId)
-			//	.ToListAsync();
-			//return trips;
-			return null;
+			var trips = await this.dbContext
+				.Trips
+				.AsNoTracking()
+				.Include(x => x.Itineraries)
+				.Include(x => x.Guests)
+				.Include(x => x.Creator)
+				.Where(trip => trip.Creator.Id == userId)
+				.ToListAsync();
+			return trips;
 		}
 
 		public Task<ICollection<Trip>> GetAllAsReadOnlyAsync(Expression<Func<Trip, bool>> search)
