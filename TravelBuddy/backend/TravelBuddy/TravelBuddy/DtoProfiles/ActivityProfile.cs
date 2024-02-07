@@ -2,9 +2,10 @@
 {
 	public class ActivityProfile : Profile
 	{
-			public ActivityProfile()
-			{
-				CreateMap<Activity, GetActivityDto>();
-			}
+		public ActivityProfile()
+		{
+			CreateMap<Activity, GetActivityDto>();
+			CreateMap<AddActivityDto, Activity>();
+		}
 	}
 }

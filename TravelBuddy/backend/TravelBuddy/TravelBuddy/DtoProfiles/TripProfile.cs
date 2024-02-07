@@ -6,6 +6,8 @@
 		{
 			CreateMap<Trip, GetTripDto>()
 				.ForMember(destinationMember => destinationMember.Creator, opt => opt.MapFrom(src => src.Creator.Email));
+
+			CreateMap<AddTripDto, Trip>();
 		}
 
 	}
