@@ -9,9 +9,9 @@
 			this.dbContext = dbContext;
 		}
 
-		public Task AddAsync(Itinerary appointment)
+		public async Task AddAsync(Itinerary itinerary)
 		{
-			throw new NotImplementedException();
+			await this.dbContext.AddAsync(itinerary);
 		}
 
 		public Task<ICollection<Itinerary>> GetAllAsReadOnlyAsync()
@@ -59,12 +59,12 @@
 			throw new NotImplementedException();
 		}
 
-		public Task SaveAsync()
+		public async Task SaveAsync()
 		{
-			throw new NotImplementedException();
+			await this.dbContext.SaveChangesAsync();
 		}
 
-		public void Update(Itinerary appointment)
+		public void Update(Itinerary itinerary)
 		{
 			throw new NotImplementedException();
 		}
