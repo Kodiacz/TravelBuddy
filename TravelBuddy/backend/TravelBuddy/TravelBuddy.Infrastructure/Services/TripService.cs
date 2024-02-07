@@ -4,9 +4,11 @@
 	{
 		public TripService(IUnitOfWork unitOfWork, IMapper mapper) : base(unitOfWork, mapper) { }
 
-		public Task AddTrip(Trip trip)
+		public async Task AddTrip(AddTripDto tripDto)
 		{
-			throw new NotImplementedException();
+			Trip dbTrip = this.Mapper.Map<Trip>(tripDto);
+			await this.UnitOfWork.TripRepository.AddAsync(dbTrip);
+			await this.UnitOfWork.SaveAsync();
 		}
 
 		public async Task<IEnumerable<GetTripDto>> GetUserTrips(Guid userId)

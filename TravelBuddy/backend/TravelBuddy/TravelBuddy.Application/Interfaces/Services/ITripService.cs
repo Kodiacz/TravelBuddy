@@ -4,7 +4,7 @@ namespace TravelBuddy.Application.Interfaces.Services
 {
 	public interface ITripService
 	{
-		Task AddTrip(Trip trip);
+		Task AddTrip(AddTripDto tripDto);
 
 		Task<IEnumerable<GetTripDto>> GetUserTrips(Guid userId);
 	}
