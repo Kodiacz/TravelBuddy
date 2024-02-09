@@ -48,7 +48,7 @@ interface IItineraryAccordionProps {
 }
 
 interface IItinerariesProps {
-	tripId: number;
+	tripId?: number;
 }
 
 interface IActivityProps {
