@@ -5,24 +5,24 @@ import useSafeArea from '../../custom-hooks/useSafeView';
 import { Icon, ListItem } from '@rneui/themed';
 import { useEffect, useState } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
-import ItineraryCard from '../../components/ItineraryCard';
-import ItineraryAccordion from '../../components/ItineraryAccordion';
-import { AppState, useAppDispatch } from '../../redux/store';
+import ItineraryCard from '../../components/ActivityCard';
+import { AppReducers, useAppDispatch } from '../../redux/store';
 import { TypedUseSelectorHook } from 'react-redux';
 import { useSelector as useReduxSelector } from 'react-redux';
 import { getTripItineraries } from '../../redux/itinerary/itinerarySlice';
 import { IItinerariesProps } from '../../types/propTypes';
-import TestAccordion from '../../components/TestAccordion';
-// import GenericAccordion from '../../components/GenericAccordion';
+import ItineraryAccordion from '../../components/ItineraryAccordion';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Itineraries = ({ tripId }: IItinerariesProps) => {
 	const { safeArea } = useSafeArea();
-	const [expanded, setExpanded] = useState<boolean>(false);
 	const dispatch = useAppDispatch();
-	const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
-	const { itineraries, loading, error } = useSelector(
-		(state) => state.itineraryReducer,
-	);
+	const useSelector: TypedUseSelectorHook<AppReducers> = useReduxSelector;
+	const {
+		data: itineraries,
+		loading,
+		error,
+	} = useSelector((state) => state.itineraryReducer);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -40,8 +40,6 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 		<Image source={require('../../assets/account/my-account.png')} />
 	);
 
-	console.log('itineraries => ', itineraries);
-
 	return (
 		<View style={safeArea}>
 			<ScreenHeader
@@ -53,7 +51,7 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 				renderItem={({ item }) => (
 					// <>{<ItineraryAccordion itinerary={item} />}</>
 					<>
-						<TestAccordion itinerary={item}></TestAccordion>
+						<ItineraryAccordion itinerary={item}></ItineraryAccordion>
 					</>
 				)}
 			/>
