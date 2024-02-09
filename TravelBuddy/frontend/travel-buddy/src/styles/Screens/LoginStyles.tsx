@@ -60,7 +60,7 @@ export const styles = StyleSheet.create({
 		backgroundColor: colors.primary.fibonacciBlue,
 	},
 	buttonDisabled: {
-		backgroundColor: colors.primary.fibonacciBlue,
+		backgroundColor: colors.primary.lambentLagoon,
 	},
 	buttonPressed: {
 		backgroundColor: 'red', // Change to a different color or add any other styles
