@@ -12,4 +12,12 @@ interface IItinerarySliceState {
 	error: string | null | undefined;
 }
 
-export { ITripsSliceState, IItinerarySliceState };
+interface IUserSliceState {}
+
+interface ISliceState<T> {
+	data: T | null;
+	loading: boolean;
+	error: string | null | undefined;
+}
+
+export { ITripsSliceState, IItinerarySliceState, ISliceState };

@@ -1,11 +1,11 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IItinerarySliceState } from '../../types/reduxTypes';
+import { ISliceState } from '../../types/reduxTypes';
 import ItineraryApiService from '../../utils/services/ItinararyApiService';
 import { IItinerary, ITrip } from '../../types/applicationDbTypes';
 
-const initialState: IItinerarySliceState = {
-	itineraries: [],
-	loading: true,
+const initialState: ISliceState<IItinerary[]> = {
+	data: [],
+	loading: false,
 	error: null,
 };
 
@@ -33,7 +33,7 @@ const itinerarySlice = createSlice({
 				getTripItineraries.fulfilled,
 				(state, action: PayloadAction<IItinerary[]>) => {
 					state.loading = false;
-					state.itineraries = action.payload;
+					state.data = action.payload;
 				},
 			)
 			.addCase(getTripItineraries.rejected, (state, action) => {
