@@ -8,10 +8,24 @@ import Home from './Home';
 import { colors } from '../utils/colors';
 import { styles } from '../styles/Screens/MainStyles';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
+import userSlice from '../redux/user/userSlice';
+import {
+	TypedUseSelectorHook,
+	useSelector as useReduxSelector,
+} from 'react-redux';
+import { AppReducers } from '../redux/store';
 
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
+	const useSelector: TypedUseSelectorHook<AppReducers> = useReduxSelector;
+	const {
+		data: user,
+		loading,
+		error,
+	} = useSelector((state) => state.userReducer);
+	console.log('auth user => ', user);
 	return (
 		<Tab.Navigator
 			initialRouteName="Home"

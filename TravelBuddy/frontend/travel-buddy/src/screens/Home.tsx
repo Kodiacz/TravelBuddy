@@ -1,32 +1,33 @@
 import React, { useEffect } from 'react';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
-import {
-	FlatList,
-	Image,
-	ScrollView,
-	StyleSheet,
-	Text,
-	View,
-} from 'react-native';
+import { FlatList, Image, Text, View } from 'react-native';
 import useSafeArea from '../custom-hooks/useSafeView';
 import {
 	useSelector as useReduxSelector,
 	TypedUseSelectorHook,
 } from 'react-redux';
 import { getTrips } from '../redux/trips/tripsSlice';
-import { AppState, useAppDispatch } from '../redux/store';
-import { styles } from '../styles/Screens/HomeStyles';
+import { AppReducers, useAppDispatch } from '../redux/store';
 import { IUser } from '../types/applicationDbTypes';
 import TripCard from '../components/TripCard';
 import TripCardSkeleton from '../components/loading-components/TripCardSkeleton';
 import ScreenHeader from '../components/ScreenHeader';
+import { useSelector } from 'react-redux';
 
 export default function Home() {
 	const { safeArea } = useSafeArea();
-	const user = useAuthUser<IUser>();
+	// const user = useAuthUser<IUser>();
+	const user = useSelector(
+		(state: AppReducers) => state.userReducer.data,
+	) as IUser | null;
 	const dispatch = useAppDispatch();
-	const useSelector: TypedUseSelectorHook<AppState> = useReduxSelector;
-	const { trips, loading, error } = useSelector((state) => state.tripReducer);
+	const {
+		data: trips,
+		loading,
+		error,
+	} = useSelector((state: AppReducers) => state.tripReducer);
+
+	console.log('home => user => ', user);
 
 	useEffect(() => {
 		const fetchData = async () => {
