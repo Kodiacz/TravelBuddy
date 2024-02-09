@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Image, Pressable, Text, View, StyleSheet } from 'react-native';
-import { AppState } from '../redux/store';
+import { AppReducers } from '../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { incrementCount, decrementCount } from '../redux/counter/CounterAction';
 import { RootStackParamList } from '../types/applicationDbTypes';
