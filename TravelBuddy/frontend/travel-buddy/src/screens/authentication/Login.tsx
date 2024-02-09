@@ -1,27 +1,23 @@
-import {
-	Pressable,
-	StyleSheet,
-	Text,
-	View,
-	KeyboardAvoidingView,
-	Platform,
-} from 'react-native';
+import { Pressable, View, KeyboardAvoidingView, Platform } from 'react-native';
 import { IRegisterProps } from '../../types/screens/register';
 import useSafeArea from '../../custom-hooks/useSafeView';
 import { useForm } from 'react-hook-form';
 import InputField from '../../components/InputField';
 import { colors } from '../../utils/colors';
-import { Dimensions } from 'react-native';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
 import { ILoginData, IUser } from '../../types/applicationDbTypes';
 import AuthApiService from '../../utils/services/AuthApiService';
 import { Button } from '@rneui/themed';
 import { useState } from 'react';
 import { styles } from '../../styles/Screens/LoginStyles';
-
-const authApiService = new AuthApiService();
-
-const pressable = () => <Pressable></Pressable>;
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {
+	TypedUseSelectorHook,
+	useSelector as useReduxSelector,
+} from 'react-redux';
+import { AppReducers, useAppDispatch } from '../../redux/store';
+import { getUser } from '../../redux/user/userSlice';
+import { useSelector } from 'react-redux';
 
 export default function Login({ navigation }: IRegisterProps) {
 	const { safeArea } = useSafeArea();
@@ -35,41 +31,36 @@ export default function Login({ navigation }: IRegisterProps) {
 		reset,
 	} = useForm<ILoginData>({ shouldUnregister: true });
 	const viewContainerStyle = { ...safeArea, ...styles.container };
-	const [loading, setLoading] = useState<boolean>(false);
+	// const [loading, setLoading] = useState<boolean>(false);
 	const [disabled, setDisabled] = useState<boolean>(false);
-
+	const dispatch = useAppDispatch();
+	const {
+		data: user,
+		loading,
+		error,
+	} = useSelector((state: AppReducers) => state.userReducer);
+	console.log('login => loading => ', loading);
+	console.log('login => disabled => ', disabled);
 	const onSubmit = async (data: any) => {
-		setLoading(true);
+		console.log('onSubmit clicked');
 		setDisabled(true);
 
-		const fetchedData = await authApiService.login(data);
+		await dispatch(getUser(data));
 
-		if (fetchedData.status == 200) {
-			const user = fetchedData.data;
-			if (
-				signIn({
-					auth: {
-						token: user.accessToken,
-						type: 'Bearer',
-					},
-					userState: user,
-				})
-			) {
-				// Only if you are using refreshToken feature
-				// Redirect or do-something
-				setLoading(false);
-				setDisabled(false);
-				navigation.navigate('Main');
-			}
+		if (!loading) {
+			setDisabled(false);
+		}
+		console.log('Login => user => ', user);
+		if (user?.accessToken) {
+			await AsyncStorage.setItem('isLogedIn', JSON.stringify(true));
+			navigation.navigate('Main');
 		} else {
-			console.error(fetchedData.status, fetchedData.data);
+			setDisabled(false);
 			setError('password', {
-				message: (fetchedData.data as any).title,
+				message: (user as any)?.title,
 				type: 'onBlur',
 			});
 		}
-		setLoading(false);
-		setDisabled(false);
 	};
 
 	return (
@@ -116,15 +107,6 @@ export default function Login({ navigation }: IRegisterProps) {
 						error={errors.password?.message?.toString()}
 					/>
 					<View style={styles.buttonsContainer}>
-						{/* <Pressable
-							style={({ pressed }) => [
-								styles.button,
-								pressed && styles.buttonPressed,
-							]}
-							onPress={handleSubmit(onSubmit)}
-						>
-							<Text style={styles.buttonTetxt}>LOG IN</Text>
-						</Pressable> */}
 						<Button
 							title="LOG IN"
 							loading={loading}
