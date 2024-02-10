@@ -77,19 +77,36 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
+<div align="center">
+  <h1 style="display: inline-block;">About The Project</h1>
+</div>
 
-The Travel Buddy app is a mobile application designed to help users plan and organize their trips. With Travel Buddy, users can create trips, add information about dates, locations, accommodations, tickets, and itineraries. The app allows users to invite others to join their trips as collaborators, enabling them to share ideas and coordinate plans.
+<p align="left">
+  The Travel Buddy app is a mobile application designed to help users plan and organize their trips. With Travel Buddy, users can create trips, add information about dates, locations, accommodations, tickets, and itineraries. The app allows users to invite others to join their trips as collaborators, enabling them to share ideas and coordinate plans.
+</p>
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+# Built With
 
-### Built With
 
-![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+<div align="left" style="display: flex; flex-direction: column;">
+    <p align="left">Main:</p>
+    <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript Badge">
+    <img src="https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="React Native Badge">
+    <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white" alt="C# Badge">
+    <img src="https://img.shields.io/badge/ASP.NET_Core-5C2D91?style=for-the-badge&logo=.net&logoColor=red" alt=".NET Badge">
+    <img src="https://img.shields.io/badge/EF_Core-5C2D91?style=for-the-badge&logo=.net&logoColor=red" alt="EF Core Badge">
+</div>
+
+<div align="left" style="display: flex;">
+    <p align="left">Secondary:</p>
+    <h1 style="display: inline-block;">Front-end libraries</h1>
+    <img src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white" alt="Redux Badge">
+    <img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E" alt="Prettier Badge">
+</div>
+
+<!-- ![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![.Net](https://img.shields.io/badge/ASP.NET_Core-5C2D91?style=for-the-badge&logo=.net&logoColor=red)
 ![.Net](https://img.shields.io/badge/EF_Core-5C2D91?style=for-the-badge&logo=.net&logoColor=red)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- GETTING STARTED -->
 
