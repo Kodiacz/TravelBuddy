@@ -29,7 +29,7 @@ The Travel Buddy app is a mobile application designed to help users plan and org
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![Contributors][contributors-shield]][contributors-url]
+<!--[![Contributors][contributors-shield]][contributors-url]
 [![Forks][forks-shield]][forks-url]
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
@@ -39,13 +39,13 @@ The Travel Buddy app is a mobile application designed to help users plan and org
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/Kodiacz/TravelBuddy/tree/development?tab=readme-ov-file">
+    <img src="TravelBuddy/frontend/travel-buddy/assets/splash.png" alt="Logo" width="350" height="350">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Travel Buddy App</h3>
 
-  <p align="center">
+  <!-- <p align="center">
     An awesome README template to jumpstart your projects!
     <br />
     <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
@@ -57,7 +57,7 @@ The Travel Buddy app is a mobile application designed to help users plan and org
     ·
     <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
   </p>
-</div>
+</div> -->
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -89,34 +89,15 @@ The Travel Buddy app is a mobile application designed to help users plan and org
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
-
-Here's why:
-
-- Your time should be focused on creating something amazing. A project that solves a problem and helps others
-- You shouldn't be doing the same tasks over and over like creating a README from scratch
-- You should implement DRY principles to the rest of your life :smile:
-
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have contributed to expanding this template!
-
-Use the `BLANK_README.md` to get started.
+The Travel Buddy app is a mobile application designed to help users plan and organize their trips. With Travel Buddy, users can create trips, add information about dates, locations, accommodations, tickets, and itineraries. The app allows users to invite others to join their trips as collaborators, enabling them to share ideas and coordinate plans.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
-- [![Next][Next.js]][Next-url]
-- [![React][React.js]][React-url]
-- [![Vue][Vue.js]][Vue-url]
-- [![Angular][Angular.io]][Angular-url]
-- [![Svelte][Svelte.dev]][Svelte-url]
-- [![Laravel][Laravel.com]][Laravel-url]
-- [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-- [![JQuery][JQuery.com]][JQuery-url]
+![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+![.Net](https://img.shields.io/badge/ASP.NET_Core-5C2D91?style=for-the-badge&logo=.net&logoColor=red)
+![.Net](https://img.shields.io/badge/EF_Core-5C2D91?style=for-the-badge&logo=.net&logoColor=red)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
