@@ -30,7 +30,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/Kodiacz/TravelBuddy/tree/development?tab=readme-ov-file">
-    <img src="TravelBuddy/frontend/travel-buddy/assets/splash.png" alt="Logo" width="350" height="350">
+    <img src="TravelBuddy/frontend/travel-buddy/assets/splash.png" alt="Logo" width="350" height="315">
   </a>
 
   <h3 align="center">Travel Buddy App</h3>
@@ -56,7 +56,7 @@
     <li>
       <a href="#about-the-project">About The Project</a>
       <ul>
-        <li><a href="#built-with">Built With</a></li>
+        <li><a href="#built-with">Build With</a></li>
       </ul>
     </li>
     <li>
@@ -88,20 +88,46 @@
 # Built With
 
 
-<div align="left" style="display: flex; flex-direction: column;">
-    <p align="left">Main:</p>
-    <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript Badge">
-    <img src="https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="React Native Badge">
-    <img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white" alt="C# Badge">
-    <img src="https://img.shields.io/badge/ASP.NET_Core-5C2D91?style=for-the-badge&logo=.net&logoColor=red" alt=".NET Badge">
-    <img src="https://img.shields.io/badge/EF_Core-5C2D91?style=for-the-badge&logo=.net&logoColor=red" alt="EF Core Badge">
+<div align="left">
+    <h1>Main:</h1>
+    <table border="0">
+       <th>
+          Front-end:
+       </th>
+       <th>
+          Back-end:
+       </th>
+       <tr>
+            <td><img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript Badge"></td>
+            <td><img src="https://img.shields.io/badge/ASP.NET_Core-5C2D91?style=for-the-badge&logo=.net&logoColor=red" alt=".NET Badge"></td>
+       </tr>
+       <tr>
+           <td><img src="https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB" alt="React Native Badge"></td>
+           <td><img src="https://img.shields.io/badge/EF_Core-5C2D91?style=for-the-badge&logo=.net&logoColor=red" alt="EF Core Badge"></td>
+       </tr>
+       <tr>
+          <td><img src="https://img.shields.io/badge/expo-1C1E24?style=for-the-badge&logo=expo&logoColor=#D04A37" alt="Expo Badge"></td>
+          <td><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=csharp&logoColor=white" alt="C# Badge"></td>
+       </tr>
+    </table>
 </div>
 
-<div align="left" style="display: flex;">
-    <p align="left">Secondary:</p>
-    <h1 style="display: inline-block;">Front-end libraries</h1>
-    <img src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white" alt="Redux Badge">
-    <img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E" alt="Prettier Badge">
+<div align="left">
+    <h1>Secondary:</h1>
+    <table border="0">
+       <th>
+          Front-end:
+       </th>
+       <th>
+          Back-end:
+       </th>
+       <tr>
+         <td><img src="https://img.shields.io/badge/prettier-1A2C34?style=for-the-badge&logo=prettier&logoColor=F7BA3E" alt="Prettier Badge"></td>
+       </tr>
+       <tr>
+         <td><img src="https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white" alt="Redux Badge"></td>
+       </tr>
+    </table>
 </div>
 
 <!-- ![React Native](https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
