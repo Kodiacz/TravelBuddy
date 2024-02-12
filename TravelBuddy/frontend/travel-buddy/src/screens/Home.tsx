@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import { FlatList, Image, Text, View } from 'react-native';
 import useSafeArea from '../custom-hooks/useSafeView';
@@ -47,10 +47,29 @@ export default function Home() {
 		);
 
 	return (
-		<View>
-			<Text>Home Page</Text>
-			<Text>{auth?.email}</Text>
-			<Text></Text>
+		<View style={safeArea}>
+			<ScreenHeader
+				labelText="UPCOMING TRIPS"
+				image={<Image source={require('../assets/account/my-account.png')} />}
+			/>
+			{loading ? (
+				<>
+					<TripCardSkeleton />
+				</>
+			) : (
+				<>
+					<View>
+						<FlatList
+							contentContainerStyle={{ paddingBottom: '50%' }}
+							data={trips}
+							renderItem={({ item }) => {
+								return <TripCard trip={item} />;
+							}}
+							keyExtractor={(item) => item.id.toString()}
+						></FlatList>
+					</View>
+				</>
+			)}
 		</View>
 	);
 }

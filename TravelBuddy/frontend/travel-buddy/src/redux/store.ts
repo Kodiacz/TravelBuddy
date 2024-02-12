@@ -20,12 +20,36 @@ import persistReducer from 'redux-persist/es/persistReducer';
 
 const logger = createLogger();
 
-export const rootReducer = combineReducers({ counterReducer });
-
-export type AppState = ReturnType<typeof rootReducer>;
-
-export const store = configureStore({
-	reducer: rootReducer,
-	middleware: () =>
-		new Tuple(logger) as Tuple<Middlewares<{ counterReducer: Counter }>>,
+export const rootReducer = combineReducers({
+	tripReducer,
+	itineraryReducer,
+	userReducer,
 });
+
+// const persistConfig = {
+// 	key: 'root',
+// 	storage,
+// };
+
+// const persistedReducer = persistReducer(, rootReducer);
+
+export type AppReducers = ReturnType<typeof rootReducer>;
+
+export type AppDispatch = typeof reduxStore.dispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
+
+export const reduxStore = configureStore({
+	reducer: rootReducer,
+	// middleware: () =>
+	// 	new Tuple(logger, thunk) as Tuple<Middlewares<{ counterReducer: Counter }>>,
+	// middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			serializableCheck: {
+				ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+			},
+			logger,
+		}),
+});
+
+export const persistedStore = persistStore(reduxStore);

@@ -20,8 +20,8 @@
 				.Property(x => x.TripId) 
 				.IsRequired();
 
-			builder
-				.HasCheckConstraint("CK_Itinerary_Date", $"{nameof(Itinerary.Date)} >= GETDATE()");
+			//builder
+			//	.HasCheckConstraint("CK_Itinerary_Date", $"{nameof(Itinerary.Date)} >= GETDATE()");
 
 			// Relationships:
 

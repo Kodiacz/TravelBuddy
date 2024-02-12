@@ -12,10 +12,10 @@
 		/// <summary>
 		/// Adding an Activity type entity in the database
 		/// </summary>
-		/// <param name="appointment">Activity type variable</param>
-		public Task AddAsync(Activity appointment)
+		/// <param name="activity">Activity type variable</param>
+		public async Task AddAsync(Activity activity)
 		{
-			throw new NotImplementedException();
+			await dbContext.AddAsync(activity);
 		}
 
 		/// <summary>
@@ -90,9 +90,9 @@
 		/// <summary>
 		/// Saves all changes that are done
 		/// </summary>
-		public Task SaveAsync()
+		public async Task SaveAsync()
 		{
-			throw new NotImplementedException();
+			await this.dbContext.SaveChangesAsync();
 		}
 
 		/// <summary>

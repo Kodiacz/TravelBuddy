@@ -13,14 +13,7 @@ import { useForm } from 'react-hook-form';
 import InputField from '../../components/InputField';
 import { colors } from '../../utils/colors';
 import { Dimensions } from 'react-native';
-
-interface IRegisterData {
-	firstName: string;
-	lastName: string;
-	email: string;
-	password: string;
-	confirmPassword: string;
-}
+import { IRegisterData } from '../../types/propTypes';
 
 const screenWidth = Dimensions.get('window').width;
 

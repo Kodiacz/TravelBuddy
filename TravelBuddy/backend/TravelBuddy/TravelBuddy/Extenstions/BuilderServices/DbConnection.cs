@@ -7,7 +7,9 @@
 			var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 			return builder.Services.AddDbContext<TravelBuddyDbContext>(opt =>
 			{
-				opt.UseSqlServer(connectionString);
+				opt.UseSqlServer(connectionString)
+					.UseLoggerFactory(LoggerFactory.Create(builder => builder.AddConsole()))
+					.EnableSensitiveDataLogging();
 			});
 		}
 	}

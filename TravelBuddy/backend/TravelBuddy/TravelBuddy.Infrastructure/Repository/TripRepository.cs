@@ -57,9 +57,9 @@
 			throw new NotImplementedException();
 		}
 
-		public Task SaveAsync()
+		public async Task SaveAsync()
 		{
-			throw new NotImplementedException();
+			await this.dbContext.SaveChangesAsync();
 		}
 
 		public void Update(Trip trip)

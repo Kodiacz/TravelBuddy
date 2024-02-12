@@ -28,6 +28,12 @@
 		/// </summary>
 		/// <returns></returns>
 		Task<ICollection<Itinerary>> GetAllAsync();
+		
+		/// <summary>
+		/// Gets a collection of Itinerary type entites which are for certain Trip
+		/// </summary>
+		/// <returns></returns>
+		Task<ICollection<Itinerary>> GetAllTripItinerariesAsync(int tripId);
 
 		/// <summary>
 		/// Gets all the appointments and accepts a predicate for sarch term

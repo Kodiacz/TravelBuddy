@@ -18,6 +18,8 @@
 
 			services.AddScoped<IAuthService, AuthService>();
 			services.AddScoped<ITripService, TripService>();
+			services.AddScoped<IItineraryService, ItineraryService>();
+			services.AddScoped<IActivityService, ActivityService>();
 
 			#endregion
 

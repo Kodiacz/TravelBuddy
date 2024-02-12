@@ -1,8 +1,8 @@
 import React from 'react';
 import { Button, Image, Pressable, Text, View, StyleSheet } from 'react-native';
-import { AppState } from '../redux/store';
+import { AppReducers } from '../redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootStackParamList } from '../types/types';
+import { AppRootStackParamList } from '../types/applicationTypes';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { ILandingProps } from '../types/screens/landing';
 import { colors } from '../utils/colors';
