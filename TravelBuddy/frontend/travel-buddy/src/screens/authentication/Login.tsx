@@ -1,12 +1,4 @@
-import { useState } from 'react';
-import {
-	Pressable,
-	StyleSheet,
-	Text,
-	View,
-	KeyboardAvoidingView,
-	Platform,
-} from 'react-native';
+import { View, KeyboardAvoidingView, Platform } from 'react-native';
 import { IRegisterProps } from '../../types/screens/register';
 import useSafeArea from '../../custom-hooks/useSafeView';
 import { useForm } from 'react-hook-form';
@@ -14,7 +6,11 @@ import InputField from '../../components/InputField';
 import { colors } from '../../utils/colors';
 import { Dimensions } from 'react-native';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
-import axios from 'axios';
+import { ILoginData, IUser } from '../../types/applicationTypes';
+import AuthApiService from '../../utils/services/AuthApiService';
+import { Button } from '@rneui/themed';
+import { useState } from 'react';
+import { styles } from '../../styles/Screens/LoginStyles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 interface ILoginData {
@@ -47,67 +43,41 @@ export default function Login({ navigation }: IRegisterProps) {
 		reset,
 	} = useForm<ILoginData>();
 	const viewContainerStyle = { ...safeArea, ...styles.container };
+	const [disabled, setDisabled] = useState<boolean>(false);
+	const dispatch = useAppDispatch();
+	const {
+		data: user,
+		loading,
+		error,
+	} = useSelector((state: AppReducers) => state.userReducer);
 	const onSubmit = async (data: any) => {
-		// await axios
-		// .get<IUser>('https://api.api-ninjas.com/v1/jokes?limit=2', {
-		// 	headers: {
-		// 		'X-Api-Key': 's3Aw0i4YiGgTly14xv8iCQ==LpBInF3SoVLH0kb4',
-		// 	},
-		// })
-		// .then((res) => console.log(res.data))
-		// .catch((err) => console.log(err));
+		console.log('inside onSubmit');
+		setDisabled(true);
 
-		// const result = await fetch(
-		// 	'https://localhost:7024/api/Authentication/Login',
-		// 	{
-		// 		method: 'POST',
-		// 		headers: {
-		// 			Accept: 'application/json',
-		// 		},
-		// 		body: JSON.stringify(data),
-		// 	},
-		// )
-		// 	.then((res) => res.status)
-		// 	.catch((err) => console.log(err));
+		await dispatch(getUser(data));
 
-		// console.log(result);
-		console.log('fetching');
+		if (!loading) {
+			setDisabled(false);
+		}
 
-		await axios
-			.get('https://10.0.2.2/api/Trip/GetString')
-			.then((res) => console.log(res.data))
-			.catch((err) => console.log(err));
+		console.log('onSubmit => user', user);
 
-		// await axios
-		// 	.post<IUser>('https://localhost:7024/api/Authentication/Login', data)
-		// 	.then((res) => {
-		// 		console.log(res.data);
-		// 		if (res.status === 200) {
-		// 			if (
-		// 				signIn({
-		// 					auth: {
-		// 						token: res.data.accessToken,
-		// 						type: 'Bearer',
-		// 					},
-		// 					refresh: res.data.refreshToken,
-		// 					userState: res.data,
-		// 				})
-		// 			) {
-		// 				// Only if you are using refreshToken feature
-		// 				// Redirect or do-something
-		// 			} else {
-		// 				console.error(res.status);
-		// 			}
+		if (user?.accessToken) {
+			console.log(
+				'inside if statement => user?.accessToken',
+				user?.accessToken,
+			);
+			await AsyncStorage.setItem('isLogedIn', JSON.stringify(true));
+			navigation.navigate('Main');
+		} else {
+			// reset();
+			setError('password', {
+				message: (user as any)?.title,
+				type: 'onBlur',
+			});
+		}
 
-		// 			navigation.navigate('Home');
-		// 			console.log('fetched');
-		// 		}
-		// 	})
-		// 	.catch((error) => {
-		// 		console.log('we have an error here maaan...');
-		// 		// reset();
-		// 		console.log('Axios Error => ', error);
-		// 	});
+		setDisabled(false);
 	};
 
 	return (
@@ -154,11 +124,16 @@ export default function Login({ navigation }: IRegisterProps) {
 						error={errors.password?.message?.toString()}
 					/>
 					<View style={styles.buttonsContainer}>
-						<Pressable
-							style={({ pressed }) => [
-								styles.button,
-								pressed && styles.buttonPressed,
-							]}
+						<Button
+							title="LOG IN"
+							// loading={loading}
+							// disabled={disabled}
+							disabledStyle={{ ...styles.button, ...styles.buttonDisabled }}
+							loadingProps={{
+								size: 'small',
+								color: 'rgba(111, 202, 186, 1)',
+								animating: true,
+							}}
 							onPress={handleSubmit(onSubmit)}
 						>
 							<Text style={styles.buttonTetxt}>LOG IN</Text>

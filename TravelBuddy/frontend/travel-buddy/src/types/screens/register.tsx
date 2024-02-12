@@ -1,5 +1,5 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types';
+import { AppRootStackParamList } from '../applicationTypes';
 
 export interface IRegisterProps
-	extends NativeStackScreenProps<RootStackParamList> {}
+	extends NativeStackScreenProps<AppRootStackParamList> {}
