@@ -8,7 +8,7 @@ import {
 } from 'react-redux';
 import { getTrips } from '../redux/trips/tripsSlice';
 import { AppReducers, useAppDispatch } from '../redux/store';
-import { IUser } from '../types/applicationDbTypes';
+import { IUser } from '../types/applicationTypes';
 import TripCard from '../components/TripCard';
 import TripCardSkeleton from '../components/loading-components/TripCardSkeleton';
 import ScreenHeader from '../components/ScreenHeader';
@@ -26,8 +26,6 @@ export default function Home() {
 		loading,
 		error,
 	} = useSelector((state: AppReducers) => state.tripReducer);
-
-	console.log('home => user => ', user);
 
 	useEffect(() => {
 		const fetchData = async () => {

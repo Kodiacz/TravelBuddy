@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ILoginData, IUser } from '../../types/applicationDbTypes';
+import { ILoginData, IUser } from '../../types/applicationTypes';
 import { ISliceState } from '../../types/reduxTypes';
 import AuthApiService from '../../utils/services/AuthApiService';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
@@ -16,12 +16,12 @@ const authApiService = new AuthApiService();
 const getUser = createAsyncThunk(
 	'user/getUser',
 	async (loginData: ILoginData) => {
+		console.log('inside getUser');
 		const data = (await authApiService.login(loginData)).data;
-		console.log('userSlice => getUser => data => ', data);
+		console.log('getUser => data => ', data);
 		return data;
 	},
 );
-console.log('userSlice => initilaState => ', initialState);
 const userSlice = createSlice({
 	name: 'user',
 	initialState,
@@ -29,22 +29,17 @@ const userSlice = createSlice({
 	extraReducers: (builder) => {
 		builder
 			.addCase(getUser.pending, (state) => {
-				console.log('pending => state ', state);
 				state.loading = true;
 				state.error = null;
 			})
 			.addCase(
 				getUser.fulfilled,
 				(state, action: PayloadAction<IUser | null>) => {
-					console.log('fulfilled => state ', state);
-					console.log('fulfilled => action ', action);
 					state.loading = false;
 					state.data = action.payload;
 				},
 			)
 			.addCase(getUser.rejected, (state, action) => {
-				console.log('rejected => state ', state);
-				console.log('rejected => action ', action);
 				state.loading = false;
 				state.error = action.error.message || 'An error occurred';
 			});

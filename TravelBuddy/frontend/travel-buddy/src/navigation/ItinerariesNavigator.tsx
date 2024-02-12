@@ -7,9 +7,9 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Text } from '@rneui/base';
 import { View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { RootStackParamList } from '../types/applicationDbTypes';
+import { AppRootStackParamList } from '../types/applicationTypes';
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const Stack = createNativeStackNavigator<AppRootStackParamList>();
 
 //TODO: Needs to be changed
 

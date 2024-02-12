@@ -1,4 +1,4 @@
-import { IItinerary, ITrip } from './applicationDbTypes';
+import { IItinerary, ITrip } from './applicationTypes';
 
 interface ITripsSliceState {
 	trips: ITrip[];

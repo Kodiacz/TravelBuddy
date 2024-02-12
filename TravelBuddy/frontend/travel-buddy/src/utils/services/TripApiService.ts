@@ -1,4 +1,4 @@
-import { ITrip } from '../../types/applicationDbTypes';
+import { ITrip } from '../../types/applicationTypes';
 import ApiService from './ApiService';
 
 export default class TripApiService extends ApiService {

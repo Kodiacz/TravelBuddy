@@ -1,17 +1,9 @@
-import { RneFunctionComponent } from '@rneui/base';
-import { Image, Text } from '@rneui/themed';
-import React, { ReactNode } from 'react';
-import {
-	ImageProps,
-	Pressable,
-	StyleProp,
-	TextStyle,
-	View,
-	ViewStyle,
-} from 'react-native';
+import { Text } from '@rneui/themed';
+import { Pressable, View } from 'react-native';
 import { styles } from '../styles/Components/ScreenHeaderStyles';
 import { IScreenHeaderProps } from '../types/propTypes';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useAppNavigation } from '../custom-hooks/useAppNavigation';
 
 const ScreenHeader = ({
 	imageContainerStyle,
@@ -20,8 +12,11 @@ const ScreenHeader = ({
 	image,
 	labelText,
 }: IScreenHeaderProps) => {
+	const navigation = useAppNavigation();
+
 	const handlePress = async () => {
 		await AsyncStorage.clear();
+		navigation.navigate('Landing');
 	};
 
 	return (

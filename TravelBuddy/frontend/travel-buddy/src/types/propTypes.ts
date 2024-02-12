@@ -1,5 +1,5 @@
 import { ReactNode } from 'react';
-import { IActivity, IItinerary, ITrip } from './applicationDbTypes';
+import { IActivity, IItinerary, ITrip } from './applicationTypes';
 import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 interface ITripCardProps {

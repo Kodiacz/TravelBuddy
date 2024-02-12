@@ -1,4 +1,4 @@
-import { IItinerary } from '../../types/applicationDbTypes';
+import { IItinerary } from '../../types/applicationTypes';
 import ApiService from './ApiService';
 
 export default class ItineraryApiService extends ApiService {

@@ -18,11 +18,9 @@ const Chevron = ({ progress }: ChevronProps) => {
 		],
 	}));
 
-	console.log('progress in Chevron => ', progress.value);
-
 	return (
 		<Animated.View style={iconStyle}>
-			<Image source={require('../assets/pictures/accordion-arrow.png')} />
+			<Image source={require('../assets/icons/accordion-arrow.png')} />
 		</Animated.View>
 	);
 };

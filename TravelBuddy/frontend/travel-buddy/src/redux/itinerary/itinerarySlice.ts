@@ -1,7 +1,7 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ISliceState } from '../../types/reduxTypes';
 import ItineraryApiService from '../../utils/services/ItinararyApiService';
-import { IItinerary, ITrip } from '../../types/applicationDbTypes';
+import { IItinerary, ITrip } from '../../types/applicationTypes';
 
 const initialState: ISliceState<IItinerary[]> = {
 	data: [],

@@ -1,11 +1,11 @@
-import { Pressable, View, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, KeyboardAvoidingView, Platform } from 'react-native';
 import { IRegisterProps } from '../../types/screens/register';
 import useSafeArea from '../../custom-hooks/useSafeView';
 import { useForm } from 'react-hook-form';
 import InputField from '../../components/InputField';
 import { colors } from '../../utils/colors';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
-import { ILoginData, IUser } from '../../types/applicationDbTypes';
+import { ILoginData, IUser } from '../../types/applicationTypes';
 import AuthApiService from '../../utils/services/AuthApiService';
 import { Button } from '@rneui/themed';
 import { useState } from 'react';
@@ -31,7 +31,6 @@ export default function Login({ navigation }: IRegisterProps) {
 		reset,
 	} = useForm<ILoginData>({ shouldUnregister: true });
 	const viewContainerStyle = { ...safeArea, ...styles.container };
-	// const [loading, setLoading] = useState<boolean>(false);
 	const [disabled, setDisabled] = useState<boolean>(false);
 	const dispatch = useAppDispatch();
 	const {
@@ -39,10 +38,8 @@ export default function Login({ navigation }: IRegisterProps) {
 		loading,
 		error,
 	} = useSelector((state: AppReducers) => state.userReducer);
-	console.log('login => loading => ', loading);
-	console.log('login => disabled => ', disabled);
 	const onSubmit = async (data: any) => {
-		console.log('onSubmit clicked');
+		console.log('inside onSubmit');
 		setDisabled(true);
 
 		await dispatch(getUser(data));
@@ -50,17 +47,25 @@ export default function Login({ navigation }: IRegisterProps) {
 		if (!loading) {
 			setDisabled(false);
 		}
-		console.log('Login => user => ', user);
+
+		console.log('onSubmit => user', user);
+
 		if (user?.accessToken) {
+			console.log(
+				'inside if statement => user?.accessToken',
+				user?.accessToken,
+			);
 			await AsyncStorage.setItem('isLogedIn', JSON.stringify(true));
 			navigation.navigate('Main');
 		} else {
-			setDisabled(false);
+			// reset();
 			setError('password', {
 				message: (user as any)?.title,
 				type: 'onBlur',
 			});
 		}
+
+		setDisabled(false);
 	};
 
 	return (
@@ -109,8 +114,8 @@ export default function Login({ navigation }: IRegisterProps) {
 					<View style={styles.buttonsContainer}>
 						<Button
 							title="LOG IN"
-							loading={loading}
-							disabled={disabled}
+							// loading={loading}
+							// disabled={disabled}
 							disabledStyle={{ ...styles.button, ...styles.buttonDisabled }}
 							loadingProps={{
 								size: 'small',

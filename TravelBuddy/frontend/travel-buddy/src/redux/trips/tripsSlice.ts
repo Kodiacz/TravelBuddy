@@ -1,4 +1,4 @@
-import { ITrip } from '../../types/applicationDbTypes';
+import { ITrip } from '../../types/applicationTypes';
 import { ISliceState, ITripsSliceState } from '../../types/reduxTypes';
 import TripApiService from '../../utils/services/TripApiService';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';

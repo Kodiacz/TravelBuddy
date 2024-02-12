@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import { IItinerary } from '../types/applicationDbTypes';
+import { IActivity, IItinerary } from '../types/applicationTypes';
 import { colors } from '../utils/colors';
 import Chevron from './Chevron';
 import Animated, {
@@ -22,6 +22,13 @@ type Props = {
 	itinerary: IItinerary;
 };
 
+const sortActivitiesByDone = (a: boolean, b: boolean) => {
+	const doneA = a ? 1 : 0;
+	const doneB = b ? 1 : 0;
+
+	return doneA - doneB;
+};
+
 const ItineraryAccordion = ({ itinerary }: Props) => {
 	const listRef = useAnimatedRef<Animated.View>();
 	const heightValue = useSharedValue(0);
@@ -39,8 +46,6 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 		),
 	}));
 
-	console.log(`${test * itinerary.activities.length}%`);
-
 	return (
 		<View style={styles.container}>
 			<Pressable
@@ -50,7 +55,7 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 						runOnUI(() => {
 							'worklet';
 							const measurement = measure(listRef);
-							heightValue.value = 48 * itinerary.activities.length;
+							heightValue.value = 49 * itinerary.activities.length;
 						})();
 					}
 					open.value = !open.value;
@@ -65,24 +70,26 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 					style={styles.contentContainer}
 				>
 					<View style={styles.itineraryInfoContainer}>
-						<View>
+						<View style={styles.contentTitleContainer}>
 							<Text>
 								Itinerary for {new Date(itinerary.date).toLocaleDateString()}
 							</Text>
 						</View>
 						<Image
-							style={{ width: 20, height: 20, marginRight: '3%' }}
-							source={require('../assets/pictures/yellow-edit-pensil.png')}
+							style={{ width: 20, height: 20 }}
+							source={require('../assets/icons/yellow-edit-pensil.png')}
 						/>
 					</View>
-					{itinerary.activities.map((a, i) => {
-						return (
-							<ActivityCard
-								activity={a}
-								key={i}
-							/>
-						);
-					})}
+					{itinerary.activities
+						.sort((a, b) => sortActivitiesByDone(a.done, b.done))
+						.map((a, i) => {
+							return (
+								<ActivityCard
+									activity={a}
+									key={i}
+								/>
+							);
+						})}
 				</Animated.View>
 			</Animated.View>
 		</View>
@@ -100,6 +107,7 @@ const styles = StyleSheet.create({
 	},
 	titleContainer: {
 		padding: 20,
+		paddingRight: '6.7%',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
@@ -113,7 +121,6 @@ const styles = StyleSheet.create({
 		overflow: 'hidden',
 		backgroundColor: colors.white,
 		height: '100%',
-		// flex: 1,
 	},
 	content: {
 		padding: 20,
@@ -122,12 +129,16 @@ const styles = StyleSheet.create({
 	textContent: {
 		fontSize: 14,
 	},
+	contentTitleContainer: {
+		marginBottom: 15,
+	},
 	itineraryInfoContainer: {
 		paddingTop: 10,
-		paddingHorizontal: '1.5%',
 		justifyContent: 'space-between',
 		flexDirection: 'row',
 		backgroundColor: colors.white,
+		paddingRight: '5.8%',
+		paddingLeft: '4.5%',
 	},
 });
 

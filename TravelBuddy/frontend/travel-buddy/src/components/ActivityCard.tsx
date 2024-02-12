@@ -5,10 +5,11 @@ import { IActivityProps, IItineraryCardProps } from '../types/propTypes';
 import { FlatList } from 'react-native-gesture-handler';
 import { CheckBox } from '@rneui/base';
 import { colors } from '../utils/colors';
-import { IActivity } from '../types/applicationDbTypes';
+import { IActivity } from '../types/applicationTypes';
 
 const ActivityCard = ({ activity }: IActivityProps) => {
 	const [checked, setChecked] = useState(false);
+	activity.done = true;
 
 	return (
 		<>
@@ -16,13 +17,14 @@ const ActivityCard = ({ activity }: IActivityProps) => {
 				<Text style={styles.activityTextStyle}>{activity.name}</Text>
 				<CheckBox
 					containerStyle={styles.checkBoxContainer}
-					checked={checked}
+					checked={activity.done}
 					onPress={() => {
 						setChecked(!checked);
-						console.log('pressed => ', checked);
 					}}
 					size={20}
 					style={styles.checkBox}
+					uncheckedColor={colors.primary.fibonacciBlue}
+					checkedColor={colors.primary.fibonacciBlue}
 				/>
 			</View>
 		</>
@@ -47,7 +49,15 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		paddingVertical: '2%',
 		paddingHorizontal: '1.5%',
+		paddingRight: '3%',
 		backgroundColor: colors.white,
+	},
+	activityTextStyle: {
+		color: colors.primary.dutchBlue,
+		fontWeight: '600',
+		fontSize: 18,
+		letterSpacing: -0.42,
+		marginLeft: '3%',
 	},
 	checkBoxContainer: {
 		padding: 0,
@@ -55,13 +65,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		backgroundColor: colors.transparent,
 	},
-	activityTextStyle: {
-		color: colors.primary.dutchBlue,
-		fontWeight: '600',
-		fontSize: 18,
-		letterSpacing: -0.42,
-	},
 	checkBox: {
+		color: colors.primary.fibonacciBlue,
 		width: 10,
 		height: 10,
 	},

@@ -25,7 +25,7 @@ const Main = () => {
 		loading,
 		error,
 	} = useSelector((state) => state.userReducer);
-	console.log('auth user => ', user);
+
 	return (
 		<Tab.Navigator
 			initialRouteName="Home"
@@ -51,7 +51,7 @@ const Main = () => {
 								},
 								...styles.tabBarIcon,
 							}}
-							source={require('../assets/pictures/My-Trips.png')}
+							source={require('../assets/icons/My-Trips.png')}
 						></Image>
 					),
 				}}
@@ -69,7 +69,7 @@ const Main = () => {
 								},
 								...styles.tabBarIcon,
 							}}
-							source={require('../assets/pictures/Explore.png')}
+							source={require('../assets/icons/Explore.png')}
 						></Image>
 					),
 				}}
@@ -87,7 +87,7 @@ const Main = () => {
 								},
 								...styles.tabBarIcon,
 							}}
-							source={require('../assets/pictures/Itineraries.png')}
+							source={require('../assets/icons/Itineraries.png')}
 						></Image>
 					),
 				}}

@@ -1,10 +1,17 @@
-type RootStackParamList = {
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+type AppRootStackParamList = {
 	Landing: undefined;
 	Register: undefined;
 	Login: undefined;
 	Home: undefined;
 	Main: undefined;
 };
+
+type AppScreenNavigationProp = NativeStackNavigationProp<
+	AppRootStackParamList,
+	keyof AppRootStackParamList
+>;
 
 interface ITrip {
 	id: number;
@@ -42,6 +49,15 @@ interface IItinerary {
 
 interface IActivity {
 	name: string;
+	done: boolean;
 }
 
-export { IUser, ILoginData, ITrip, RootStackParamList, IItinerary, IActivity };
+export {
+	IUser,
+	ILoginData,
+	ITrip,
+	AppRootStackParamList,
+	AppScreenNavigationProp,
+	IItinerary,
+	IActivity,
+};

@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
 import { createLogger } from 'redux-logger';
 import { configureStore } from '@reduxjs/toolkit';
-import { counterReducer } from './counter/CounterReducer';
 import { TypedUseSelectorHook, useDispatch } from 'react-redux';
 import tripReducer from './trips/tripsSlice';
 import itineraryReducer from './itinerary/itinerarySlice';

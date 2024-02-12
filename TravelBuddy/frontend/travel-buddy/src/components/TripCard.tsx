@@ -23,7 +23,7 @@ export default function TripCard({ trip }: ITripCardProps) {
 		<Card containerStyle={style.container}>
 			<Image
 				style={style.imageStyle}
-				source={require('../assets/pictures/sunset.png')}
+				source={require('../assets/icons/sunset.png')}
 			/>
 			<View style={style.tripInfoContainer}>
 				<View style={style.textContainer}>
@@ -54,19 +54,19 @@ export default function TripCard({ trip }: ITripCardProps) {
 					<Pressable>
 						<Image
 							style={style.icon}
-							source={require('../assets/pictures/share-icon.png')}
+							source={require('../assets/icons/share-icon.png')}
 						/>
 					</Pressable>
 					<Pressable style={style.middleButton}>
 						<Image
 							style={style.icon}
-							source={require('../assets/pictures/pen-edit.png')}
+							source={require('../assets/icons/pen-edit.png')}
 						/>
 					</Pressable>
 					<Pressable>
 						<Image
 							style={style.icon}
-							source={require('../assets/pictures/file-icon.png')}
+							source={require('../assets/icons/file-icon.png')}
 						/>
 					</Pressable>
 				</View>
