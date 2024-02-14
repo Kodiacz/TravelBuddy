@@ -1,4 +1,6 @@
-﻿namespace TravelBuddy.Infrastructure.Services
+﻿using TravelBuddy.Application.Queries.Itineraries;
+
+namespace TravelBuddy.Infrastructure.Services
 {
 	public class ItineraryService : BaseService, IItineraryService
 	{
@@ -11,11 +13,18 @@
 			await this.UnitOfWork.SaveAsync();
 		}
 
+		public async Task<IEnumerable<GetItineraryDto>> GetAllUserTripsItineraries(GetAllItinerariesQuery query)
+		{
+			var dbItineraries = await this.UnitOfWork.ItineraryRepository.GetAllAsyncAsReadOnly(query);
+			var itinerariesDto = this.Mapper.Map<IEnumerable<GetItineraryDto>>(dbItineraries);
+			return itinerariesDto;
+		}
+
 		public async Task<IEnumerable<GetItineraryDto>> GetTripItineraries(int tripId)
 		{
-			var dbTrips = await this.UnitOfWork.ItineraryRepository.GetAllTripItinerariesAsync(tripId);
-			var tripDto = this.Mapper.Map<IEnumerable<GetItineraryDto>>(dbTrips);
-			return tripDto;
+			var dbItineraries = await this.UnitOfWork.ItineraryRepository.GetAllTripItinerariesAsync(tripId);
+			var itinerariesDto = this.Mapper.Map<IEnumerable<GetItineraryDto>>(dbItineraries);
+			return itinerariesDto;
 		}
 	}
 }
