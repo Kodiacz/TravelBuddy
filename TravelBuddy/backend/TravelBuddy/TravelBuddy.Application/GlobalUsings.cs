@@ -14,5 +14,6 @@ global using TravelBuddy.Domain.Entities;
 global using TravelBuddy.Application.CustomAttributes;
 global using TravelBuddy.Application.Dtos.ActivityDtos;
 global using TravelBuddy.Application.Dtos.ItineraryDtos;
+global using TravelBuddy.Application.Queries.Itineraries;
 global using TravelBuddy.Application.Dtos.ApplicationUserDto;
 global using TravelBuddy.Application.Interfaces.Repository;
