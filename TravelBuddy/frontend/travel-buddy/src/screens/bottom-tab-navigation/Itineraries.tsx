@@ -27,7 +27,7 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				await dispatch(getTripItineraries(7));
+				await dispatch(getTripItineraries(9));
 			} catch (error) {
 				console.error(error);
 			}

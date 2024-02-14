@@ -17,13 +17,6 @@ import { IRegisterData } from '../../types/propTypes';
 
 const screenWidth = Dimensions.get('window').width;
 
-type inputFieldName =
-	| 'firstName'
-	| 'lastName'
-	| 'email'
-	| 'password'
-	| 'confirmPassword';
-
 export default function Register({ navigation }: IRegisterProps) {
 	const { safeArea } = useSafeArea();
 	const [user, setUser] = useState<IRegisterData>();

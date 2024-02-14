@@ -36,7 +36,7 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 	const progress = useDerivedValue(() =>
 		open.value ? withTiming(1) : withTiming(0),
 	);
-	const test = 50;
+
 	const heightAnimationStyle = useAnimatedStyle(() => ({
 		height: interpolate(
 			progress.value,
@@ -54,7 +54,6 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 					if (heightValue.value === 0) {
 						runOnUI(() => {
 							'worklet';
-							const measurement = measure(listRef);
 							heightValue.value = 49 * itinerary.activities.length;
 						})();
 					}
