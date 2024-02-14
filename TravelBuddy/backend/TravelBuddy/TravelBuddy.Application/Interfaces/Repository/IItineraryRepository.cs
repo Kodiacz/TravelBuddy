@@ -40,6 +40,12 @@
 		/// </summary>
 		/// <returns></returns>
 		Task<ICollection<Itinerary>> GetAllAsync(Expression<Func<Itinerary, bool>> search);
+		
+		/// <summary>
+		/// Gets all the appointments and accepts a predicate for sarch term
+		/// </summary>
+		/// <returns></returns>
+		Task<ICollection<Itinerary>> GetAllAsyncAsReadOnly(GetAllItinerariesQuery query);
 
 		/// <summary>
 		/// Gets all the Itinerarys and uses AsNoTracking method
