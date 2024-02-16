@@ -1,4 +1,6 @@
-﻿namespace TravelBuddy.API.Controllers
+﻿using TravelBuddy.Application.Queries.Trips;
+
+namespace TravelBuddy.API.Controllers
 {
 	[ApiController]
 	[EnableCors("TravelBuddy")]
@@ -27,14 +29,6 @@
 		{
 			await this.tripService.AddTrip(tripDto);
 			return Ok();
-		}
-
-		[HttpGet]
-		[ActionName(nameof(Hey))]
-		//[Authorize(Roles = "User")]
-		public ActionResult Hey()
-		{
-			return Ok("Hey");
 		}
 	}
 }
