@@ -12,4 +12,15 @@ export default class ItineraryApiService extends ApiService {
 		);
 		return data;
 	}
+
+	async getAllTripsItineraries(
+		searchTerm: string = '',
+		sortBy: number = 0,
+		userId: string,
+	) {
+		const data = await this.get<IItinerary[]>(
+			`Itinerary/GetAllUserTripsItineraries?SearchTerm=${searchTerm}&OrderBy=${sortBy}&UserId=${userId}`,
+		);
+		return data;
+	}
 }

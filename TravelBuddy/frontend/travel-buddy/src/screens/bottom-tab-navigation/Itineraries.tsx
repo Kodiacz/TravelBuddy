@@ -4,7 +4,7 @@ import ScreenHeader from '../../components/ScreenHeader';
 import useSafeArea from '../../custom-hooks/useSafeView';
 import { Icon, ListItem } from '@rneui/themed';
 import { useEffect, useState } from 'react';
-import { FlatList } from 'react-native-gesture-handler';
+import { FlatList, ScrollView } from 'react-native-gesture-handler';
 import ItineraryCard from '../../components/ActivityCard';
 import { AppReducers, useAppDispatch } from '../../redux/store';
 import { TypedUseSelectorHook } from 'react-redux';
@@ -13,21 +13,25 @@ import { getTripItineraries } from '../../redux/itinerary/itinerarySlice';
 import { IItinerariesProps } from '../../types/propTypes';
 import ItineraryAccordion from '../../components/ItineraryAccordion';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useSelector } from 'react-redux';
 
 const Itineraries = ({ tripId }: IItinerariesProps) => {
 	const { safeArea } = useSafeArea();
 	const dispatch = useAppDispatch();
-	const useSelector: TypedUseSelectorHook<AppReducers> = useReduxSelector;
 	const {
 		data: itineraries,
 		loading,
 		error,
-	} = useSelector((state) => state.itineraryReducer);
+	} = useSelector((state: AppReducers) => state.itineraryReducer);
+
+	const { data: user } = useSelector((state: AppReducers) => state.userReducer);
 
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				await dispatch(getTripItineraries(9));
+				await dispatch(
+					getTripItineraries({ orderBy: 0, userId: user?.userId! }),
+				);
 			} catch (error) {
 				console.error(error);
 			}
@@ -41,12 +45,12 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 	);
 
 	return (
-		<View style={safeArea}>
+		<ScrollView style={safeArea}>
 			<ScreenHeader
 				labelText="MY ITINERARY"
 				image={image}
 			/>
-			<FlatList
+			{/* <FlatList
 				data={itineraries}
 				renderItem={({ item }) => (
 					// <>{<ItineraryAccordion itinerary={item} />}</>
@@ -54,8 +58,19 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 						<ItineraryAccordion itinerary={item}></ItineraryAccordion>
 					</>
 				)}
-			/>
-		</View>
+			/> */}
+			{itineraries?.map((x, key) => {
+				console.log('key => ', key);
+				return (
+					<>
+						<ItineraryAccordion
+							key={key + 3}
+							itinerary={x}
+						/>
+					</>
+				);
+			})}
+		</ScrollView>
 	);
 };
 

@@ -13,8 +13,21 @@ const itinerartService = new ItineraryApiService();
 
 const getTripItineraries = createAsyncThunk(
 	'itineraries/get',
-	async (tripId: number) => {
-		const data = await itinerartService.getTripItineraries(tripId);
+	async ({
+		orderBy,
+		userId,
+		searchTerm,
+	}: {
+		searchTerm?: string;
+		orderBy: number;
+		userId: string;
+	}) => {
+		const data = await itinerartService.getAllTripsItineraries(
+			searchTerm,
+			orderBy,
+			userId,
+		);
+		console.log(data);
 		return data;
 	},
 );

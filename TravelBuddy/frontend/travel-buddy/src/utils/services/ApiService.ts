@@ -3,7 +3,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 export default abstract class ApiService {
 	private axiosInstance: AxiosInstance;
 	private ngrokUrl: string =
-		'https://5140-2a01-5a8-306-233b-6d4d-49d-4a2e-9854.ngrok-free.app';
+		'https://c956-2a01-5a8-306-233b-d8a6-21bf-ee7a-df25.ngrok-free.app';
 
 	constructor() {
 		this.axiosInstance = axios.create({

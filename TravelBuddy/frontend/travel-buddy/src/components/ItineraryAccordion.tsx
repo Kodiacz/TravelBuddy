@@ -46,6 +46,12 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 		),
 	}));
 
+	console.log(
+		`${itinerary.name} => ${itinerary.activities.length} => ${
+			heightValue.value
+		} => ${itinerary.activities.length !== 0}`,
+	);
+
 	return (
 		<View style={styles.container}>
 			<Pressable
@@ -54,7 +60,10 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 					if (heightValue.value === 0) {
 						runOnUI(() => {
 							'worklet';
-							heightValue.value = 49 * itinerary.activities.length;
+							heightValue.value =
+								itinerary.activities.length !== 0
+									? 40 * (itinerary.activities.length + 1)
+									: 0;
 						})();
 					}
 					open.value = !open.value;
@@ -85,7 +94,7 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 							return (
 								<ActivityCard
 									activity={a}
-									key={i}
+									key={i + 2}
 								/>
 							);
 						})}
