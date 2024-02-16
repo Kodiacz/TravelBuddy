@@ -5,6 +5,7 @@
 
 # Custom ignores
 Migrations
+TravelBuddy/TravelBuddy/appsettings.json
 
 # User-specific files
 *.rsuser
