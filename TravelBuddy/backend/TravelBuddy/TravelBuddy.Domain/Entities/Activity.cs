@@ -8,6 +8,8 @@ namespace TravelBuddy.Domain.Entities
 
 		public string Name { get; set; } = null!;
 
+		public bool Done { get; set; } = false;
+
 		public int ItineraryId { get; set; }
 		public Itinerary Itinerary { get; set; } = null!;
 
