@@ -1,6 +1,4 @@
-﻿using TravelBuddy.Application.Queries.Itineraries;
-
-namespace TravelBuddy.Infrastructure.Services
+﻿namespace TravelBuddy.Infrastructure.Services
 {
 	public class ItineraryService : BaseService, IItineraryService
 	{

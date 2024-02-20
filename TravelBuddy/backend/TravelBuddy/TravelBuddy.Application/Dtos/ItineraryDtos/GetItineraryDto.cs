@@ -1,6 +1,4 @@
-﻿using TravelBuddy.Application.Dtos.TripDtos;
-
-namespace TravelBuddy.Application.Dtos.ItineraryDtos
+﻿namespace TravelBuddy.Application.Dtos.ItineraryDtos
 {
 	public class GetItineraryDto
 	{

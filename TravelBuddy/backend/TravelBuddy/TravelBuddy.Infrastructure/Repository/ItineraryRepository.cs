@@ -1,7 +1,4 @@
-﻿using TravelBuddy.Application.Models.Itineraries;
-using TravelBuddy.Application.Queries.Itineraries;
-
-namespace TravelBuddy.Infrastructure.Repository
+﻿namespace TravelBuddy.Infrastructure.Repository
 {
 	public class ItineraryRepository : IItineraryRepository
 	{

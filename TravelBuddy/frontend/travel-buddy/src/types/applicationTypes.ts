@@ -16,6 +16,7 @@ type AppScreenNavigationProp = NativeStackNavigationProp<
 interface ITrip {
 	id: number;
 	name: string;
+	image?: string;
 	creator: string;
 	travellingBy: string;
 	accommodation: string;
@@ -45,6 +46,7 @@ interface IItinerary {
 	name: string;
 	date: Date;
 	activities: IActivity[];
+	trip: ITrip;
 }
 
 interface IActivity {

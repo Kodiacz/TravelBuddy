@@ -1,6 +1,4 @@
-﻿using TravelBuddy.Application.Queries.Trips;
-
-namespace TravelBuddy.API.Controllers
+﻿namespace TravelBuddy.API.Controllers
 {
 	[ApiController]
 	[EnableCors("TravelBuddy")]

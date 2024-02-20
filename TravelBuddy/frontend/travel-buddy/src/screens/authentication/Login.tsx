@@ -39,7 +39,6 @@ export default function Login({ navigation }: IRegisterProps) {
 		error,
 	} = useSelector((state: AppReducers) => state.userReducer);
 	const onSubmit = async (data: any) => {
-		console.log('inside onSubmit');
 		setDisabled(true);
 
 		await dispatch(getUser(data));
@@ -48,13 +47,7 @@ export default function Login({ navigation }: IRegisterProps) {
 			setDisabled(false);
 		}
 
-		console.log('onSubmit => user', user);
-
 		if (user?.accessToken) {
-			console.log(
-				'inside if statement => user?.accessToken',
-				user?.accessToken,
-			);
 			await AsyncStorage.setItem('isLogedIn', JSON.stringify(true));
 			navigation.navigate('Main');
 		} else {
@@ -114,8 +107,8 @@ export default function Login({ navigation }: IRegisterProps) {
 					<View style={styles.buttonsContainer}>
 						<Button
 							title="LOG IN"
-							// loading={loading}
-							// disabled={disabled}
+							loading={loading}
+							disabled={disabled}
 							disabledStyle={{ ...styles.button, ...styles.buttonDisabled }}
 							loadingProps={{
 								size: 'small',

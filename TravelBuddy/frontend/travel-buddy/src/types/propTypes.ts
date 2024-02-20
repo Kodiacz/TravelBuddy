@@ -54,6 +54,8 @@ interface IItinerariesProps {
 interface IActivityProps {
 	// name: string;
 	// checked: boolean;
+	activityIndex: number;
+	itineraryId: number;
 	activity: IActivity;
 }
 

@@ -16,6 +16,7 @@ const Chevron = ({ progress }: ChevronProps) => {
 				rotate: `${progress.value * -180}deg`,
 			},
 		],
+		flex: 0,
 	}));
 
 	return (

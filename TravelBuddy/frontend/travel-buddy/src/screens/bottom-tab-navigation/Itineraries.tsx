@@ -1,5 +1,5 @@
 import { Text } from '@rneui/base';
-import { View, Image } from 'react-native';
+import { View, Image, StyleSheet } from 'react-native';
 import ScreenHeader from '../../components/ScreenHeader';
 import useSafeArea from '../../custom-hooks/useSafeView';
 import { Icon, ListItem } from '@rneui/themed';
@@ -14,6 +14,8 @@ import { IItinerariesProps } from '../../types/propTypes';
 import ItineraryAccordion from '../../components/ItineraryAccordion';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useSelector } from 'react-redux';
+import { IItinerary } from '../../types/applicationTypes';
+import { colors } from '../../utils/colors';
 
 const Itineraries = ({ tripId }: IItinerariesProps) => {
 	const { safeArea } = useSafeArea();
@@ -40,38 +42,65 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 		fetchData();
 	}, []);
 
+	function groupItinerariesByTripName(
+		itineraries: IItinerary[],
+	): { tripName: string; itineraries: IItinerary[] }[] {
+		const groups: { [key: string]: IItinerary[] } = {};
+		itineraries.forEach((itinerary) => {
+			const tripName = itinerary.trip.name;
+			if (!groups[tripName]) {
+				groups[tripName] = [];
+			}
+			groups[tripName].push(itinerary);
+		});
+
+		return Object.keys(groups).map((tripName) => ({
+			tripName,
+			itineraries: groups[tripName],
+		}));
+	}
+
+	const groupedItineraries = groupItinerariesByTripName(itineraries!);
+
 	const image = (
 		<Image source={require('../../assets/account/my-account.png')} />
 	);
 
 	return (
-		<ScrollView style={safeArea}>
-			<ScreenHeader
-				labelText="MY ITINERARY"
-				image={image}
-			/>
-			{/* <FlatList
-				data={itineraries}
-				renderItem={({ item }) => (
-					// <>{<ItineraryAccordion itinerary={item} />}</>
-					<>
-						<ItineraryAccordion itinerary={item}></ItineraryAccordion>
-					</>
-				)}
-			/> */}
-			{itineraries?.map((x, key) => {
-				console.log('key => ', key);
+		<ScrollView>
+			{groupedItineraries.map((x, i) => {
 				return (
 					<>
-						<ItineraryAccordion
-							key={key + 3}
-							itinerary={x}
-						/>
+						<View style={styles.container}>
+							<Text style={styles.tripName}>{x.tripName}</Text>
+							{x?.itineraries.map((itinerary) => {
+								return (
+									<>
+										<ItineraryAccordion
+											key={itinerary.id}
+											itinerary={itinerary}
+										/>
+									</>
+								);
+							})}
+						</View>
 					</>
 				);
 			})}
 		</ScrollView>
 	);
 };
+
+const styles = StyleSheet.create({
+	container: {
+		margin: '2%',
+	},
+	tripName: {
+		paddingLeft: '3.5%',
+		fontSize: 20,
+		fontWeight: 'bold',
+		color: colors.primary.fibonacciBlue,
+	},
+});
 
 export default Itineraries;

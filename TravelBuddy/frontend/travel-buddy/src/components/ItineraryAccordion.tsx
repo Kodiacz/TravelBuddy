@@ -36,6 +36,7 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 	const progress = useDerivedValue(() =>
 		open.value ? withTiming(1) : withTiming(0),
 	);
+	const [sortedActivities, setSortedActivities] = useState<IActivity[]>([]);
 
 	const heightAnimationStyle = useAnimatedStyle(() => ({
 		height: interpolate(
@@ -46,11 +47,21 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 		),
 	}));
 
-	console.log(
-		`${itinerary.name} => ${itinerary.activities.length} => ${
-			heightValue.value
-		} => ${itinerary.activities.length !== 0}`,
-	);
+	const itineraryDate = new Date(itinerary.date);
+
+	const dateOptions: Intl.DateTimeFormatOptions = {
+		day: '2-digit',
+		month: '2-digit',
+		year: '2-digit',
+	};
+
+	useEffect(() => {
+		setSortedActivities(
+			[...itinerary.activities].sort((a, b) =>
+				sortActivitiesByDone(a.done, b.done),
+			),
+		);
+	}, [itinerary.activities, sortActivitiesByDone]);
 
 	return (
 		<View style={styles.container}>
@@ -70,6 +81,9 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 				}}
 			>
 				<Text style={styles.textTitle}>{itinerary.name}</Text>
+				<Text style={styles.dateStyle}>
+					{itineraryDate.toLocaleDateString(undefined, dateOptions)}
+				</Text>
 				<Chevron progress={progress} />
 			</Pressable>
 			<Animated.View style={heightAnimationStyle}>
@@ -88,16 +102,16 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 							source={require('../assets/icons/yellow-edit-pensil.png')}
 						/>
 					</View>
-					{itinerary.activities
-						.sort((a, b) => sortActivitiesByDone(a.done, b.done))
-						.map((a, i) => {
-							return (
-								<ActivityCard
-									activity={a}
-									key={i + 2}
-								/>
-							);
-						})}
+					{sortedActivities.map((activity, activityIndex) => {
+						return (
+							<ActivityCard
+								activity={activity}
+								activityIndex={activityIndex}
+								itineraryId={itinerary.id}
+								key={activity.name}
+							/>
+						);
+					})}
 				</Animated.View>
 			</Animated.View>
 		</View>
@@ -122,6 +136,11 @@ const styles = StyleSheet.create({
 	},
 	textTitle: {
 		fontSize: 16,
+		flex: 0.9,
+	},
+	dateStyle: {
+		fontSize: 16,
+		flex: 1,
 	},
 	contentContainer: {
 		borderTopRightRadius: 12.5,

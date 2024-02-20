@@ -23,7 +23,12 @@ export default function TripCard({ trip }: ITripCardProps) {
 		<Card containerStyle={style.container}>
 			<Image
 				style={style.imageStyle}
-				source={require('../assets/icons/sunset.png')}
+				// source={require('../assets/icons/sunset.png')}
+				source={
+					trip.image
+						? { uri: trip.image }
+						: require('../assets/icons/sunset.png')
+				}
 			/>
 			<View style={style.tripInfoContainer}>
 				<View style={style.textContainer}>
@@ -40,12 +45,6 @@ export default function TripCard({ trip }: ITripCardProps) {
 				</View>
 				<View style={style.textContainer}>
 					<Text style={style.textDescription}>Accommodation</Text>
-					{/* <Text
-						onPress={handlePress}
-						style={style.textValue}
-					>
-						Link
-					</Text> */}
 					<OpenURLButton url={trip.accommodation}>
 						<Text style={style.textValue}>Link</Text>
 					</OpenURLButton>

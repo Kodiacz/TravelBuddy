@@ -1,7 +1,4 @@
-﻿using Newtonsoft.Json.Converters;
-using System.Runtime.Serialization;
-
-namespace TravelBuddy.Application.Models.Itineraries
+﻿namespace TravelBuddy.Application.Models.Itineraries
 {
 	public enum ItinerarieSorting
 	{

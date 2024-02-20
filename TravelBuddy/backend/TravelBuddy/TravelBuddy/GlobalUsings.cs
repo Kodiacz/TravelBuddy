@@ -1,17 +1,22 @@
-﻿global using Microsoft.EntityFrameworkCore;
+﻿global using System.Net;
+global using System.Text;
+global using System.Reflection;
+global using System.Threading.Tasks;
+global using System.ComponentModel.DataAnnotations;
+
+
+global using Microsoft.EntityFrameworkCore;
 global using Microsoft.IdentityModel.Tokens;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Cors;
 global using Microsoft.AspNetCore.Mvc.Filters;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Authentication;
+global using Microsoft.AspNetCore.JsonPatch;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
+global using Microsoft.OpenApi.Models;
 
-global using System.Net;
-global using System.Text;
-global using System.Reflection;
-global using System.Threading.Tasks;
-global using System.ComponentModel.DataAnnotations;
+global using Swashbuckle.AspNetCore.Filters;
 
 global using AutoMapper;
 

@@ -15,10 +15,14 @@ import {
 	useSelector as useReduxSelector,
 } from 'react-redux';
 import { AppReducers } from '../redux/store';
+import ScreenHeader from '../components/ScreenHeader';
+import useSafeArea from '../custom-hooks/useSafeView';
+import { HeaderOptions } from '../types/screens/main';
 
 const Tab = createBottomTabNavigator();
 
 const Main = () => {
+	const { safeArea } = useSafeArea();
 	const useSelector: TypedUseSelectorHook<AppReducers> = useReduxSelector;
 	const {
 		data: user,
@@ -26,20 +30,57 @@ const Main = () => {
 		error,
 	} = useSelector((state) => state.userReducer);
 
+	const headerOptions: HeaderOptions = {
+		trips: { labelText: 'UPCOMING TRIPS' },
+		itineraries: {
+			labelText: 'MY ITINERARY',
+		},
+		explore: {
+			labelText: 'TravelBuddy',
+			labelStyle: {
+				fontFamily: 'Lilita-One',
+				fontWeight: '400',
+				fontSize: 28,
+			},
+			textContainerStyle: {
+				alignItems: 'flex-start',
+				paddingLeft: 30,
+			},
+		},
+	};
+
+	const profileImage = (
+		<Image source={require('../assets/account/my-account.png')} />
+	);
+
 	return (
 		<Tab.Navigator
 			initialRouteName="Home"
-			screenOptions={{
-				header: () => null,
+			screenOptions={({ route }) => ({
+				header: () => (
+					<ScreenHeader
+						labelText={
+							headerOptions[route.name as keyof typeof headerOptions].labelText
+						}
+						lableStyle={
+							headerOptions[route.name as keyof typeof headerOptions].labelStyle
+						}
+						textContainerStyle={
+							headerOptions[route.name as keyof typeof headerOptions]
+								.textContainerStyle
+						}
+					/>
+				),
 				// tabBarActiveBackgroundColor: 'black',
 				// tabBarInactiveBackgroundColor: 'red',
 				// tabBarActiveTintColor: 'black',
 				// tabBarInactiveTintColor: 'gray',
 				tabBarStyle: styles.tabBar,
-			}}
+			})}
+			sceneContainerStyle={safeArea}
 		>
 			<Tab.Screen
-				name="My Trips"
+				name="trips"
 				component={Home}
 				options={{
 					tabBarIcon: ({ color, size }) => (
@@ -57,7 +98,7 @@ const Main = () => {
 				}}
 			/>
 			<Tab.Screen
-				name="Explore"
+				name="explore"
 				component={Explore}
 				options={{
 					tabBarIcon: ({ color, size }) => (
@@ -75,7 +116,7 @@ const Main = () => {
 				}}
 			/>
 			<Tab.Screen
-				name="Itineraries"
+				name="itineraries"
 				component={Itineraries}
 				options={{
 					tabBarIcon: ({ color, size }) => (
