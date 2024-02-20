@@ -46,7 +46,7 @@
 				}
 			}
 
-			await this.UnitOfWork.ActivityRepository.SaveAsync();
+			await this.UnitOfWork.SaveAsync();
 		}
 	}
 }
