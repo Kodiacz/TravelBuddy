@@ -1,40 +1,16 @@
-import {
-	PayloadAction,
-	createAction,
-	createAsyncThunk,
-	createSlice,
-} from '@reduxjs/toolkit';
+import { PayloadAction, createAction, createSlice } from '@reduxjs/toolkit';
 import { ISliceState } from '../../types/reduxTypes';
-import ItineraryApiService from '../../utils/services/ItinararyApiService';
-import { IItinerary, ITrip } from '../../types/applicationTypes';
+import { IItinerary } from '../../types/applicationTypes';
+import {
+	getTripItineraries,
+	updateItinerariesActivities,
+} from './itineraryAsyncThunks';
 
 const initialState: ISliceState<IItinerary[]> = {
 	data: [],
 	loading: false,
 	error: null,
 };
-
-const itinerartService = new ItineraryApiService();
-
-const getTripItineraries = createAsyncThunk(
-	'itineraries/get',
-	async ({
-		orderBy,
-		userId,
-		searchTerm,
-	}: {
-		searchTerm?: string;
-		orderBy: number;
-		userId: string;
-	}) => {
-		const data = await itinerartService.getAllTripsItineraries(
-			searchTerm,
-			orderBy,
-			userId,
-		);
-		return data;
-	},
-);
 
 const toggleActivityDone = createAction<{
 	itineraryId: number;
@@ -76,6 +52,18 @@ const itinerarySlice = createSlice({
 						activity.done = !activity.done;
 					}
 				}
+			})
+			.addCase(updateItinerariesActivities.pending, (state) => {
+				state.loading = true;
+				state.error = null;
+			})
+			.addCase(updateItinerariesActivities.fulfilled, (state, action) => {
+				state.loading = false;
+				// You might update the state accordingly based on the action payload
+			})
+			.addCase(updateItinerariesActivities.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message || 'An error occurred';
 			});
 	},
 });

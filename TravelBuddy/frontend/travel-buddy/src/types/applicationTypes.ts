@@ -50,9 +50,17 @@ interface IItinerary {
 }
 
 interface IActivity {
+	id: number;
 	name: string;
 	done: boolean;
 }
+
+type ActivityPatchUpdate = {
+	entityId: string;
+	path: string;
+	value: string;
+	op: 'replace';
+};
 
 export {
 	IUser,
@@ -62,4 +70,5 @@ export {
 	AppScreenNavigationProp,
 	IItinerary,
 	IActivity,
+	ActivityPatchUpdate,
 };

@@ -3,7 +3,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 export default abstract class ApiService {
 	private axiosInstance: AxiosInstance;
 	private ngrokUrl: string =
-		'https://d02f-2a01-5a8-306-233b-d1b4-2314-803c-59d6.ngrok-free.app';
+		'https://c389-2a01-5a8-306-233b-f41a-ab27-b4e7-7236.ngrok-free.app';
 
 	constructor() {
 		this.axiosInstance = axios.create({
@@ -58,6 +58,15 @@ export default abstract class ApiService {
 		config?: AxiosRequestConfig,
 	): Promise<T> {
 		const response = await this.axiosInstance.delete<T>(url, config);
+		return response.data;
+	}
+
+	protected async patch<T>(
+		url: string,
+		data?: any,
+		config?: AxiosRequestConfig,
+	): Promise<T> {
+		const response = await this.axiosInstance.patch<T>(url, data, config);
 		return response.data;
 	}
 }

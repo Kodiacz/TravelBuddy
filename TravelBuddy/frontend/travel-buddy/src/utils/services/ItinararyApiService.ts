@@ -1,4 +1,5 @@
-import { IItinerary } from '../../types/applicationTypes';
+import { AppState } from 'react-native';
+import { ActivityPatchUpdate, IItinerary } from '../../types/applicationTypes';
 import ApiService from './ApiService';
 
 export default class ItineraryApiService extends ApiService {
@@ -22,5 +23,12 @@ export default class ItineraryApiService extends ApiService {
 			`Itinerary/GetAllUserTripsItineraries?SearchTerm=${searchTerm}&OrderBy=${sortBy}&UserId=${userId}`,
 		);
 		return data;
+	}
+
+	async updateAllActivities(activitiesPatchDocuments: ActivityPatchUpdate[]) {
+		await this.patch<ActivityPatchUpdate[]>(
+			`Activity/BulkyPatchUpdateActivity`,
+			JSON.stringify(activitiesPatchDocuments),
+		);
 	}
 }
