@@ -9,7 +9,7 @@ type ChevronProps = {
 	progress: Animated.SharedValue<number>;
 };
 
-const Chevron = ({ progress }: ChevronProps) => {
+const ItineraryAccordionArrow = ({ progress }: ChevronProps) => {
 	const iconStyle = useAnimatedStyle(() => ({
 		transform: [
 			{
@@ -26,6 +26,6 @@ const Chevron = ({ progress }: ChevronProps) => {
 	);
 };
 
-export default Chevron;
+export default ItineraryAccordionArrow;
 
 const styles = StyleSheet.create({});

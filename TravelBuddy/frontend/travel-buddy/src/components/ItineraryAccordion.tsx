@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { IActivity, IItinerary } from '../types/applicationTypes';
 import { colors } from '../utils/colors';
-import Chevron from './Chevron';
+import ItineraryAccordionArrow from './ItineraryAccordionArrow';
 import Animated, {
 	Extrapolate,
 	interpolate,
@@ -84,7 +84,7 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 				<Text style={styles.dateStyle}>
 					{itineraryDate.toLocaleDateString(undefined, dateOptions)}
 				</Text>
-				<Chevron progress={progress} />
+				<ItineraryAccordionArrow progress={progress} />
 			</Pressable>
 			<Animated.View style={heightAnimationStyle}>
 				<Animated.View
@@ -97,10 +97,12 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 								Itinerary for {new Date(itinerary.date).toLocaleDateString()}
 							</Text>
 						</View>
-						<Image
-							style={{ width: 20, height: 20 }}
-							source={require('../assets/icons/yellow-edit-pensil.png')}
-						/>
+						<Pressable onPress={() => console.log('clicked')}>
+							<Image
+								style={{ width: 20, height: 20 }}
+								source={require('../assets/icons/yellow-edit-pensil.png')}
+							/>
+						</Pressable>
 					</View>
 					{sortedActivities.map((activity, activityIndex) => {
 						return (

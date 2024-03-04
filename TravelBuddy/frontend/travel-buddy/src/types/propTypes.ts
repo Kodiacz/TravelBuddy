@@ -6,6 +6,12 @@ interface ITripCardProps {
 	trip: ITrip;
 }
 
+interface IEditTripCard {
+	trip: ITrip;
+	dialogVisible: boolean;
+	setDialogVisible: () => void;
+}
+
 interface IAppProps {
 	increment: () => void;
 	decrement: () => void;
@@ -70,4 +76,5 @@ export {
 	IItineraryAccordionProps,
 	IItinerariesProps,
 	IActivityProps,
+	IEditTripCard,
 };
