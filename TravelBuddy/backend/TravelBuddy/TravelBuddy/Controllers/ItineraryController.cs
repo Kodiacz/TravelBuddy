@@ -23,6 +23,7 @@
 
 		[HttpPost]
 		[ModelValidationFilter]
+		[ActionName(nameof(AddItinerary))]
 		public async Task<IActionResult> AddItinerary(AddItineraryDto itineraryDto)
 		{
 			await this.itineraryService.AddItinerary(itineraryDto);
