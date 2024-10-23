@@ -16,9 +16,7 @@ const authApiService = new AuthApiService();
 const getUser = createAsyncThunk(
 	'user/getUser',
 	async (loginData: ILoginData) => {
-		console.log('inside getUser');
 		const data = (await authApiService.login(loginData)).data;
-		console.log('getUser => data => ', data);
 		return data;
 	},
 );

@@ -13,6 +13,7 @@ import TripCard from '../components/TripCard';
 import TripCardSkeleton from '../components/loading-components/TripCardSkeleton';
 import ScreenHeader from '../components/ScreenHeader';
 import { useSelector } from 'react-redux';
+import { Button } from '@rneui/themed';
 
 export default function Home() {
 	const { safeArea } = useSafeArea();
@@ -38,13 +39,15 @@ export default function Home() {
 
 		fetchData();
 	}, [dispatch, user?.userId]);
-
+	console.log(trips);
 	if (error)
 		return (
 			<View style={safeArea}>
 				<Text>Error</Text>
 			</View>
 		);
+
+	const footerButton = () => <Button title="Add Trip"></Button>;
 
 	return (
 		<View style={safeArea}>
@@ -61,7 +64,9 @@ export default function Home() {
 					<View>
 						<FlatList
 							contentContainerStyle={{ paddingBottom: '50%' }}
+							style={{ height: '95%' }}
 							data={trips}
+							ListFooterComponent={footerButton}
 							renderItem={({ item }) => {
 								return <TripCard trip={item} />;
 							}}

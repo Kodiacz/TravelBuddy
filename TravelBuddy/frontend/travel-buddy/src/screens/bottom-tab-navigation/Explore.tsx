@@ -1,9 +1,10 @@
+import React from 'react';
+import { useEffect } from 'react';
 import { Text } from '@rneui/base';
 import { Image, View } from 'react-native';
 import ScreenHeader from '../../components/ScreenHeader';
 import useSafeArea from '../../custom-hooks/useSafeView';
 import { useFonts } from '@expo-google-fonts/inter';
-import { useEffect } from 'react';
 import { loadAsync } from 'expo-font';
 
 const Explore = () => {

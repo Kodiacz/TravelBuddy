@@ -1,9 +1,10 @@
+import React from 'react';
+import { useEffect, useState } from 'react';
 import { Text } from '@rneui/base';
 import { View, Image } from 'react-native';
 import ScreenHeader from '../../components/ScreenHeader';
 import useSafeArea from '../../custom-hooks/useSafeView';
 import { Icon, ListItem } from '@rneui/themed';
-import { useEffect, useState } from 'react';
 import { FlatList } from 'react-native-gesture-handler';
 import ItineraryCard from '../../components/ActivityCard';
 import { AppReducers, useAppDispatch } from '../../redux/store';

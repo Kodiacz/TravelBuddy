@@ -1,3 +1,4 @@
+import React from 'react';
 import LandingScreen from '../screens/Landing';
 import RegisterScreen from '../screens/authentication/Register';
 import LoginScreen from '../screens/authentication/Login';
@@ -12,9 +13,12 @@ import { AppRootStackParamList } from '../types/applicationTypes';
 const Stack = createNativeStackNavigator<AppRootStackParamList>();
 
 //TODO: Needs to be changed
-
 const ItinerariesNavigator = () => {
-	return <View></View>;
+	return (
+		<View>
+			<Text>Hello</Text>
+		</View>
+	);
 };
 
 export default ItinerariesNavigator;

@@ -1,3 +1,4 @@
+import React from 'react';
 import { View, KeyboardAvoidingView, Platform } from 'react-native';
 import { IRegisterProps } from '../../types/screens/register';
 import useSafeArea from '../../custom-hooks/useSafeView';
@@ -18,6 +19,7 @@ import {
 import { AppReducers, useAppDispatch } from '../../redux/store';
 import { getUser } from '../../redux/user/userSlice';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 export default function Login({ navigation }: IRegisterProps) {
 	const { safeArea } = useSafeArea();
@@ -39,7 +41,6 @@ export default function Login({ navigation }: IRegisterProps) {
 		error,
 	} = useSelector((state: AppReducers) => state.userReducer);
 	const onSubmit = async (data: any) => {
-		console.log('inside onSubmit');
 		setDisabled(true);
 
 		await dispatch(getUser(data));
@@ -48,13 +49,7 @@ export default function Login({ navigation }: IRegisterProps) {
 			setDisabled(false);
 		}
 
-		console.log('onSubmit => user', user);
-
 		if (user?.accessToken) {
-			console.log(
-				'inside if statement => user?.accessToken',
-				user?.accessToken,
-			);
 			await AsyncStorage.setItem('isLogedIn', JSON.stringify(true));
 			navigation.navigate('Main');
 		} else {

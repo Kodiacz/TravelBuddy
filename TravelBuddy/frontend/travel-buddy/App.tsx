@@ -1,3 +1,4 @@
+import React from 'react'; // Add this line at the top
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Provider } from 'react-redux';
 import { persistedStore, reduxStore } from './src/redux/store';
@@ -57,7 +58,6 @@ export default function App() {
 				setInitialScreen('Landing');
 			}
 		};
-
 		getUserInfo();
 	}, []);
 
