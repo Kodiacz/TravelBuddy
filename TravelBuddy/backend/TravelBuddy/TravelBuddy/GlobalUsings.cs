@@ -1,4 +1,10 @@
-﻿global using Microsoft.EntityFrameworkCore;
+﻿global using System.Net;
+global using System.Text;
+global using System.Reflection;
+global using System.Threading.Tasks;
+global using System.ComponentModel.DataAnnotations;
+
+global using Microsoft.EntityFrameworkCore;
 global using Microsoft.IdentityModel.Tokens;
 global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Cors;
@@ -7,11 +13,7 @@ global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Authentication;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 
-global using System.Net;
-global using System.Text;
-global using System.Reflection;
-global using System.Threading.Tasks;
-global using System.ComponentModel.DataAnnotations;
+global using Azure.Storage.Blobs;
 
 global using AutoMapper;
 
