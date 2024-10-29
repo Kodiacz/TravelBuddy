@@ -26,6 +26,7 @@ export default abstract class ApiService {
 	protected async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
 		const response = await this.axiosInstance.get<T>(url, config);
 		console.log('response.data => ', response.data);
+		console.log('url => ', url);
 		return response.data;
 	}
 

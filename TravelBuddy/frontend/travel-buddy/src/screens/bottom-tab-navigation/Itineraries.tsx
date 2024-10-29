@@ -16,6 +16,8 @@ import ItineraryAccordion from '../../components/ItineraryAccordion';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Itineraries = ({ tripId }: IItinerariesProps) => {
+	console.log('tripId => ', tripId);
+	console.log('inside Itinereries');
 	const { safeArea } = useSafeArea();
 	const dispatch = useAppDispatch();
 	const useSelector: TypedUseSelectorHook<AppReducers> = useReduxSelector;
@@ -24,11 +26,11 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 		loading,
 		error,
 	} = useSelector((state) => state.itineraryReducer);
-
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
-				await dispatch(getTripItineraries(7));
+				console.log('inside Itineraries fetchData');
+				await dispatch(getTripItineraries(1));
 			} catch (error) {
 				console.error(error);
 			}

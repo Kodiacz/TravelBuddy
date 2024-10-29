@@ -1,5 +1,9 @@
 import { Text } from '@rneui/themed';
 import React, { useState } from 'react';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import { Image, StyleSheet, View } from 'react-native';
 import { IActivityProps, IItineraryCardProps } from '../types/propTypes';
 import { FlatList } from 'react-native-gesture-handler';
@@ -10,24 +14,21 @@ import { IActivity } from '../types/applicationTypes';
 const ActivityCard = ({ activity }: IActivityProps) => {
 	const [checked, setChecked] = useState(false);
 	activity.done = true;
-
 	return (
-		<>
-			<View style={{ ...styles.activitiesContainer }}>
-				<Text style={styles.activityTextStyle}>{activity.name}</Text>
-				<CheckBox
-					containerStyle={styles.checkBoxContainer}
-					checked={activity.done}
-					onPress={() => {
-						setChecked(!checked);
-					}}
-					size={20}
-					style={styles.checkBox}
-					uncheckedColor={colors.primary.fibonacciBlue}
-					checkedColor={colors.primary.fibonacciBlue}
-				/>
-			</View>
-		</>
+		<View style={{ ...styles.activitiesContainer }}>
+			<Text style={styles.activityTextStyle}>{activity.name}</Text>
+			<CheckBox
+				containerStyle={styles.checkBoxContainer}
+				checked={activity.done}
+				onPress={() => {
+					setChecked(!checked);
+				}}
+				size={20}
+				style={styles.checkBox}
+				uncheckedColor={colors.primary.fibonacciBlue}
+				checkedColor={colors.primary.fibonacciBlue}
+			/>
+		</View>
 	);
 };
 
@@ -35,7 +36,6 @@ const styles = StyleSheet.create({
 	container: {
 		justifyContent: 'flex-start',
 		alignSelf: 'center',
-		width: 365,
 		marginBottom: 20,
 		backgroundColor: colors.white,
 		paddingHorizontal: 20,
