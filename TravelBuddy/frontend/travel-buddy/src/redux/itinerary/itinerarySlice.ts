@@ -14,6 +14,7 @@ const itinerartService = new ItineraryApiService();
 const getTripItineraries = createAsyncThunk(
 	'itineraries/get',
 	async (tripId: number) => {
+		console.log('inside createAsynThunk');
 		const data = await itinerartService.getTripItineraries(tripId);
 		return data;
 	},

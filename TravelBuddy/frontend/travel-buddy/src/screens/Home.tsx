@@ -1,6 +1,10 @@
 import React, { useEffect } from 'react';
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
-import { FlatList, Image, Text, View } from 'react-native';
+import {
+	widthPercentageToDP as wp,
+	heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import { FlatList, Image, Platform, Text, View } from 'react-native';
 import useSafeArea from '../custom-hooks/useSafeView';
 import {
 	useSelector as useReduxSelector,
@@ -14,9 +18,12 @@ import TripCardSkeleton from '../components/loading-components/TripCardSkeleton'
 import ScreenHeader from '../components/ScreenHeader';
 import { useSelector } from 'react-redux';
 import { Button } from '@rneui/themed';
+import usePlatformStyles from '../custom-hooks/usePlatformStyles';
 
 export default function Home() {
 	const { safeArea } = useSafeArea();
+	const { getResponsive } = usePlatformStyles();
+
 	// const user = useAuthUser<IUser>();
 	const user = useSelector(
 		(state: AppReducers) => state.userReducer.data,
@@ -27,7 +34,6 @@ export default function Home() {
 		loading,
 		error,
 	} = useSelector((state: AppReducers) => state.tripReducer);
-
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -49,6 +55,12 @@ export default function Home() {
 
 	const footerButton = () => <Button title="Add Trip"></Button>;
 
+	const flatListBottomPadding = getResponsive({
+		property: 'height',
+		iosValue: '35%',
+		androidValue: '30%',
+	});
+
 	return (
 		<View style={safeArea}>
 			<ScreenHeader
@@ -61,10 +73,14 @@ export default function Home() {
 				</>
 			) : (
 				<>
-					<View>
+					<View
+						style={{ paddingLeft: 10, paddingRight: 10, height: hp('100') }}
+					>
 						<FlatList
-							contentContainerStyle={{ paddingBottom: '50%' }}
-							style={{ height: '95%' }}
+							contentContainerStyle={{
+								paddingBottom: flatListBottomPadding,
+								// height: 'auto',
+							}}
 							data={trips}
 							ListFooterComponent={footerButton}
 							renderItem={({ item }) => {

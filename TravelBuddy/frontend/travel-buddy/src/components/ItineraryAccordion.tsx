@@ -1,5 +1,9 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import { IActivity, IItinerary } from '../types/applicationTypes';
 import { colors } from '../utils/colors';
 import Chevron from './Chevron';
@@ -17,6 +21,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Image } from 'react-native';
 import ActivityCard from './ActivityCard';
+import { ScrollView } from 'react-native-gesture-handler';
 
 type Props = {
 	itinerary: IItinerary;
@@ -36,14 +41,9 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 	const progress = useDerivedValue(() =>
 		open.value ? withTiming(1) : withTiming(0),
 	);
-	const test = 50;
+
 	const heightAnimationStyle = useAnimatedStyle(() => ({
-		height: interpolate(
-			progress.value,
-			[0, 1],
-			[0, heightValue.value],
-			Extrapolate.CLAMP,
-		),
+		height: heightValue.value,
 	}));
 
 	return (
@@ -53,21 +53,21 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 				onPress={() => {
 					if (heightValue.value === 0) {
 						runOnUI(() => {
-							'worklet';
-							const measurement = measure(listRef);
-							heightValue.value = 49 * itinerary.activities.length;
+							('worklet');
+							heightValue.value = withTiming(measure(listRef)!.height);
 						})();
+					} else {
+						heightValue.value = withTiming(0);
 					}
-					open.value = !open.value;
 				}}
 			>
 				<Text style={styles.textTitle}>{itinerary.name}</Text>
 				<Chevron progress={progress} />
 			</Pressable>
-			<Animated.View style={heightAnimationStyle}>
+			<Animated.ScrollView style={heightAnimationStyle}>
 				<Animated.View
-					ref={listRef}
 					style={styles.contentContainer}
+					ref={listRef}
 				>
 					<View style={styles.itineraryInfoContainer}>
 						<View style={styles.contentTitleContainer}>
@@ -80,18 +80,24 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 							source={require('../assets/icons/yellow-edit-pensil.png')}
 						/>
 					</View>
-					{itinerary.activities
-						.sort((a, b) => sortActivitiesByDone(a.done, b.done))
-						.map((a, i) => {
-							return (
-								<ActivityCard
-									activity={a}
-									key={i}
-								/>
-							);
-						})}
+					{itinerary.activities.length > 0 ? (
+						itinerary.activities
+							.sort((a, b) => sortActivitiesByDone(a.done, b.done))
+							.map((a, i) => {
+								return (
+									<ActivityCard
+										activity={a}
+										key={i}
+									/>
+								);
+							})
+					) : (
+						<View>
+							<Text>Empty</Text>
+						</View>
+					)}
 				</Animated.View>
-			</Animated.View>
+			</Animated.ScrollView>
 		</View>
 	);
 };
@@ -118,9 +124,10 @@ const styles = StyleSheet.create({
 	contentContainer: {
 		borderTopRightRadius: 12.5,
 		borderTopLeftRadius: 12.5,
-		overflow: 'hidden',
+		position: 'absolute',
+		width: '100%',
+		top: 0,
 		backgroundColor: colors.white,
-		height: '100%',
 	},
 	content: {
 		padding: 20,

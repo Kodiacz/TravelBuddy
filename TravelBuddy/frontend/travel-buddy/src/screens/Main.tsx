@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Image } from '@rneui/themed';
+import { Image, Text } from '@rneui/themed';
 import React from 'react';
 import Explore from './bottom-tab-navigation/Explore';
 import MyTrips from './bottom-tab-navigation/MyTrips';
@@ -15,6 +15,9 @@ import {
 	useSelector as useReduxSelector,
 } from 'react-redux';
 import { AppReducers } from '../redux/store';
+import useSafeArea from '../custom-hooks/useSafeView';
+import usePlatformStyles from '../custom-hooks/usePlatformStyles';
+import { Platform } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
@@ -25,17 +28,22 @@ const Main = () => {
 		loading,
 		error,
 	} = useSelector((state) => state.userReducer);
+	const insets = useSafeAreaInsets();
+	const { getResponsive } = usePlatformStyles();
+
+	const tabTextBottomPadding = getResponsive({
+		property: 'height',
+		androidValue: '1.5%',
+		iosValue: 0,
+	});
 
 	return (
 		<Tab.Navigator
 			initialRouteName="Home"
 			screenOptions={{
 				header: () => null,
-				// tabBarActiveBackgroundColor: 'black',
-				// tabBarInactiveBackgroundColor: 'red',
-				// tabBarActiveTintColor: 'black',
-				// tabBarInactiveTintColor: 'gray',
-				tabBarStyle: styles.tabBar,
+				tabBarStyle: { ...styles.tabBar, paddingBottom: insets.bottom },
+				tabBarItemStyle: { marginBottom: tabTextBottomPadding },
 			}}
 		>
 			<Tab.Screen
@@ -53,6 +61,18 @@ const Main = () => {
 							}}
 							source={require('../assets/icons/My-Trips.png')}
 						></Image>
+					),
+					tabBarLabel: ({ focused }) => (
+						<Text
+							style={{
+								color: 'white',
+								fontSize: focused ? 16 : 12,
+								fontWeight: focused ? 'bold' : 'normal',
+								// marginBottom: 10,
+							}}
+						>
+							My Trips
+						</Text>
 					),
 				}}
 			/>
@@ -72,6 +92,18 @@ const Main = () => {
 							source={require('../assets/icons/Explore.png')}
 						></Image>
 					),
+					tabBarLabel: ({ focused }) => (
+						<Text
+							style={{
+								color: 'white',
+								fontSize: focused ? 16 : 12,
+								fontWeight: focused ? 'bold' : 'normal',
+								// marginBottom: 10,
+							}}
+						>
+							Explore
+						</Text>
+					),
 				}}
 			/>
 			<Tab.Screen
@@ -89,6 +121,18 @@ const Main = () => {
 							}}
 							source={require('../assets/icons/Itineraries.png')}
 						></Image>
+					),
+					tabBarLabel: ({ focused }) => (
+						<Text
+							style={{
+								color: 'white',
+								fontSize: focused ? 16 : 12,
+								fontWeight: focused ? 'bold' : 'normal',
+								// marginBottom: 10,
+							}}
+						>
+							Itineraries
+						</Text>
 					),
 				}}
 			/>
