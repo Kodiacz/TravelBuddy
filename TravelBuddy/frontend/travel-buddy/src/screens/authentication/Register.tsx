@@ -34,9 +34,7 @@ export default function Register({ navigation }: IRegisterProps) {
 		return confirmPassword === value || 'Passwords do not match';
 	};
 
-	const onSubmit = (data: any) => {
-		console.log(data);
-	};
+	const onSubmit = (data: any) => {};
 
 	return (
 		<KeyboardAvoidingView

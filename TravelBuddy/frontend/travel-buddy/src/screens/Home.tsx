@@ -40,7 +40,7 @@ export default function Home() {
 
 		fetchData();
 	}, [dispatch, user?.userId]);
-	console.log(trips);
+
 	if (error)
 		return (
 			<View>

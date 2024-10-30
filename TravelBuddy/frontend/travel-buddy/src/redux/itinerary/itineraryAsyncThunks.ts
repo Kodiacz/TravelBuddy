@@ -20,7 +20,6 @@ const getTripItineraries = createAsyncThunk(
 			orderBy,
 			userId,
 		);
-		console.log('getTripItineraries => ', data);
 		return data;
 	},
 );
@@ -28,10 +27,7 @@ const getTripItineraries = createAsyncThunk(
 const updateItinerariesActivities = createAsyncThunk(
 	'itineraries-activities/patch',
 	async (activitiesPatchDocuments: ActivityPatchUpdate[]) => {
-		console.log(
-			'createAsyncThunk => activitiesPatchDocuments => ',
-			activitiesPatchDocuments,
-		);
+		console.log('inside updateItinerariesActivities');
 		await itinerartService.updateAllActivities(activitiesPatchDocuments);
 	},
 );

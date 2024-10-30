@@ -8,11 +8,9 @@ export default class ItineraryApiService extends ApiService {
 	}
 
 	async getTripItineraries(tripId: number) {
-		console.log('inside getTripItineraries');
 		const data = await this.get<IItinerary[]>(
 			`Itinerary/GetTripItineraries?tripId=${tripId}`,
 		);
-		console.log('getTripItineraries => data => ', data);
 		return data;
 	}
 
@@ -28,6 +26,7 @@ export default class ItineraryApiService extends ApiService {
 	}
 
 	async updateAllActivities(activitiesPatchDocuments: ActivityPatchUpdate[]) {
+		console.log('inside updateAllActivities => ', activitiesPatchDocuments);
 		await this.patch<ActivityPatchUpdate[]>(
 			`Activity/BulkyPatchUpdateActivity`,
 			JSON.stringify(activitiesPatchDocuments),

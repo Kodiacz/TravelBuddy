@@ -53,6 +53,7 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 		const activities = itineraries.flatMap((x) => x.activities);
 		const activitiesPatchDocuments: ActivityPatchUpdate[] = activities.map(
 			(x) => {
+				console.log('createActivitiesPatchDocuments => activity => ', x);
 				return {
 					op: 'replace',
 					entityId: x.id?.toString(),

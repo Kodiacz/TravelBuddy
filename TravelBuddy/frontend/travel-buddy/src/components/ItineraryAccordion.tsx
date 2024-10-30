@@ -63,8 +63,6 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 		);
 	}, [itinerary.activities, sortActivitiesByDone]);
 
-	console.log(`${Platform.OS} => itinerary => `, itinerary);
-
 	return (
 		<View style={styles.container}>
 			<Pressable
@@ -97,7 +95,7 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 								Itinerary for {new Date(itinerary.date).toLocaleDateString()}
 							</Text>
 						</View>
-						<Pressable onPress={() => console.log('clicked')}>
+						<Pressable onPress={() => console.log('clicked edit button')}>
 							<Image
 								style={{ width: 20, height: 20 }}
 								source={require('../assets/icons/yellow-edit-pensil.png')}
