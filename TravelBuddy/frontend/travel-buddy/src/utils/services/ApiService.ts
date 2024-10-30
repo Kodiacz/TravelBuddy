@@ -24,8 +24,8 @@ export default abstract class ApiService {
 	}
 
 	protected async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
+		console.log('ApiService => get => url => ', url);
 		const response = await this.axiosInstance.get<T>(url, config);
-		console.log('response.data => ', response.data);
 		return response.data;
 	}
 
@@ -55,6 +55,16 @@ export default abstract class ApiService {
 		config?: AxiosRequestConfig,
 	): Promise<T> {
 		const response = await this.axiosInstance.delete<T>(url, config);
+		return response.data;
+	}
+
+	protected async patch<T>(
+		url: string,
+		data?: any,
+		config?: AxiosRequestConfig,
+	): Promise<T> {
+		console.log('patch => url => ', url);
+		const response = await this.axiosInstance.patch<T>(url, data, config);
 		return response.data;
 	}
 }

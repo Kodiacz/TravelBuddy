@@ -1,7 +1,10 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAction, createSlice } from '@reduxjs/toolkit';
 import { ISliceState } from '../../types/reduxTypes';
-import ItineraryApiService from '../../utils/services/ItinararyApiService';
-import { IItinerary, ITrip } from '../../types/applicationTypes';
+import { IItinerary } from '../../types/applicationTypes';
+import {
+	getTripItineraries,
+	updateItinerariesActivities,
+} from './itineraryAsyncThunks';
 
 const initialState: ISliceState<IItinerary[]> = {
 	data: [],
@@ -9,18 +12,13 @@ const initialState: ISliceState<IItinerary[]> = {
 	error: null,
 };
 
-const itinerartService = new ItineraryApiService();
-
-const getTripItineraries = createAsyncThunk(
-	'itineraries/get',
-	async (tripId: number) => {
-		const data = await itinerartService.getTripItineraries(tripId);
-		return data;
-	},
-);
+const toggleActivityDone = createAction<{
+	itineraryId: number;
+	activityName: string;
+}>('itineraries/toggleActivityDone');
 
 const itinerarySlice = createSlice({
-	name: 'trips',
+	name: 'itineraries',
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
@@ -39,9 +37,36 @@ const itinerarySlice = createSlice({
 			.addCase(getTripItineraries.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message || 'An error occurred';
+			})
+			.addCase(toggleActivityDone, (state, action) => {
+				const { itineraryId, activityName } = action.payload;
+				const itinerary = state.data!.find(
+					(itinerary) => itinerary.id === itineraryId,
+				);
+				if (itinerary) {
+					const activity = itinerary.activities.find(
+						(x) => x.name === activityName,
+					);
+
+					if (activity) {
+						activity.done = !activity.done;
+					}
+				}
+			})
+			.addCase(updateItinerariesActivities.pending, (state) => {
+				state.loading = true;
+				state.error = null;
+			})
+			.addCase(updateItinerariesActivities.fulfilled, (state, action) => {
+				state.loading = false;
+				// You might update the state accordingly based on the action payload
+			})
+			.addCase(updateItinerariesActivities.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message || 'An error occurred';
 			});
 	},
 });
 
 export default itinerarySlice.reducer;
-export { getTripItineraries };
+export { getTripItineraries, toggleActivityDone };

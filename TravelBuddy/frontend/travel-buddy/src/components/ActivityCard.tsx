@@ -1,33 +1,38 @@
 import { Text } from '@rneui/themed';
-import React, { useState } from 'react';
-import { Image, StyleSheet, View } from 'react-native';
+import React, { cloneElement, useState } from 'react';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
+import { AppState, Image, StyleSheet, View } from 'react-native';
 import { IActivityProps, IItineraryCardProps } from '../types/propTypes';
 import { FlatList } from 'react-native-gesture-handler';
 import { CheckBox } from '@rneui/base';
 import { colors } from '../utils/colors';
 import { IActivity } from '../types/applicationTypes';
+import { useAppDispatch } from '../redux/store';
+import { toggleActivityDone } from '../redux/itinerary/itinerarySlice';
 
-const ActivityCard = ({ activity }: IActivityProps) => {
-	const [checked, setChecked] = useState(false);
-	activity.done = true;
+const ActivityCard = ({ activity, itineraryId }: IActivityProps) => {
+	const dispatch = useAppDispatch();
+
+	const handleToggleActivity = () => {
+		dispatch(toggleActivityDone({ itineraryId, activityName: activity.name }));
+	};
 
 	return (
-		<>
-			<View style={{ ...styles.activitiesContainer }}>
-				<Text style={styles.activityTextStyle}>{activity.name}</Text>
-				<CheckBox
-					containerStyle={styles.checkBoxContainer}
-					checked={activity.done}
-					onPress={() => {
-						setChecked(!checked);
-					}}
-					size={20}
-					style={styles.checkBox}
-					uncheckedColor={colors.primary.fibonacciBlue}
-					checkedColor={colors.primary.fibonacciBlue}
-				/>
-			</View>
-		</>
+		<View style={{ ...styles.activitiesContainer }}>
+			<Text style={styles.activityTextStyle}>{activity.name}</Text>
+			<CheckBox
+				containerStyle={styles.checkBoxContainer}
+				checked={activity.done}
+				onPress={handleToggleActivity}
+				size={20}
+				style={styles.checkBox}
+				uncheckedColor={colors.primary.fibonacciBlue}
+				checkedColor={colors.primary.fibonacciBlue}
+			/>
+		</View>
 	);
 };
 
@@ -35,7 +40,6 @@ const styles = StyleSheet.create({
 	container: {
 		justifyContent: 'flex-start',
 		alignSelf: 'center',
-		width: 365,
 		marginBottom: 20,
 		backgroundColor: colors.white,
 		paddingHorizontal: 20,

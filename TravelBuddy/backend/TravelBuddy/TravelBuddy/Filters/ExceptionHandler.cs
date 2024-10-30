@@ -1,6 +1,4 @@
-﻿using TravelBuddy.API.Extenstions.BuilderServices;
-
-namespace TravelBuddy.API.Filters
+﻿namespace TravelBuddy.API.Filters
 {
 	public class ExceptionHandler : IExceptionFilter
 	{

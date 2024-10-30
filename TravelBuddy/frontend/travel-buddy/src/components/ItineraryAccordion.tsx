@@ -1,8 +1,12 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
-import React, { useEffect, useState } from 'react';
+import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import {
+	heightPercentageToDP as hp,
+	widthPercentageToDP as wp,
+} from 'react-native-responsive-screen';
 import { IActivity, IItinerary } from '../types/applicationTypes';
 import { colors } from '../utils/colors';
-import Chevron from './Chevron';
+import ItineraryAccordionArrow from './ItineraryAccordionArrow';
 import Animated, {
 	Extrapolate,
 	interpolate,
@@ -17,6 +21,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Image } from 'react-native';
 import ActivityCard from './ActivityCard';
+import { ScrollView } from 'react-native-gesture-handler';
 
 type Props = {
 	itinerary: IItinerary;
@@ -36,15 +41,27 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 	const progress = useDerivedValue(() =>
 		open.value ? withTiming(1) : withTiming(0),
 	);
-	const test = 50;
+	const [sortedActivities, setSortedActivities] = useState<IActivity[]>([]);
+
 	const heightAnimationStyle = useAnimatedStyle(() => ({
-		height: interpolate(
-			progress.value,
-			[0, 1],
-			[0, heightValue.value],
-			Extrapolate.CLAMP,
-		),
+		height: heightValue.value,
 	}));
+
+	const itineraryDate = new Date(itinerary.date);
+
+	const dateOptions: Intl.DateTimeFormatOptions = {
+		day: '2-digit',
+		month: '2-digit',
+		year: '2-digit',
+	};
+
+	useEffect(() => {
+		setSortedActivities(
+			[...itinerary.activities].sort((a, b) =>
+				sortActivitiesByDone(a.done, b.done),
+			),
+		);
+	}, [itinerary.activities, sortActivitiesByDone]);
 
 	return (
 		<View style={styles.container}>
@@ -53,21 +70,24 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 				onPress={() => {
 					if (heightValue.value === 0) {
 						runOnUI(() => {
-							'worklet';
-							const measurement = measure(listRef);
-							heightValue.value = 49 * itinerary.activities.length;
+							('worklet');
+							heightValue.value = withTiming(measure(listRef)!.height);
 						})();
+					} else {
+						heightValue.value = withTiming(0);
 					}
-					open.value = !open.value;
 				}}
 			>
 				<Text style={styles.textTitle}>{itinerary.name}</Text>
-				<Chevron progress={progress} />
+				<Text style={styles.dateStyle}>
+					{itineraryDate.toLocaleDateString(undefined, dateOptions)}
+				</Text>
+				<ItineraryAccordionArrow progress={progress} />
 			</Pressable>
 			<Animated.View style={heightAnimationStyle}>
 				<Animated.View
-					ref={listRef}
 					style={styles.contentContainer}
+					ref={listRef}
 				>
 					<View style={styles.itineraryInfoContainer}>
 						<View style={styles.contentTitleContainer}>
@@ -75,21 +95,29 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 								Itinerary for {new Date(itinerary.date).toLocaleDateString()}
 							</Text>
 						</View>
-						<Image
-							style={{ width: 20, height: 20 }}
-							source={require('../assets/icons/yellow-edit-pensil.png')}
-						/>
+						<Pressable onPress={() => console.log('clicked edit button')}>
+							<Image
+								style={{ width: 20, height: 20 }}
+								source={require('../assets/icons/yellow-edit-pensil.png')}
+							/>
+						</Pressable>
 					</View>
-					{itinerary.activities
-						.sort((a, b) => sortActivitiesByDone(a.done, b.done))
-						.map((a, i) => {
+					{itinerary.activities.length > 0 ? (
+						sortedActivities.map((activity, activityIndex) => {
 							return (
 								<ActivityCard
-									activity={a}
-									key={i}
+									activity={activity}
+									activityIndex={activityIndex}
+									itineraryId={itinerary.id}
+									key={activity.name}
 								/>
 							);
-						})}
+						})
+					) : (
+						<View>
+							<Text>Empty</Text>
+						</View>
+					)}
 				</Animated.View>
 			</Animated.View>
 		</View>
@@ -114,13 +142,19 @@ const styles = StyleSheet.create({
 	},
 	textTitle: {
 		fontSize: 16,
+		flex: 0.9,
+	},
+	dateStyle: {
+		fontSize: 16,
+		flex: 1,
 	},
 	contentContainer: {
 		borderTopRightRadius: 12.5,
 		borderTopLeftRadius: 12.5,
-		overflow: 'hidden',
+		position: 'absolute',
+		width: '100%',
+		top: 0,
 		backgroundColor: colors.white,
-		height: '100%',
 	},
 	content: {
 		padding: 20,

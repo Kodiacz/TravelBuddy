@@ -10,7 +10,7 @@
 
 		public DbSet<Trip> Trips { get; set; } = null!;
 
-		public DbSet<Itinerary> Activities { get; set; } = null!;
+		public DbSet<Activity> Activities { get; set; } = null!;
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

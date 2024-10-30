@@ -18,13 +18,6 @@ import { IRegisterData } from '../../types/propTypes';
 
 const screenWidth = Dimensions.get('window').width;
 
-type inputFieldName =
-	| 'firstName'
-	| 'lastName'
-	| 'email'
-	| 'password'
-	| 'confirmPassword';
-
 export default function Register({ navigation }: IRegisterProps) {
 	const { safeArea } = useSafeArea();
 	const [user, setUser] = useState<IRegisterData>();
@@ -41,9 +34,7 @@ export default function Register({ navigation }: IRegisterProps) {
 		return confirmPassword === value || 'Passwords do not match';
 	};
 
-	const onSubmit = (data: any) => {
-		console.log(data);
-	};
+	const onSubmit = (data: any) => {};
 
 	return (
 		<KeyboardAvoidingView

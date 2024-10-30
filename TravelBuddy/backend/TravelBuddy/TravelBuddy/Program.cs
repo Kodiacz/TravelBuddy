@@ -1,6 +1,3 @@
-using Microsoft.OpenApi.Models;
-using Swashbuckle.AspNetCore.Filters;
-
 var builder = WebApplication.CreateBuilder(args);
 
 //builder.WebHost.ConfigureKestrel((context, serverOption) =>
@@ -16,7 +13,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers(configure =>
 {
 	configure.Filters.AddApplicationFilters();
-});
+})
+.AddNewtonsoftJson();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(opt =>
 {

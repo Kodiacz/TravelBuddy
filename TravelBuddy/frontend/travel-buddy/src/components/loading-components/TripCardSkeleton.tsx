@@ -51,7 +51,7 @@ export default TripCardSkeleton;
 
 const styles = StyleSheet.create({
 	mainContainer: {
-		backgroundColor: 'red',
+		backgroundColor: 'lightgrey',
 		maxHeight: 451,
 		width: 359,
 		alignSelf: 'center',

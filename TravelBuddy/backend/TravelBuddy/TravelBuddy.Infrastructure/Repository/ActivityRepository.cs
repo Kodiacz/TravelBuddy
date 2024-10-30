@@ -82,9 +82,14 @@
 		/// </summary>
 		/// <param name="id">The id of the <see cref="Activity"/> entity</param>
 		/// <returns>Return the <see cref="Activity"/> entity</returns>
-		public Task<Activity> GetByIdAsync(int id)
+		public async Task<Activity> GetByIdAsync(int id)
 		{
-			throw new NotImplementedException();
+			var activity = await this.dbContext
+				.Activities
+				.Include(a => a.Itinerary)
+				.FirstOrDefaultAsync(a => !a.Deleted && a.Id == id);
+
+			return activity!;
 		}
 
 		/// <summary>

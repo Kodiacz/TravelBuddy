@@ -11,9 +11,13 @@ global using Microsoft.AspNetCore.Cors;
 global using Microsoft.AspNetCore.Mvc.Filters;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Authentication;
+global using Microsoft.AspNetCore.JsonPatch;
 global using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 global using Azure.Storage.Blobs;
+global using Microsoft.OpenApi.Models;
+
+global using Swashbuckle.AspNetCore.Filters;
 
 global using AutoMapper;
 
@@ -35,3 +39,4 @@ global using TravelBuddy.Application.Dtos.TripDtos;
 global using TravelBuddy.Application.Dtos.ActivityDtos;
 global using TravelBuddy.Application.Dtos.ItineraryDtos;
 global using TravelBuddy.Application.Dtos.ApplicationUserDto;
+global using TravelBuddy.Application.Queries.Itineraries;

@@ -23,7 +23,7 @@ const Explore = () => {
 
 	return (
 		<View style={safeArea}>
-			<ScreenHeader
+			{/* <ScreenHeader
 				image={image}
 				labelText="TravelBuddy"
 				lableStyle={{
@@ -35,7 +35,7 @@ const Explore = () => {
 					alignItems: 'flex-start',
 					paddingLeft: 30,
 				}}
-			/>
+			/> */}
 		</View>
 	);
 };

@@ -5,6 +5,7 @@
         public GetItineraryDto()
         {
 			this.Activities = new List<GetActivityDto>();
+			this.Trip = new GetTripDto();
         }
 
         public int Id { get; set; }
@@ -14,5 +15,7 @@
 		public DateTime Date { get; set; }
 
 		public IEnumerable<GetActivityDto> Activities { get; set; }
+
+		public GetTripDto Trip { get; set; }
 	}
 }

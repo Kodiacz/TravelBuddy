@@ -1,6 +1,4 @@
-﻿using TravelBuddy.Application.Dtos.TripDtos;
-
-namespace TravelBuddy.Application.Interfaces.Services
+﻿namespace TravelBuddy.Application.Interfaces.Services
 {
 	public interface ITripService
 	{

@@ -21,6 +21,14 @@
 			return Ok(trips);
 		}
 
+		[HttpGet]
+		[ActionName(nameof(GetAllUserTripsItineraries))]
+		public async Task<IActionResult> GetAllUserTripsItineraries([FromQuery] GetAllItinerariesQuery query) 
+		{
+			var itineraries = await this.itineraryService.GetAllUserTripsItineraries(query);
+			return Ok(itineraries);
+		}
+
 		[HttpPost]
 		[ModelValidationFilter]
 		[ActionName(nameof(AddItinerary))]
@@ -29,5 +37,7 @@
 			await this.itineraryService.AddItinerary(itineraryDto);
 			return Ok();
 		}
+
+
 	}
 }

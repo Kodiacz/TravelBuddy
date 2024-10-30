@@ -109,8 +109,8 @@ export default function Login({ navigation }: IRegisterProps) {
 					<View style={styles.buttonsContainer}>
 						<Button
 							title="LOG IN"
-							// loading={loading}
-							// disabled={disabled}
+							loading={loading}
+							disabled={disabled}
 							disabledStyle={{ ...styles.button, ...styles.buttonDisabled }}
 							loadingProps={{
 								size: 'small',

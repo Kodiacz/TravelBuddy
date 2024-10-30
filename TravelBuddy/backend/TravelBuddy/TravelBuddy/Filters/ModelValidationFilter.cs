@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace TravelBuddy.API.Filters
+﻿namespace TravelBuddy.API.Filters
 {
 	public class ModelValidationFilterAttribute : Attribute, IAsyncActionFilter
 	{

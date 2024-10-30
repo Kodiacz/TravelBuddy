@@ -6,6 +6,12 @@ interface ITripCardProps {
 	trip: ITrip;
 }
 
+interface IEditTripCard {
+	trip: ITrip;
+	dialogVisible: boolean;
+	setDialogVisible: () => void;
+}
+
 interface IAppProps {
 	increment: () => void;
 	decrement: () => void;
@@ -54,6 +60,8 @@ interface IItinerariesProps {
 interface IActivityProps {
 	// name: string;
 	// checked: boolean;
+	activityIndex: number;
+	itineraryId: number;
 	activity: IActivity;
 }
 
@@ -68,4 +76,5 @@ export {
 	IItineraryAccordionProps,
 	IItinerariesProps,
 	IActivityProps,
+	IEditTripCard,
 };

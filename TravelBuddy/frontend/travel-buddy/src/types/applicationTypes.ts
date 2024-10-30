@@ -16,10 +16,10 @@ type AppScreenNavigationProp = NativeStackNavigationProp<
 interface ITrip {
 	id: number;
 	name: string;
+	image?: string;
 	creator: string;
 	travellingBy: string;
 	accommodation: string;
-	image: string;
 	startDate: Date;
 	endDate: Date;
 }
@@ -46,12 +46,21 @@ interface IItinerary {
 	name: string;
 	date: Date;
 	activities: IActivity[];
+	trip: ITrip;
 }
 
 interface IActivity {
+	id: number;
 	name: string;
 	done: boolean;
 }
+
+type ActivityPatchUpdate = {
+	entityId: string;
+	path: string;
+	value: string;
+	op: 'replace';
+};
 
 export {
 	IUser,
@@ -61,4 +70,5 @@ export {
 	AppScreenNavigationProp,
 	IItinerary,
 	IActivity,
+	ActivityPatchUpdate,
 };

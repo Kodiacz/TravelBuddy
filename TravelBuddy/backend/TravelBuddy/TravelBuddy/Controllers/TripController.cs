@@ -28,13 +28,5 @@
 			await this.tripService.AddTrip(tripDto);
 			return Ok();
 		}
-
-		[HttpGet]
-		[ActionName(nameof(Hey))]
-		//[Authorize(Roles = "User")]
-		public ActionResult Hey()
-		{
-			return Ok("Hey");
-		}
 	}
 }
