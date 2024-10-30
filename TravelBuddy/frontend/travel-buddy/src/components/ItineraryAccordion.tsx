@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import React, { useEffect, useRef, useState } from 'react';
 import {
 	heightPercentageToDP as hp,
@@ -63,6 +63,8 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 		);
 	}, [itinerary.activities, sortActivitiesByDone]);
 
+	console.log(`${Platform.OS} => itinerary => `, itinerary);
+
 	return (
 		<View style={styles.container}>
 			<Pressable
@@ -84,7 +86,7 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 				</Text>
 				<ItineraryAccordionArrow progress={progress} />
 			</Pressable>
-			<Animated.ScrollView style={heightAnimationStyle}>
+			<Animated.View style={heightAnimationStyle}>
 				<Animated.View
 					style={styles.contentContainer}
 					ref={listRef}
@@ -119,7 +121,7 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 						</View>
 					)}
 				</Animated.View>
-			</Animated.ScrollView>
+			</Animated.View>
 		</View>
 	);
 };
