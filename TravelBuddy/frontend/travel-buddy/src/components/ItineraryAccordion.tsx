@@ -47,6 +47,22 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 		height: heightValue.value,
 	}));
 
+	const itineraryDate = new Date(itinerary.date);
+
+	const dateOptions: Intl.DateTimeFormatOptions = {
+		day: '2-digit',
+		month: '2-digit',
+		year: '2-digit',
+	};
+
+	useEffect(() => {
+		setSortedActivities(
+			[...itinerary.activities].sort((a, b) =>
+				sortActivitiesByDone(a.done, b.done),
+			),
+		);
+	}, [itinerary.activities, sortActivitiesByDone]);
+
 	return (
 		<View style={styles.container}>
 			<Pressable
