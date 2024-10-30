@@ -31,6 +31,8 @@ builder.Services.AddSwaggerGen(opt =>
 
 builder.Services.ConfigureDatabaseConnection(builder);
 
+builder.Services.AddBlobStorageService(builder);
+
 builder.Services.AddApplicationIdentity();
 
 builder.Services.AddApplicationCors();

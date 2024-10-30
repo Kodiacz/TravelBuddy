@@ -20,6 +20,7 @@ interface ITrip {
 	creator: string;
 	travellingBy: string;
 	accommodation: string;
+	image: string;
 	startDate: Date;
 	endDate: Date;
 }

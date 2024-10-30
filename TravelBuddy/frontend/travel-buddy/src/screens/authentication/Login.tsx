@@ -1,3 +1,4 @@
+import React from 'react';
 import { View, KeyboardAvoidingView, Platform } from 'react-native';
 import { IRegisterProps } from '../../types/screens/register';
 import useSafeArea from '../../custom-hooks/useSafeView';
@@ -18,6 +19,7 @@ import {
 import { AppReducers, useAppDispatch } from '../../redux/store';
 import { getUser } from '../../redux/user/userSlice';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 export default function Login({ navigation }: IRegisterProps) {
 	const { safeArea } = useSafeArea();

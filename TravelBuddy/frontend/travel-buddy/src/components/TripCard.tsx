@@ -42,11 +42,8 @@ export default function TripCard({ trip }: ITripCardProps) {
 		<Card containerStyle={style.container}>
 			<Image
 				style={style.imageStyle}
-				source={
-					trip.image
-						? { uri: trip.image }
-						: require('../assets/icons/sunset.png')
-				}
+				source={{ uri: trip.image }}
+				resizeMode="contain"
 			/>
 			<View style={style.tripInfoContainer}>
 				<View style={style.textContainer}>

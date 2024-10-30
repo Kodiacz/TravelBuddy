@@ -1,4 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import {
+	widthPercentageToDP as wp,
+	heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 import * as Device from 'expo-device';
 import { colors } from '../../utils/colors';
 
@@ -19,18 +23,19 @@ const flexRation = calculateFlex(0.798968357, aspectRatio, 0.01);
 const style = StyleSheet.create({
 	container: {
 		backgroundColor: colors.primary.frostFairy,
-		width: 359,
+		width: wp('90%'),
+		// height: hp('75%'),
 		padding: 0,
 		paddingBottom: 15,
 		marginTop: 0,
 		marginBottom: 35,
 		borderRadius: 12,
 		alignSelf: 'center',
-		flex: 1,
+		// flex: 1,
 	},
 	imageStyle: {
 		width: '100%',
-		height: 160,
+		height: 200,
 		borderRadius: 12,
 		marginBottom: 21,
 	},
@@ -55,7 +60,8 @@ const style = StyleSheet.create({
 	textContainer: {
 		borderRadius: 11.19,
 		backgroundColor: colors.white,
-		width: 330,
+		// width: 330,
+		width: wp('82%'),
 		height: 41,
 		flexDirection: 'row',
 		alignItems: 'center',

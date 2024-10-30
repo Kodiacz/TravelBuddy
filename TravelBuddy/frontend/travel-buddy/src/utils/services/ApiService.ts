@@ -2,21 +2,17 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export default abstract class ApiService {
 	private axiosInstance: AxiosInstance;
-	private ngrokUrl: string =
-		'https://3f41-2a01-5a8-306-233b-95df-bcf3-d9e2-bb99.ngrok-free.app';
+	private url: string = 'http://192.168.1.4:5284/api/';
 
 	constructor() {
 		this.axiosInstance = axios.create({
-			baseURL: `${this.ngrokUrl}/api/`,
+			baseURL: `${this.url}`,
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json',
+				Authorization: 'Bearer',
+			},
 		});
-
-		this.axiosInstance.defaults.headers.common!['Authorization'] =
-			'Bearer YourAccessToken';
-		this.axiosInstance.defaults.headers.common!['ngrok-skip-browser-warning'] =
-			'7024';
-		this.axiosInstance.defaults.headers.common!['Accept'] = 'application/json';
-		this.axiosInstance.defaults.headers.common!['Content-Type'] =
-			'application/json';
 
 		this.axiosInstance.interceptors.response.use(
 			(response: AxiosResponse) => response,

@@ -14,8 +14,10 @@
 
 		public DateTime EndDate { get; set; }
 
-        public string? TravellingBy { get; set; } = null!;
+		public string? TravellingBy { get; set; } = null!;
 
-        public string? Accommodation { get; set; } = null!;
-    }
+		public string? Accommodation { get; set; } = null!;
+
+		public string? Image { get; set; }
+	}
 }

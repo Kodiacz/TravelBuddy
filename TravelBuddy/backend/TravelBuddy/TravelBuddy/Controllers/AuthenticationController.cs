@@ -7,11 +7,13 @@
 	{
 		private readonly IAuthService authenticationService;
 		private readonly IConfiguration configuration;
+		private readonly IBlobStorageService blobStorageService;
 
-		public AuthenticationController(IAuthService authenticationService, IConfiguration configuration)
+		public AuthenticationController(IAuthService authenticationService, IConfiguration configuration, IBlobStorageService blobStorageService)
 		{
 			this.authenticationService = authenticationService;
 			this.configuration = configuration;
+			this.blobStorageService = blobStorageService;
 		}
 
 		[HttpPost]
@@ -31,7 +33,7 @@
 			var getUserDto = await this.authenticationService.LoginUserAsync(userDto);
 
 			var token = this.authenticationService.CreateToken(getUserDto, configuration);
-			
+
 			return Ok(token);
 		}
 
@@ -40,6 +42,19 @@
 		public async Task<IActionResult> CreateAdmin(int userId)
 		{
 			return null;
+		}
+
+		[HttpPost]
+		[ActionName(nameof(UploadImage))]
+		public async Task<ActionResult<string>> UploadImage(IFormFile file)
+		{
+			if (file.Length > 0)
+			{
+				using var stream = file.OpenReadStream();
+				var fileUri = await blobStorageService.UploadAsync(file.FileName, stream);
+				return Ok(new { Uri = fileUri });
+			}
+			return BadRequest("Invalid file");
 		}
 	}
 }
