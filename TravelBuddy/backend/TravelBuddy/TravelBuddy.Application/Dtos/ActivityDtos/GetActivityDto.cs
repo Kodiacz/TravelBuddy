@@ -2,7 +2,7 @@
 {
 	public class GetActivityDto
 	{
-		int Id { get; }
+		public int Id { get; set; }
 
 		public string Name { get; set; } = null!;
 
