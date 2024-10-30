@@ -24,6 +24,7 @@
 				.Include(x => x.Creator)
 				.Where(trip => trip.Creator.Id == userId)
 				.ToListAsync();
+
 			return trips;
 		}
 
