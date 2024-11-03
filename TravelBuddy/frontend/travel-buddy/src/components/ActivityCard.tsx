@@ -27,7 +27,7 @@ const ActivityCard = ({ activity, itineraryId }: IActivityProps) => {
 				containerStyle={styles.checkBoxContainer}
 				checked={activity.done}
 				onPress={handleToggleActivity}
-				size={20}
+				size={hp('3%')}
 				style={styles.checkBox}
 				uncheckedColor={colors.primary.fibonacciBlue}
 				checkedColor={colors.primary.fibonacciBlue}
@@ -38,11 +38,14 @@ const ActivityCard = ({ activity, itineraryId }: IActivityProps) => {
 
 const styles = StyleSheet.create({
 	container: {
+		width: wp('50%'),
+		borderWidth: 1,
+		borderColor: 'red',
 		justifyContent: 'flex-start',
 		alignSelf: 'center',
 		marginBottom: 20,
 		backgroundColor: colors.white,
-		paddingHorizontal: 20,
+		// paddingHorizontal: 20,
 		paddingTop: 10,
 		borderRadius: 12.5,
 		marginTop: '-2%',
@@ -52,27 +55,30 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'space-between',
 		paddingVertical: '2%',
-		paddingHorizontal: '1.5%',
-		paddingRight: '3%',
+		paddingHorizontal: wp('5%'),
 		backgroundColor: colors.white,
 	},
 	activityTextStyle: {
 		color: colors.primary.dutchBlue,
 		fontWeight: '600',
-		fontSize: 18,
+		fontSize: hp('2.5%'),
 		letterSpacing: -0.42,
-		marginLeft: '3%',
+		// marginLeft: '3%',
 	},
 	checkBoxContainer: {
+		// borderWidth: 1,
+		// borderColor: 'red',
+		// width: '3.5%',
+		// height: '2%',
 		padding: 0,
 		margin: 0,
-		justifyContent: 'center',
+		marginRight: 0,
+		paddingRight: 0,
 		backgroundColor: colors.transparent,
 	},
 	checkBox: {
 		color: colors.primary.fibonacciBlue,
-		width: 10,
-		height: 10,
+		alignSelf: 'center',
 	},
 });
 

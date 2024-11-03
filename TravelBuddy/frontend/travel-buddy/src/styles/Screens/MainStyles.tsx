@@ -10,8 +10,8 @@ const screenWidth = Dimensions.get('window').width;
 const { getResponsive } = usePlatformStyles();
 const tabBarHeight = getResponsive({
 	property: 'height',
-	iosValue: '11%',
-	androidValue: '10%',
+	iosValue: '14%',
+	androidValue: '13%',
 });
 export const styles = StyleSheet.create({
 	tabBar: {
