@@ -76,6 +76,8 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 					} else {
 						heightValue.value = withTiming(0);
 					}
+
+					open.value = !open.value;
 				}}
 			>
 				<Text style={styles.textTitle}>{itinerary.name}</Text>
@@ -91,13 +93,13 @@ const ItineraryAccordion = ({ itinerary }: Props) => {
 				>
 					<View style={styles.itineraryInfoContainer}>
 						<View style={styles.contentTitleContainer}>
-							<Text>
+							<Text style={styles.activityTitleText}>
 								Itinerary for {new Date(itinerary.date).toLocaleDateString()}
 							</Text>
 						</View>
 						<Pressable onPress={() => console.log('clicked edit button')}>
 							<Image
-								style={{ width: 20, height: 20 }}
+								style={{ width: hp('3%'), height: hp('3%') }}
 								source={require('../assets/icons/yellow-edit-pensil.png')}
 							/>
 						</Pressable>
@@ -144,6 +146,9 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		flex: 0.9,
 	},
+	activityTitleText: {
+		fontSize: hp('2.5%'),
+	},
 	dateStyle: {
 		fontSize: 16,
 		flex: 1,
@@ -165,6 +170,7 @@ const styles = StyleSheet.create({
 	},
 	contentTitleContainer: {
 		marginBottom: 15,
+		paddingLeft: hp('0.5'),
 	},
 	itineraryInfoContainer: {
 		paddingTop: 10,
