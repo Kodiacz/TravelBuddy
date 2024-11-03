@@ -19,7 +19,6 @@ export default function Home() {
 	const { safeArea } = useSafeArea();
 	const { getResponsive } = usePlatformStyles();
 
-	// const user = useAuthUser<IUser>();
 	const user = useSelector(
 		(state: AppReducers) => state.userReducer.data,
 	) as IUser | null;
@@ -52,8 +51,14 @@ export default function Home() {
 
 	const flatListBottomPadding = getResponsive({
 		property: 'height',
-		iosValue: '35%',
-		androidValue: '30%',
+		iosValue: '21',
+		androidValue: '15',
+	});
+
+	const flatListTopPadding = getResponsive({
+		property: 'height',
+		iosValue: '3',
+		androidValue: '5',
 	});
 
 	return (
@@ -70,6 +75,7 @@ export default function Home() {
 						<FlatList
 							contentContainerStyle={{
 								paddingBottom: flatListBottomPadding,
+								paddingTop: flatListTopPadding,
 								// height: 'auto',
 							}}
 							data={trips}

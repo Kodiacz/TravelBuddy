@@ -53,7 +53,6 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 		const activities = itineraries.flatMap((x) => x.activities);
 		const activitiesPatchDocuments: ActivityPatchUpdate[] = activities.map(
 			(x) => {
-				console.log('createActivitiesPatchDocuments => activity => ', x);
 				return {
 					op: 'replace',
 					entityId: x.id?.toString(),
@@ -72,14 +71,6 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 		activitiesPatchDocuments: ActivityPatchUpdate[],
 	) => {
 		if (nextAppState === 'inactive' || nextAppState === 'background') {
-			console.log(
-				'inside handleAppStateChange => generateedActivityPatchDocuments => ',
-				activitiesPatchDocuments,
-			);
-			console.log(
-				'inside handleAppStateChange => itineraries => ',
-				itineraries,
-			);
 			dispatch(updateItinerariesActivities(activitiesPatchDocuments));
 		}
 	};
@@ -111,8 +102,6 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 	}, [itineraries]);
 
 	const test = createActivitiesPatchDocuments(itineraries!);
-
-	console.log('patch documents => tests => ', test);
 
 	return (
 		<ScrollView>

@@ -27,7 +27,6 @@ const getTripItineraries = createAsyncThunk(
 const updateItinerariesActivities = createAsyncThunk(
 	'itineraries-activities/patch',
 	async (activitiesPatchDocuments: ActivityPatchUpdate[]) => {
-		console.log('inside updateItinerariesActivities');
 		await itinerartService.updateAllActivities(activitiesPatchDocuments);
 	},
 );
