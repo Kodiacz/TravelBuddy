@@ -31,6 +31,7 @@ interface ILoginData {
 
 interface IUser {
 	userId: string;
+	profileImage?: string;
 	email: string;
 	username: string;
 	firstName: string;
