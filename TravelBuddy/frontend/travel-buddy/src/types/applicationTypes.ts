@@ -42,6 +42,11 @@ interface IUser {
 	authUserState: any;
 }
 
+interface ILoginError {
+	status: number;
+	title: string;
+}
+
 interface IItinerary {
 	id: number;
 	name: string;
@@ -71,5 +76,6 @@ export {
 	AppScreenNavigationProp,
 	IItinerary,
 	IActivity,
+	ILoginError,
 	ActivityPatchUpdate,
 };

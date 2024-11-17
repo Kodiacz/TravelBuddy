@@ -1,12 +1,24 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ILoginData, IUser } from '../../types/applicationTypes';
+import { ILoginData, ILoginError, IUser } from '../../types/applicationTypes';
 import { ISliceState } from '../../types/reduxTypes';
 import AuthApiService from '../../utils/services/AuthApiService';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { persistReducer } from 'redux-persist';
 
-const initialState: ISliceState<IUser | null> = {
-	data: null,
+// const initialState: ISliceState<IUser | null> = {
+// 	data: null,
+// 	loading: false,
+// 	error: null,
+// };
+
+const initialState: {
+	user: IUser | null;
+	errorResponse: ILoginError | null;
+	loading: boolean;
+	error: string | null;
+} = {
+	user: null,
+	errorResponse: null,
 	loading: false,
 	error: null,
 };
@@ -20,10 +32,18 @@ const getUser = createAsyncThunk(
 		return data;
 	},
 );
+
 const userSlice = createSlice({
 	name: 'user',
 	initialState,
-	reducers: {},
+	reducers: {
+		clearUser: (state) => {
+			state.user = null;
+			state.errorResponse = null;
+			state.loading = false;
+			state.error = null;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(getUser.pending, (state) => {
@@ -32,9 +52,15 @@ const userSlice = createSlice({
 			})
 			.addCase(
 				getUser.fulfilled,
-				(state, action: PayloadAction<IUser | null>) => {
+				(state, action: PayloadAction<IUser | ILoginError>) => {
 					state.loading = false;
-					state.data = action.payload;
+					if ('accessToken' in action.payload) {
+						state.user = action.payload;
+						state.errorResponse = null;
+					} else {
+						state.user = null;
+						state.errorResponse = action.payload;
+					}
 				},
 			)
 			.addCase(getUser.rejected, (state, action) => {
@@ -53,3 +79,4 @@ const persistedUserReducer = persistReducer(persistConfig, userSlice.reducer);
 
 export default persistedUserReducer;
 export { getUser };
+export const { clearUser } = userSlice.actions;

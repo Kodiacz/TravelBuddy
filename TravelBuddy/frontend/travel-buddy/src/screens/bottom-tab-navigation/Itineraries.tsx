@@ -27,7 +27,7 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 		error,
 	} = useSelector((state: AppReducers) => state.itineraryReducer);
 
-	const { data: user } = useSelector((state: AppReducers) => state.userReducer);
+	const { user } = useSelector((state: AppReducers) => state.userReducer);
 
 	function groupItinerariesByTripName(
 		itineraries: IItinerary[],
@@ -67,7 +67,6 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 
 	const handleAppStateChange = async (
 		nextAppState: any,
-		// itineraries: IItinerary[],
 		activitiesPatchDocuments: ActivityPatchUpdate[],
 	) => {
 		if (nextAppState === 'inactive' || nextAppState === 'background') {
@@ -101,8 +100,6 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 		};
 	}, [itineraries]);
 
-	const test = createActivitiesPatchDocuments(itineraries!);
-
 	return (
 		<ScrollView>
 			{groupedItineraries.map((x, i) => {
@@ -114,7 +111,7 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 								return (
 									<>
 										<ItineraryAccordion
-											key={itinerary.id}
+											key={itinerary.name}
 											itinerary={itinerary}
 										/>
 									</>

@@ -1,0 +1,86 @@
+# React Native specific
+node_modules/
+*.log
+*.lock
+android/.gradle/
+android/app/build/
+android/build/
+ios/Pods/
+ios/build/
+ios/DerivedData/
+*.xcworkspace
+*.xcuserstate
+*.xcodeproj/project.xcworkspace/
+*.xcodeproj/xcuserdata/
+
+# Expo specific
+.expo/
+.expo-shared/
+
+# Testing and coverage
+coverage/
+jest/
+*.test.js
+*.spec.js
+*.test.ts
+*.spec.ts
+*.test.tsx
+*.spec.tsx
+.nyc_output/
+
+# Build outputs
+*.apk
+*.aab
+*.ipa
+dist/
+build/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs and debugging
+*.log
+*.tflite
+*.map
+*.stackdump
+*.swp
+*.swo
+*.tsbuildinfo
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Metro bundler cache
+*.hbc
+*.cache
+*.tmp
+
+# IDE-specific files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+.DS_Store
+Thumbs.db
+
+# IntelliJ IDEA
+*.iml
+*.iws
+*.ipr
+out/
+
+# MacOS system files
+.DS_Store
+._*
+
+# Linux system files
+*~
+
+# Windows system files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/

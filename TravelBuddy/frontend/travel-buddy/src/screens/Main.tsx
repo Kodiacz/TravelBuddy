@@ -36,11 +36,7 @@ const Tab = createBottomTabNavigator();
 const Main = () => {
 	const { safeArea } = useSafeArea();
 	const useSelector: TypedUseSelectorHook<AppReducers> = useReduxSelector;
-	const {
-		data: user,
-		loading,
-		error,
-	} = useSelector((state) => state.userReducer);
+	const { user, loading, error } = useSelector((state) => state.userReducer);
 	const insets = useSafeAreaInsets();
 	const { getResponsive } = usePlatformStyles();
 
@@ -188,7 +184,7 @@ const Main = () => {
 									},
 									...styles.tabBarIcon,
 								}}
-								source={{ uri: user.profileImage }}
+								source={{ uri: user?.profileImage }}
 							></Image>
 						),
 						tabBarLabel: ({ focused }) => (

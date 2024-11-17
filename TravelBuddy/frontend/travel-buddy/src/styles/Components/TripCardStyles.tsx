@@ -24,7 +24,6 @@ const style = StyleSheet.create({
 	container: {
 		backgroundColor: colors.primary.frostFairy,
 		width: wp('90%'),
-		// height: hp('75%'),
 		padding: 0,
 		paddingBottom: 15,
 		marginTop: 0,
@@ -35,7 +34,8 @@ const style = StyleSheet.create({
 	},
 	imageStyle: {
 		width: '100%',
-		height: 200,
+		// height: hp('28%'),
+		aspectRatio: 9 / 6,
 		borderRadius: 12,
 		marginBottom: 21,
 	},

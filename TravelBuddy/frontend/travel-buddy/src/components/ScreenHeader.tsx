@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useDebugValue, useState } from 'react';
 import { Text } from '@rneui/themed';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { styles } from '../styles/Components/ScreenHeaderStyles';
@@ -8,8 +8,10 @@ import { useAppNavigation } from '../custom-hooks/useAppNavigation';
 import { Image } from 'react-native';
 import LogOutDialog from './LogOutDialog';
 import { IUser } from '../types/applicationTypes';
-import { AppReducers } from '../redux/store';
+import { AppReducers, useAppDispatch } from '../redux/store';
 import { useSelector } from 'react-redux';
+import { clearUser } from '../redux/user/userSlice';
+import { useDispatch } from 'react-redux';
 
 const ScreenHeader = ({
 	imageContainerStyle,
@@ -20,18 +22,21 @@ const ScreenHeader = ({
 }: IScreenHeaderProps) => {
 	const navigation = useAppNavigation();
 	const [dialogVisible, setDialogVisible] = useState<boolean>(false);
-	const handleLogOut = async () => {
-		setVisible();
-		await AsyncStorage.clear();
-		navigation.navigate('Landing');
-	};
+	const dispatch = useAppDispatch();
 
 	const setVisible = () => {
 		setDialogVisible((prev) => !prev);
 	};
 	const user = useSelector(
-		(state: AppReducers) => state.userReducer.data,
+		(state: AppReducers) => state.userReducer.user,
 	) as IUser | null;
+
+	const handleLogOut = async () => {
+		setVisible();
+		await AsyncStorage.clear();
+		dispatch(clearUser());
+		navigation.navigate('Landing');
+	};
 
 	const defaultImage = image ? (
 		<Image

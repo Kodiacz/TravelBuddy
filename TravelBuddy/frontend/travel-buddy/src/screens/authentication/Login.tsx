@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, KeyboardAvoidingView, Platform } from 'react-native';
 import { IRegisterProps } from '../../types/screens/register';
 import useSafeArea from '../../custom-hooks/useSafeView';
@@ -35,11 +35,9 @@ export default function Login({ navigation }: IRegisterProps) {
 	const viewContainerStyle = { ...safeArea, ...styles.container };
 	const [disabled, setDisabled] = useState<boolean>(false);
 	const dispatch = useAppDispatch();
-	const {
-		data: user,
-		loading,
-		error,
-	} = useSelector((state: AppReducers) => state.userReducer);
+	const { user, errorResponse, loading, error } = useSelector(
+		(state: AppReducers) => state.userReducer,
+	);
 	const onSubmit = async (data: any) => {
 		setDisabled(true);
 
@@ -49,19 +47,26 @@ export default function Login({ navigation }: IRegisterProps) {
 			setDisabled(false);
 		}
 
-		if (user?.accessToken) {
-			await AsyncStorage.setItem('isLogedIn', JSON.stringify(true));
-			navigation.navigate('Main');
-		} else {
-			// reset();
-			setError('password', {
-				message: (user as any)?.title,
-				type: 'onBlur',
-			});
-		}
-
 		setDisabled(false);
 	};
+
+	useEffect(() => {
+		if (user) {
+			if (user?.accessToken) {
+				SetAsyncStorageItem();
+				navigation.navigate('Main');
+			} else {
+				setError('password', {
+					message: errorResponse.title,
+					type: 'onBlur',
+				});
+			}
+		}
+
+		async function SetAsyncStorageItem() {
+			await AsyncStorage.setItem('isLogedIn', JSON.stringify(true));
+		}
+	}, [user, error]);
 
 	return (
 		<KeyboardAvoidingView
