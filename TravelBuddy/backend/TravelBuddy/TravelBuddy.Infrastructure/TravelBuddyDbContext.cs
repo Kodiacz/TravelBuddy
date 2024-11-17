@@ -2,7 +2,7 @@
 {
 	public class TravelBuddyDbContext : IdentityDbContext<ApplicationUser, IdentityRole<Guid>, Guid>
 	{
-        public TravelBuddyDbContext(DbContextOptions<TravelBuddyDbContext> options) : base(options) {}
+		public TravelBuddyDbContext(DbContextOptions<TravelBuddyDbContext> options) : base(options) { }
 
 		public DbSet<ApplicationUser> ApplicationUsers { get; set; } = null!;
 
