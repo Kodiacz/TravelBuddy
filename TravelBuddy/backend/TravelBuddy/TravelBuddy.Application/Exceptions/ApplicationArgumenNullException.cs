@@ -1,8 +1,13 @@
 ﻿namespace TravelBuddy.API.Exceptions
 {
 	[ExceptionHttpStatusCode(HttpStatusCode.NotFound)]
-	public class ApplicationArgumenNullException : ArgumentNullException
+	public class ApplicationArgumenNullException : ArgumentNullException, ICustomExceptionMessage
 	{
-		public ApplicationArgumenNullException(string message): base(message) { }
+		public ApplicationArgumenNullException(string message) : base(message)
+		{
+			this.CustomMessage = message;
+		}
+
+		public string CustomMessage { get; private set; }
 	}
 }
