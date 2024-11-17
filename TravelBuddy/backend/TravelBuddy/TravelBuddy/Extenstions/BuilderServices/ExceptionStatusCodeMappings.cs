@@ -2,9 +2,9 @@
 {
 	public static class ExceptionStatusCodeMappings
 	{
-		public static readonly Dictionary<Type, int> ExceptionStatusCode = new();
+		public static Dictionary<Type, int> ExceptionStatusCode { get; } = new();
 
-		public static void InitializeExceptionStatusCodeMappings(this IServiceCollection services) 
+		public static void InitializeExceptionStatusCodeMappings(this IServiceCollection services)
 		{
 			// Get all types in the assembly where your exceptions are defined
 			var exceptionAssembly = typeof(NotAuthorizedException).Assembly;
