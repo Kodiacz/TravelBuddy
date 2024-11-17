@@ -7,9 +7,13 @@
 	{
 		private readonly IAuthService authenticationService;
 		private readonly IConfiguration configuration;
+		private readonly ISeedService seedService;
 		private readonly IBlobStorageService blobStorageService;
 
-		public AuthenticationController(IAuthService authenticationService, IConfiguration configuration, IBlobStorageService blobStorageService)
+		public AuthenticationController(
+		IAuthService authenticationService,
+		IConfiguration configuration,
+		IBlobStorageService blobStorageService)
 		{
 			this.authenticationService = authenticationService;
 			this.configuration = configuration;
