@@ -15,6 +15,11 @@ namespace TravelBuddy.Infrastructure.Repository
 			await this.dbContext.AddAsync(user);
 		}
 
+		public async Task AddRangeAsync(IEnumerable<ApplicationUser> users)
+		{
+			await dbContext.AddRangeAsync(users);
+		}
+
 		public async Task<ICollection<ApplicationUser>> GetAllAsReadOnlyAsync()
 		{
 			return await this.dbContext

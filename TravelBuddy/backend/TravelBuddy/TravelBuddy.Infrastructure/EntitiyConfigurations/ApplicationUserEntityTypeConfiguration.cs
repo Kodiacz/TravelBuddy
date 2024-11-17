@@ -37,6 +37,27 @@
 
 			builder
 				.HasCheckConstraint("CK_User_Created", $"{nameof(ApplicationUser.Created)} >= GETUTCDATE()");
+
+			CreateAdmin(builder);
+		}
+
+		private void CreateAdmin(EntityTypeBuilder<ApplicationUser> builder)
+		{
+			Helpers.Encrypt.Password.CreateHash("sysadmin", out byte[] passwordHash, out byte[] passwordSal);
+
+			var admin = new ApplicationUser()
+			{
+				Id = Guid.NewGuid(),
+				FirstName = "Sys",
+				LastName = "Admin",
+				UserName = "SA",
+				Created = DateTime.UtcNow.AddHours(1),
+				Email = "sysadmin@gmail.com",
+				PasswordHash = Convert.ToBase64String(passwordHash),
+				PasswordSalt = passwordSal,
+			};
+
+			builder.HasData(admin);
 		}
 	}
 }
