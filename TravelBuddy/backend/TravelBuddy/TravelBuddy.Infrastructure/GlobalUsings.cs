@@ -16,6 +16,7 @@ global using AutoMapper;
 
 global using TravelBuddy.Domain.Models;
 global using TravelBuddy.Domain.Entities;
+global using TravelBuddy.Application;
 global using TravelBuddy.Application.Exceptions;
 global using TravelBuddy.Application.Interfaces;
 global using TravelBuddy.Application.Interfaces.Services;

@@ -22,3 +22,4 @@ global using TravelBuddy.Application.Dtos.ActivityDtos;
 global using TravelBuddy.Application.Dtos.ItineraryDtos;
 global using TravelBuddy.Application.Dtos.ApplicationUserDto;
 global using TravelBuddy.Application.Interfaces.Repository;
+global using TravelBuddy.Application.Interfaces;

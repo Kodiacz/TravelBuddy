@@ -40,3 +40,9 @@ global using TravelBuddy.Application.Dtos.ActivityDtos;
 global using TravelBuddy.Application.Dtos.ItineraryDtos;
 global using TravelBuddy.Application.Dtos.ApplicationUserDto;
 global using TravelBuddy.Application.Queries.Itineraries;
+
+#region Static Usings
+
+global using static TravelBuddy.Application.Helpers.Encrypt.Password;
+
+#endregion
