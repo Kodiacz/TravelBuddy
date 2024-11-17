@@ -20,6 +20,7 @@
 			services.AddScoped<ITripService, TripService>();
 			services.AddScoped<IItineraryService, ItineraryService>();
 			services.AddScoped<IActivityService, ActivityService>();
+			services.AddScoped<ISeedService, SeedService>();
 
 			#endregion
 
