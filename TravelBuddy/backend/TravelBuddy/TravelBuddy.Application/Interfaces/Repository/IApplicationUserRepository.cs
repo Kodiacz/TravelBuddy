@@ -10,6 +10,13 @@
 		Task AddAsync(ApplicationUser user);
 
 		/// <summary>
+		/// Adding an ApplicationUser type entity in the database
+		/// </summary>
+		/// <param name="user">ApplicationUser type variable</param>
+		/// <returns></returns>
+		Task AddRangeAsync(IEnumerable<ApplicationUser> users);
+
+		/// <summary>
 		/// Updating the ApplicationUser entity in the database
 		/// </summary>
 		/// <param name="user">ApplicationUser type variable</param>
@@ -22,14 +29,14 @@
 		/// <param name="id">The id of the ApplicationUser entity</param>
 		/// <returns>Return the ApplicationUser entity</returns>
 		Task<ApplicationUser> GetByIdAsync(Guid id);
-		
+
 		/// <summary>
 		/// Gets the entity from the database by its email 
 		/// </summary>
 		/// <param name="id">The id of the ApplicationUser entity</param>
 		/// <returns>Return the ApplicationUser entity</returns>
 		Task<ApplicationUser> GetByEmailAsReadOnlyAsync(string email);
-		
+
 		/// <summary>
 		/// Gets the entity from the database by its email 
 		/// </summary>
