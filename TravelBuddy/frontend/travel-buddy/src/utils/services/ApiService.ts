@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 
 export default abstract class ApiService {
 	private axiosInstance: AxiosInstance;
-	private url: string = 'http://192.168.1.4:5284/api/';
+	private url: string = 'http://192.168.1.8:5284/api/';
 
 	constructor() {
 		this.axiosInstance = axios.create({

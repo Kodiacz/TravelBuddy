@@ -20,14 +20,17 @@ export default function Home() {
 	const { getResponsive } = usePlatformStyles();
 
 	const user = useSelector(
-		(state: AppReducers) => state.userReducer.data,
+		(state: AppReducers) => state.userReducer.user,
 	) as IUser | null;
+
 	const dispatch = useAppDispatch();
+
 	const {
 		data: trips,
 		loading,
 		error,
 	} = useSelector((state: AppReducers) => state.tripReducer);
+
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -76,7 +79,6 @@ export default function Home() {
 							contentContainerStyle={{
 								paddingBottom: flatListBottomPadding,
 								paddingTop: flatListTopPadding,
-								// height: 'auto',
 							}}
 							data={trips}
 							ListFooterComponent={footerButton}

@@ -40,11 +40,12 @@ export default function TripCard({ trip }: ITripCardProps) {
 
 	return (
 		<Card containerStyle={style.container}>
-			<Image
-				style={style.imageStyle}
-				source={{ uri: trip.image }}
-				resizeMode="contain"
-			/>
+			<View style={style.imageContainer}>
+				<Image
+					style={style.imageStyle}
+					source={{ uri: trip.image }}
+				/>
+			</View>
 			<View style={style.tripInfoContainer}>
 				<View style={style.textContainer}>
 					<Text style={style.textDescription}>Destination</Text>

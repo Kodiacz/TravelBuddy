@@ -6,19 +6,7 @@ import {
 import * as Device from 'expo-device';
 import { colors } from '../../utils/colors';
 
-const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-const aspectRatio = windowWidth / windowHeight;
-
-const calculateFlex = (
-	baseFlex: number,
-	aspectRatio: number,
-	threshold: number,
-) => {
-	return baseFlex + (aspectRatio - threshold) * 0.1;
-};
-
-const flexRation = calculateFlex(0.798968357, aspectRatio, 0.01);
+const aspectRatio = 16 / 9;
 
 const style = StyleSheet.create({
 	container: {
@@ -30,14 +18,20 @@ const style = StyleSheet.create({
 		marginBottom: 35,
 		borderRadius: 12,
 		alignSelf: 'center',
-		// flex: 1,
 	},
 	imageStyle: {
 		width: '100%',
-		// height: hp('28%'),
-		aspectRatio: 9 / 6,
+		height: '100%',
 		borderRadius: 12,
-		marginBottom: 21,
+	},
+	imageContainer: {
+		width: wp(90),
+		height: hp(20),
+		borderRadius: 12,
+		marginBottom: hp(3),
+		justifyContent: 'center',
+		alignItems: 'center',
+		alignSelf: 'center',
 	},
 	tripInfoContainer: {
 		rowGap: 25,
@@ -45,7 +39,7 @@ const style = StyleSheet.create({
 	textDescription: {
 		borderStartEndRadius: 11.19,
 		alignItems: 'flex-start',
-		flex: flexRation,
+		flex: hp(0.11),
 		fontWeight: '800',
 		fontSize: 16,
 		lineHeight: 20.51,
@@ -60,7 +54,6 @@ const style = StyleSheet.create({
 	textContainer: {
 		borderRadius: 11.19,
 		backgroundColor: colors.white,
-		// width: 330,
 		width: wp('82%'),
 		height: 41,
 		flexDirection: 'row',

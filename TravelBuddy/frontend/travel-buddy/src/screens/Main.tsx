@@ -30,6 +30,7 @@ import { HeaderOptions } from '../types/screens/main';
 // Styles
 import { styles } from '../styles/Screens/MainStyles';
 import { hp } from '../overriden-imports/react-native-responsive-screen';
+import Profile from './bottom-tab-navigation/Profile';
 
 const Tab = createBottomTabNavigator();
 
@@ -93,7 +94,7 @@ const Main = () => {
 									},
 									...styles.tabBarIcon,
 								}}
-								source={require('../assets/icons/My-Trips.png')}
+								source={require('../assets/icons/travel.png')}
 							></Image>
 						),
 						tabBarLabel: ({ focused }) => (
@@ -123,7 +124,7 @@ const Main = () => {
 									},
 									...styles.tabBarIcon,
 								}}
-								source={require('../assets/icons/Explore.png')}
+								source={require('../assets/icons/adventurer.png')}
 							></Image>
 						),
 						tabBarLabel: ({ focused }) => (
@@ -153,7 +154,7 @@ const Main = () => {
 									},
 									...styles.tabBarIcon,
 								}}
-								source={require('../assets/icons/Itineraries.png')}
+								source={require('../assets/icons/map.png')}
 							></Image>
 						),
 						tabBarLabel: ({ focused }) => (
@@ -172,7 +173,7 @@ const Main = () => {
 				/>
 				<Tab.Screen
 					name="Profile"
-					component={ScreenHeader}
+					component={Profile}
 					options={{
 						tabBarIcon: ({ color, size }) => (
 							<Image
@@ -180,11 +181,11 @@ const Main = () => {
 									...{
 										width: hp(6),
 										height: hp(6),
-										borderRadius: hp(50),
 									},
 									...styles.tabBarIcon,
 								}}
-								source={{ uri: user?.profileImage }}
+								// source={{ uri: user?.profileImage }}
+								source={require('../assets/icons/profile.png')}
 							></Image>
 						),
 						tabBarLabel: ({ focused }) => (
