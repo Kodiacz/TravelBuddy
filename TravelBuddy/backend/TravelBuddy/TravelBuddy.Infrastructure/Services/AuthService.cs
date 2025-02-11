@@ -51,7 +51,7 @@ public class AuthService : BaseService, IAuthService
 		return password.Equals(confirmedPassword);
 	}
 
-	public JwtToken CreateToken(GetApplicationUserDto user, IConfiguration configuration)
+	public async Task<JwtToken> CreateToken(GetApplicationUserDto user, IConfiguration configuration)
 	{
 		JwtToken jwt = new();
 
@@ -62,8 +62,14 @@ public class AuthService : BaseService, IAuthService
 				new Claim(ClaimTypes.Email, user.Email!),
 				new Claim(ClaimTypes.GivenName, user.FirstName!),
 				new Claim(ClaimTypes.Surname, user.LastName!),
-				new Claim(ClaimTypes.Role, "User"),
 			};
+
+		var userRoles = await this.UnitOfWork.ApplicationUserRepository.GetRolesForUser(user.Id);
+
+		foreach (var role in userRoles)
+		{
+			claims.Add(new Claim(ClaimTypes.Role, role));
+		}
 
 		var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
 			configuration.GetSection("JwtSettings:Secret").Value));
@@ -79,7 +85,9 @@ public class AuthService : BaseService, IAuthService
 		jwt.UserId = user.Id;
 		jwt.Email = user.Email;
 		jwt.ProfileImage = user.ProfileImage;
-		jwt.Role = "User";
+		jwt.Role = string.Join(",", userRoles);
+
+		var test = new JwtSecurityTokenHandler().ReadJwtToken(jwt.AccessToken);
 
 		return jwt;
 	}

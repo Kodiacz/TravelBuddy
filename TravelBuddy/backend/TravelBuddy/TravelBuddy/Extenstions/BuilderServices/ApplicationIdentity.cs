@@ -6,8 +6,9 @@ namespace TravelBuddy.API.Extenstions.BuilderServices
 	{
 		public static IdentityBuilder AddApplicationIdentity(this IServiceCollection services)
 		{
-			return services.AddDefaultIdentity<ApplicationUser>(opt => opt.SignIn.RequireConfirmedAccount = true)
-				.AddEntityFrameworkStores<TravelBuddyDbContext>();
+			return services.AddIdentity<ApplicationUser, IdentityRole<Guid>>(opt => opt.SignIn.RequireConfirmedAccount = true)
+				.AddEntityFrameworkStores<TravelBuddyDbContext>()
+				.AddDefaultTokenProviders();
 		}
 	}
 }

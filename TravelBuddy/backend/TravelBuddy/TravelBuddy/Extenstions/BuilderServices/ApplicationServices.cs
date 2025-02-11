@@ -1,4 +1,6 @@
-﻿namespace TravelBuddy.API.Extenstions.BuilderServices
+﻿using Microsoft.AspNet.Identity;
+
+namespace TravelBuddy.API.Extenstions.BuilderServices
 {
 	public static class ApplicationServices
 	{

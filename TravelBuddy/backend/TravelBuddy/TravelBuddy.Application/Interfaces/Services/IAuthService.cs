@@ -8,6 +8,6 @@
 
 		public Task<GetApplicationUserDto> LoginUserAsync(LoginDto dto);
 
-		public JwtToken CreateToken(GetApplicationUserDto user, IConfiguration configuration);
+		public Task<JwtToken> CreateToken(GetApplicationUserDto user, IConfiguration configuration);
 	}
 }

@@ -23,6 +23,8 @@
 		/// <returns></returns>
 		void Update(ApplicationUser user);
 
+		public Task<List<string>> GetRolesForUser(Guid userId);
+
 		/// <summary>
 		/// Gets the entity from the database by its Id
 		/// </summary>

@@ -1,4 +1,6 @@
-﻿namespace TravelBuddy.API.Extenstions.BuilderServices
+﻿using System.Security.Claims;
+
+namespace TravelBuddy.API.Extenstions.BuilderServices
 {
 	public static class ApplicationAuthentication
 	{
@@ -6,7 +8,7 @@
 		{
 			var jwtSettings = builder.Configuration;
 
-			return services.AddAuthentication(opt =>
+			var authServices = services.AddAuthentication(opt =>
 			{
 				opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
 				opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -21,8 +23,13 @@
 					ValidateAudience = false,
 					ValidateIssuerSigningKey = true,
 					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["JwtSettings:Secret"]!)),
+					RoleClaimType = ClaimTypes.Role,
 				};
 			});
+
+			authServices.Services.AddAuthorization();
+
+			return authServices;
 		}
 	}
 }

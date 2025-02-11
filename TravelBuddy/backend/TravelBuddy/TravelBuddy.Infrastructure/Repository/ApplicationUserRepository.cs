@@ -20,6 +20,15 @@ namespace TravelBuddy.Infrastructure.Repository
 			await dbContext.AddRangeAsync(users);
 		}
 
+		public async Task<List<string>> GetRolesForUser(Guid userId)
+		{
+			return await dbContext
+				.UserRoles
+				.Where(ur => ur.UserId == userId)
+				.Join(dbContext.Roles, ur => ur.RoleId, r => r.Id, (ur, r) => r.Name)
+				.ToListAsync();
+		}
+
 		public async Task<ICollection<ApplicationUser>> GetAllAsReadOnlyAsync()
 		{
 			return await this.dbContext

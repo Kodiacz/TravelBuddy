@@ -1,11 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using TravelBuddy.Infrastructure.Services;
-
-namespace TravelBuddy.API.Controllers
+﻿namespace TravelBuddy.API.Controllers
 {
 	[ApiController]
-	//[Authorize(Roles = "Admin")]
+	[Authorize(Roles = "Admin")]
 	[Route("api/[controller]/[action]")]
 	public class SeedController : BaseController<SeedController>
 	{

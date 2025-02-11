@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using TravelBuddy.Domain.Abstraction;
 
 namespace TravelBuddy.Domain.Entities

@@ -1,4 +1,7 @@
-﻿namespace TravelBuddy.API.Controllers
+﻿using Microsoft.AspNet.Identity;
+using System.Security.Claims;
+
+namespace TravelBuddy.API.Controllers
 {
 	[ApiController]
 	[EnableCors("TravelBuddy")]
@@ -7,7 +10,6 @@
 	{
 		private readonly IAuthService authenticationService;
 		private readonly IConfiguration configuration;
-		private readonly ISeedService seedService;
 		private readonly IBlobStorageService blobStorageService;
 
 		public AuthenticationController(
@@ -36,7 +38,7 @@
 		{
 			var getUserDto = await this.authenticationService.LoginUserAsync(userDto);
 
-			var token = this.authenticationService.CreateToken(getUserDto, configuration);
+			var token = await this.authenticationService.CreateToken(getUserDto, configuration);
 
 			return Ok(token);
 		}
@@ -60,5 +62,13 @@
 			}
 			return BadRequest("Invalid file");
 		}
+
+		[HttpGet]
+		[ActionName(nameof(GetHello))]
+		public async Task<IActionResult> GetHello()
+		{
+			return Ok("Hello");
+		}
+
 	}
 }

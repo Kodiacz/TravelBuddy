@@ -29,6 +29,12 @@ builder.Services.AddSwaggerGen(opt =>
 	opt.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 
+builder.Services.AddLogging(b =>
+{
+	b.AddConsole();
+	b.AddDebug();
+});
+
 builder.Services.ConfigureDatabaseConnection(builder);
 
 builder.Services.AddBlobStorageService(builder);
