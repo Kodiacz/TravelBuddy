@@ -1,5 +1,10 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ILoginData, ILoginError, IUser } from '../../types/applicationTypes';
+import {
+	ILoginData,
+	ILoginError,
+	IRegisterData,
+	IUser,
+} from '../../types/applicationTypes';
 import { ISliceState } from '../../types/reduxTypes';
 import AuthApiService from '../../utils/services/AuthApiService';
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
@@ -29,6 +34,14 @@ const getUser = createAsyncThunk(
 	'user/getUser',
 	async (loginData: ILoginData) => {
 		const data = (await authApiService.login(loginData)).data;
+		return data;
+	},
+);
+
+const registerUser = createAsyncThunk(
+	'user/registerUser',
+	async (registerData: IRegisterData) => {
+		const data = (await authApiService.register(registerData)).data;
 		return data;
 	},
 );
@@ -66,6 +79,24 @@ const userSlice = createSlice({
 			.addCase(getUser.rejected, (state, action) => {
 				state.loading = false;
 				state.error = action.error.message || 'An error occurred';
+			})
+			.addCase(registerUser.rejected, (state, action) => {
+				state.loading = false;
+				state.error = action.error.message || 'An error occurred';
+			})
+			.addCase(registerUser.pending, (state) => {
+				state.loading = true;
+				state.error = null;
+			})
+			.addCase(registerUser.fulfilled, (state, action) => {
+				state.loading = false;
+				if ('accessToken' in action.payload) {
+					state.user = action.payload;
+					state.errorResponse = null;
+				} else {
+					state.user = null;
+					state.errorResponse = action.payload;
+				}
 			});
 	},
 });
@@ -78,5 +109,5 @@ const persistConfig = {
 const persistedUserReducer = persistReducer(persistConfig, userSlice.reducer);
 
 export default persistedUserReducer;
-export { getUser };
+export { getUser, registerUser };
 export const { clearUser } = userSlice.actions;

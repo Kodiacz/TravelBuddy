@@ -29,6 +29,12 @@ interface ILoginData {
 	password: string;
 }
 
+interface IRegisterData extends ILoginData {
+	firstName: string;
+	lastName: string;
+	confirmPassword: string;
+}
+
 interface IUser {
 	userId: string;
 	profileImage?: string;
@@ -71,6 +77,7 @@ type ActivityPatchUpdate = {
 export {
 	IUser,
 	ILoginData,
+	IRegisterData,
 	ITrip,
 	AppRootStackParamList,
 	AppScreenNavigationProp,

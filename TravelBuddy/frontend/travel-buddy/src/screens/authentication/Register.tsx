@@ -15,12 +15,17 @@ import InputField from '../../components/InputField';
 import { colors } from '../../utils/colors';
 import { Dimensions } from 'react-native';
 import { IRegisterData } from '../../types/propTypes';
+import customLog from '../../utils/logUtils';
+import { useAppDispatch } from '../../redux/store';
+import { registerUser } from '../../redux/user/userSlice';
 
 const screenWidth = Dimensions.get('window').width;
 
 export default function Register({ navigation }: IRegisterProps) {
 	const { safeArea } = useSafeArea();
 	const [user, setUser] = useState<IRegisterData>();
+	const [disabled, setDisabled] = useState<boolean>(false);
+	const dispatch = useAppDispatch();
 	const {
 		control,
 		handleSubmit,
@@ -34,7 +39,14 @@ export default function Register({ navigation }: IRegisterProps) {
 		return confirmPassword === value || 'Passwords do not match';
 	};
 
-	const onSubmit = (data: any) => {};
+	const onSubmit = async (data: IRegisterData) => {
+		customLog('register', data);
+		setDisabled(true);
+
+		await dispatch(registerUser(data));
+
+		setDisabled(false);
+	};
 
 	return (
 		<KeyboardAvoidingView
