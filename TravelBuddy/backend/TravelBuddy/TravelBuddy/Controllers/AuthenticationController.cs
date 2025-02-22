@@ -29,7 +29,8 @@ namespace TravelBuddy.API.Controllers
 		{
 			this.authenticationService.CreatePasswordHash(dto.Password, out byte[] passwordHash, out byte[] passwordSalt);
 			var result = await this.authenticationService.RegisterUserAsync(dto, passwordHash, passwordSalt);
-			return Ok(result);
+			var token = await this.authenticationService.CreateToken(result, configuration);
+			return Ok(token);
 		}
 
 		[HttpPost]
@@ -37,9 +38,7 @@ namespace TravelBuddy.API.Controllers
 		public async Task<ActionResult<string>> Login(LoginDto userDto)
 		{
 			var getUserDto = await this.authenticationService.LoginUserAsync(userDto);
-
 			var token = await this.authenticationService.CreateToken(getUserDto, configuration);
-
 			return Ok(token);
 		}
 
