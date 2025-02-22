@@ -8,7 +8,7 @@ import { Text } from '@rneui/themed';
 const Profile = () => {
 	const { user } = useSelector((state: AppReducers) => state.userReducer);
 
-	console.log(user.email);
+	console.log(user?.email);
 
 	return (
 		<View>

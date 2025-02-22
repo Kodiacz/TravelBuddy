@@ -40,7 +40,7 @@ const ScreenHeader = ({
 
 	const defaultImage = image ? (
 		<Image
-			source={{ uri: user.profileImage }}
+			source={{ uri: user?.profileImage }}
 			style={styles.imageStyle}
 		/>
 	) : (

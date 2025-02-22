@@ -9,7 +9,7 @@ import AuthProvider from 'react-auth-kit';
 import createStore from 'react-auth-kit/createStore';
 
 import { decode, encode } from 'base-64';
-import { StatusBar } from 'react-native';
+import { Keyboard, StatusBar, TouchableWithoutFeedback } from 'react-native';
 import Landing from './src/screens/Landing';
 import Register from './src/screens/authentication/Register';
 import Login from './src/screens/authentication/Login';
@@ -66,7 +66,7 @@ export default function App() {
 			<SafeAreaProvider>
 				<StatusBar
 					animated={true}
-					barStyle="default"
+					barStyle='default'
 					hidden={false}
 				/>
 				<AuthProvider store={authStore}>
@@ -75,33 +75,35 @@ export default function App() {
 							loading={null}
 							persistor={persistedStore}
 						>
-							<NavigationContainer>
-								<Stack.Navigator
-									initialRouteName={initialScreen}
-									screenOptions={{
-										header: () => null,
-										gestureEnabled: true,
-										animation: 'fade_from_bottom',
-									}}
-								>
-									<Stack.Screen
-										name="Landing"
-										component={Landing}
-									/>
-									<Stack.Screen
-										name="Register"
-										component={Register}
-									/>
-									<Stack.Screen
-										name="Login"
-										component={Login}
-									/>
-									<Stack.Screen
-										name="Main"
-										component={Main}
-									/>
-								</Stack.Navigator>
-							</NavigationContainer>
+							<TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+								<NavigationContainer>
+									<Stack.Navigator
+										initialRouteName={initialScreen}
+										screenOptions={{
+											header: () => null,
+											gestureEnabled: true,
+											animation: 'fade_from_bottom',
+										}}
+									>
+										<Stack.Screen
+											name='Landing'
+											component={Landing}
+										/>
+										<Stack.Screen
+											name='Register'
+											component={Register}
+										/>
+										<Stack.Screen
+											name='Login'
+											component={Login}
+										/>
+										<Stack.Screen
+											name='Main'
+											component={Main}
+										/>
+									</Stack.Navigator>
+								</NavigationContainer>
+							</TouchableWithoutFeedback>
 						</PersistGate>
 					</Provider>
 				</AuthProvider>

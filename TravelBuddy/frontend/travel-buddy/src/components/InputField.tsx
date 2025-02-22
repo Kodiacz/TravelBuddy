@@ -8,9 +8,12 @@ import {
 } from 'react-hook-form';
 import {
 	KeyboardTypeOptions,
+	NativeSyntheticEvent,
 	StyleProp,
+	StyleSheet,
 	Text,
 	TextInput,
+	TextInputFocusEventData,
 	TextStyle,
 } from 'react-native';
 
@@ -59,16 +62,22 @@ interface IInputField {
 	textInputStyle?: StyleProp<TextStyle>;
 	inputFieldType?: InputFieldTypes;
 	errorTextStyle?: StyleProp<TextStyle>;
+	labelTextStyle?: StyleProp<TextStyle>;
 	rules?: RulesType;
 	error?: string | undefined;
 	secureTextEntry?: boolean;
 	keyboardType?: KeyboardTypeOptions;
 	clearInputField?: () => void;
+	onFocus?:
+		| ((e: NativeSyntheticEvent<TextInputFocusEventData>) => void)
+		| undefined;
+	onBlur?:
+		| ((e: NativeSyntheticEvent<TextInputFocusEventData>) => void)
+		| undefined;
 }
 
 export default function InputField({
 	name,
-	placeholder,
 	placeholderTextColor,
 	control,
 	textInputStyle,
@@ -78,12 +87,14 @@ export default function InputField({
 	error,
 	secureTextEntry,
 	keyboardType,
+	onFocus,
+	onBlur,
 }: IInputField) {
 	return (
 		<Controller
 			control={control}
 			name={name}
-			defaultValue=""
+			defaultValue=''
 			rules={rules}
 			render={({ field }) => (
 				<>
@@ -91,12 +102,13 @@ export default function InputField({
 						secureTextEntry={secureTextEntry}
 						textContentType={inputFieldType}
 						keyboardType={keyboardType}
-						underlineColorAndroid="transparent"
+						underlineColorAndroid='transparent'
 						style={textInputStyle}
-						placeholder={placeholder}
 						placeholderTextColor={placeholderTextColor}
 						onChangeText={(text) => field.onChange(text)}
 						value={field.value}
+						onFocus={onFocus}
+						onBlur={onBlur}
 					/>
 					{error && <Text style={errorTextStyle}>{error}</Text>}
 				</>

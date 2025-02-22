@@ -20,6 +20,7 @@ import { AppReducers, useAppDispatch } from '../../redux/store';
 import { getUser } from '../../redux/user/userSlice';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import AnimatedInputField from '../../components/AnimatedInputField';
 
 export default function Login({ navigation }: IRegisterProps) {
 	const { safeArea } = useSafeArea();
@@ -58,7 +59,7 @@ export default function Login({ navigation }: IRegisterProps) {
 				navigation.navigate('Main');
 			} else {
 				setError('password', {
-					message: errorResponse.title,
+					message: errorResponse?.title,
 					type: 'onBlur',
 				});
 			}
@@ -76,45 +77,21 @@ export default function Login({ navigation }: IRegisterProps) {
 		>
 			<View style={viewContainerStyle}>
 				<View style={styles.inputsContainer}>
-					<InputField
+					<AnimatedInputField
+						label={'Enter Email'}
+						name='email'
+						duration={300}
 						control={control}
-						name="email"
-						placeholder="Email"
-						keyboardType="email-address"
-						inputFieldType="emailAddress"
-						placeholderTextColor={colors.primary.fibonacciBlue}
-						textInputStyle={
-							errors.email
-								? { ...styles.inputField, ...styles.inputFieldRedBoreder }
-								: styles.inputField
-						}
-						errorTextStyle={styles.errorText}
-						rules={{
-							required: 'Email is required',
-						}}
-						error={errors.email?.message?.toString()}
 					/>
-					<InputField
+					<AnimatedInputField
+						label={'Enter Password'}
+						name='password'
+						duration={300}
 						control={control}
-						name="password"
-						placeholder="Password"
-						secureTextEntry={true}
-						placeholderTextColor={colors.primary.fibonacciBlue}
-						inputFieldType="password"
-						textInputStyle={
-							errors.password
-								? { ...styles.inputField, ...styles.inputFieldRedBoreder }
-								: styles.inputField
-						}
-						errorTextStyle={styles.errorText}
-						rules={{
-							required: 'Password is required',
-						}}
-						error={errors.password?.message?.toString()}
 					/>
 					<View style={styles.buttonsContainer}>
 						<Button
-							title="LOG IN"
+							title='LOG IN'
 							loading={loading}
 							disabled={disabled}
 							disabledStyle={{ ...styles.button, ...styles.buttonDisabled }}

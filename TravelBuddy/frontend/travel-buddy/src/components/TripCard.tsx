@@ -14,6 +14,10 @@ import { style } from '../styles/Components/TripCardStyles';
 import { ITripCardProps } from '../types/propTypes';
 import OpenURLButton from './OpenURLButton';
 import EditTripCard from './EditTripCard';
+import ShareIcon from '../assets/icons/share-icon.svg';
+import EditIcon from '../assets/icons/edit-icon.svg';
+import FileIcon from '../assets/icons/file-icon.svg';
+import { SvgUri, SvgXml } from 'react-native-svg';
 
 export default function TripCard({ trip }: ITripCardProps) {
 	const [editDialogVisible, setEditDialogVisible] = useState<boolean>(false);
@@ -67,24 +71,27 @@ export default function TripCard({ trip }: ITripCardProps) {
 				</View>
 				<View style={style.buttonsContainer}>
 					<Pressable onPress={handleShare}>
-						<Image
-							style={style.icon}
-							source={require('../assets/icons/share-icon.png')}
+						<ShareIcon
+							width={19}
+							height={19}
+							color={'#112557'}
 						/>
 					</Pressable>
 					<Pressable
 						style={style.middleButton}
 						onPress={handleDialog}
 					>
-						<Image
-							style={style.icon}
-							source={require('../assets/icons/pen-edit.png')}
+						<EditIcon
+							width={20}
+							height={20}
+							color={'#112557'}
 						/>
 					</Pressable>
 					<Pressable onPress={handleAttachFile}>
-						<Image
-							style={style.icon}
-							source={require('../assets/icons/file-icon.png')}
+						<FileIcon
+							width={20}
+							height={20}
+							color={'#112557'}
 						/>
 					</Pressable>
 				</View>

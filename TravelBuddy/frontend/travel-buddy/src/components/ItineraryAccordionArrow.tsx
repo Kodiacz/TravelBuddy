@@ -1,12 +1,13 @@
 import { Image, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import Animated, {
+	DerivedValue,
 	SharedValue,
 	useAnimatedStyle,
 } from 'react-native-reanimated';
 
 type ChevronProps = {
-	progress: Animated.SharedValue<number>;
+	progress: DerivedValue<0 | 1>;
 };
 
 const ItineraryAccordionArrow = ({ progress }: ChevronProps) => {

@@ -23,8 +23,15 @@
 		"android": {
 			"adaptiveIcon": {
 				"foregroundImage": "./assets/adaptive-icon.png",
-				"backgroundColor": "#ffffff",
-				"usesCleartextTraffic": true
+				"backgroundColor": "#ffffff"
+			},
+			"usesCleartextTraffic": true,
+			"packagerOpts": {
+				"hostType": "lan",
+				"dev": true,
+				"minify": false,
+				"https": false,
+				"urlRandomization": false
 			}
 		},
 		"web": {

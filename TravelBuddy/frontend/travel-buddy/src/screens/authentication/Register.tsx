@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useState } from 'react';
 import {
 	Pressable,
@@ -16,14 +16,18 @@ import { colors } from '../../utils/colors';
 import { Dimensions } from 'react-native';
 import { IRegisterData } from '../../types/propTypes';
 import customLog from '../../utils/logUtils';
-import { useAppDispatch } from '../../redux/store';
+import { AppReducers, useAppDispatch } from '../../redux/store';
 import { registerUser } from '../../redux/user/userSlice';
+import { useSelector } from 'react-redux';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const screenWidth = Dimensions.get('window').width;
 
 export default function Register({ navigation }: IRegisterProps) {
 	const { safeArea } = useSafeArea();
-	const [user, setUser] = useState<IRegisterData>();
+	const { user, errorResponse, loading, error } = useSelector(
+		(state: AppReducers) => state.userReducer,
+	);
 	const [disabled, setDisabled] = useState<boolean>(false);
 	const dispatch = useAppDispatch();
 	const {
@@ -46,7 +50,22 @@ export default function Register({ navigation }: IRegisterProps) {
 		await dispatch(registerUser(data));
 
 		setDisabled(false);
+		customLog('Register', user);
 	};
+
+	useEffect(() => {
+		customLog('Register', user);
+		if (user) {
+			if (user?.accessToken) {
+				SetAsyncStorageItem();
+				navigation.navigate('Main');
+			}
+		}
+
+		async function SetAsyncStorageItem() {
+			await AsyncStorage.setItem('isLogedIn', JSON.stringify(true));
+		}
+	}, [user]);
 
 	return (
 		<KeyboardAvoidingView

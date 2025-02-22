@@ -40,7 +40,9 @@ export default function Home() {
 			}
 		};
 
-		fetchData();
+		if (user) {
+			fetchData();
+		}
 	}, [dispatch, user?.userId]);
 
 	if (error)

@@ -17,15 +17,19 @@ export default abstract class ApiService {
 		this.axiosInstance.interceptors.response.use(
 			(response: AxiosResponse) => response,
 			(error) => {
-				console.error('API Error:', error);
 				return Promise.reject(error);
 			},
 		);
 	}
 
 	protected async get<T>(url: string, config?: AxiosRequestConfig): Promise<T> {
-		const response = await this.axiosInstance.get<T>(url, config);
-		return response.data;
+		try {
+			const response = await this.axiosInstance.get<T>(url, config);
+			return response.data;
+		} catch (error: any) {
+			console.log(error);
+			return error.response as T;
+		}
 	}
 
 	protected async post<T>(

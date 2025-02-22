@@ -104,21 +104,20 @@ const Itineraries = ({ tripId }: IItinerariesProps) => {
 		<ScrollView>
 			{groupedItineraries.map((x, i) => {
 				return (
-					<>
-						<View style={styles.container}>
-							<Text style={styles.tripName}>{x.tripName}</Text>
-							{x?.itineraries.map((itinerary) => {
-								return (
-									<>
-										<ItineraryAccordion
-											key={itinerary.name}
-											itinerary={itinerary}
-										/>
-									</>
-								);
-							})}
-						</View>
-					</>
+					<View
+						style={styles.container}
+						key={i}
+					>
+						<Text style={styles.tripName}>{x.tripName}</Text>
+						{x?.itineraries.map((itinerary) => {
+							return (
+								<ItineraryAccordion
+									key={itinerary.name}
+									itinerary={itinerary}
+								/>
+							);
+						})}
+					</View>
 				);
 			})}
 		</ScrollView>

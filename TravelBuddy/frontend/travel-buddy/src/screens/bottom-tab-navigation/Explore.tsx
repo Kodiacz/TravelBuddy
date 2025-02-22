@@ -36,6 +36,7 @@ const Explore = () => {
 					paddingLeft: 30,
 				}}
 			/> */}
+			<View></View>
 		</View>
 	);
 };

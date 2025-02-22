@@ -29,6 +29,13 @@ interface ILoginData {
 	password: string;
 }
 
+interface ITripInputData {
+	destination: string;
+	dates: string;
+	travellingBy: string;
+	accommodation: string;
+}
+
 interface IRegisterData extends ILoginData {
 	firstName: string;
 	lastName: string;
@@ -74,6 +81,36 @@ type ActivityPatchUpdate = {
 	op: 'replace';
 };
 
+type InputFieldTypes =
+	| 'none'
+	| 'URL'
+	| 'addressCity'
+	| 'addressCityAndState'
+	| 'addressState'
+	| 'countryName'
+	| 'creditCardNumber'
+	| 'emailAddress'
+	| 'familyName'
+	| 'fullStreetAddress'
+	| 'givenName'
+	| 'jobTitle'
+	| 'location'
+	| 'middleName'
+	| 'name'
+	| 'namePrefix'
+	| 'nameSuffix'
+	| 'nickname'
+	| 'organizationName'
+	| 'postalCode'
+	| 'streetAddressLine1'
+	| 'streetAddressLine2'
+	| 'sublocality'
+	| 'telephoneNumber'
+	| 'username'
+	| 'password'
+	| 'newPassword'
+	| 'oneTimeCode';
+
 export {
 	IUser,
 	ILoginData,
@@ -85,4 +122,6 @@ export {
 	IActivity,
 	ILoginError,
 	ActivityPatchUpdate,
+	ITripInputData,
+	InputFieldTypes,
 };
